@@ -160,12 +160,12 @@ input:-ms-input-placeholder {
         <div class="col-md-12">
             <br />
             <button type="button" class="button_khachhang fa fa-plus" data-toggle="modal" data-target="#myModal">Thêm khách mới</button>
-            <input type="button" class="button_khachhang fa fa-stack-overflow" ng-show="isadmin" onclick="location.href='/ChuyenSale/Index';" value="Chuyển Sale" />
-            <input type="button" class="button_khachhang fa fa-search-plus" ng-show="isadmin" onclick="location.href = '/KhachHang/TimKiem_KhachHang';" value="Tìm kiếm khách trên toàn hệ thống" />
-            <input type="button" class="btn btn-info" ng-show="isadmin" onclick="location.href = '/KhachHang/KhachChuaGiaoDich';" value="Danh sách khách chưa có giao dịch" />
-            <span style="cursor:pointer; text-decoration:underline" class="button_khachhang fa fa-plus-circle" ng-show="isadmin"><a href="/KhachHang/Import_KhachHang">Update thông tin khách hàng loạt</a></span>
-            <input type="button" class="button_khachhang btn-info" value="Hủy lọc" ng-show="huyloc" style="float:right" ng-click="cancel_locKH()" />
-        </div>
+            <button type="button" class="button_khachhang fa fa-stack-overflow" ng-show="isadmin" onclick="location.href='/ChuyenSale/Index';">Chuyển sales</button>
+            <button type="button" class="button_khachhang fa fa-search-plus" ng-show="isadmin" onclick="location.href = '/KhachHang/TimKiem_KhachHang';">Tìm kiếm khách trên toàn hệ thống</button>
+            <button type="button" class="button_khachhang fa fa-user-o" ng-show="isadmin" onclick="location.href = '/KhachHang/KhachChuaGiaoDich';">Danh sách khách chưa có giao dịch</button>
+            <button type="button" class="button_khachhang fa fa-wrench" ng-show="isadmin"<a href="/KhachHang/Import_KhachHang">Update thông tin khách hàng loạt</a></button>
+                <button type="button" class="button_khachhang btn-info" value="Hủy lọc" ng-show="huyloc" style="float:right" ng-click="cancel_locKH()" />
+</div>
 
         <!-- Modal Add New khách hàng -->
         <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
