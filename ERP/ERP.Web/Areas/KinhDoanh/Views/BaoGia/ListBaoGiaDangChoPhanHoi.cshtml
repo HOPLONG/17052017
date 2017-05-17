@@ -36,7 +36,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi">
+                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi"  ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                     <td>{{item.SO_BAO_GIA}}</td>
                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                     <td>{{item.TEN_KHACH_HANG}}</td>
@@ -63,7 +63,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi"  ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -86,7 +86,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong"  ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
