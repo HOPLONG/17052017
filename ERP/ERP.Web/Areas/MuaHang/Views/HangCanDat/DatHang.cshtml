@@ -13,6 +13,7 @@
                 <td></td>
                 <td>Mã hàng</td>
                 <td>Hãng</td>
+                <td>Số lượng</td>
                 <td>Ngày giao hàng</td>
             </tr>
             <tr ng-repeat="item in list_hangcandatpurc">
@@ -21,7 +22,9 @@
                 </td>
                 <td>{{item.MA_DIEU_CHINH}}</td>
                 <td style="display:none">{{item.ID}}</td>
+                <td style="display:none">{{item.TEN_HANG}}</td>
                 <td>{{item.MA_NHOM_HANG_CHI_TIET}}</td>
+                <td>{{item.SO_LUONG}}</td>
                 <td>{{item.NGAY_GIAO_HANG | date: 'dd/MM/yyyy'}}</td>
             </tr>
         </table>
