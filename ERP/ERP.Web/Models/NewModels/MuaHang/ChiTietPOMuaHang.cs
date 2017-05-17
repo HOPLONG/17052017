@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ERP.Web.Models.Database;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,5 +18,8 @@ namespace ERP.Web.Models.NewModels.MuaHang
         public bool DA_NHAP_KHO { set; get; }
         public decimal GIA_BAN_RA { set; get; }
         public int ID_BAN_HANG { set; get; }
+
+        public GetAll_ThongTinChungDonHangPO_MuaHang_Result ChungPO { get; set; }
+        public List<GetAll_ChiTiet_DonHangPO_MuaHang_Result> ChiTietPO { get; set; }
     }
 }

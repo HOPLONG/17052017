@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using ERP.Web.Models.NewModels.MuaHang;
 using System.Data.Entity.Validation;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
 
 namespace ERP.Web.Api.MuaHang
 {
@@ -54,23 +55,30 @@ namespace ERP.Web.Api.MuaHang
         }
 
         // GET: api/Api_DonPOMuaHang
-        public IQueryable<MH_PO_MUA_HANG> GetMH_PO_MUA_HANG()
+        // List PO
+        [Route("api/Api_DonPOMuaHang/ListPOMuaHang/{isadmin}/{username}")]
+        public List<Prod_ListDonMuaHangPO_Result> ListPOMuaHang(bool isadmin, string username)
         {
-            return db.MH_PO_MUA_HANG;
+            var query = db.Database.SqlQuery<Prod_ListDonMuaHangPO_Result>("Prod_ListDonMuaHangPO @macongty,@username,@isadmin", new SqlParameter("macongty", "HOPLONG"), new SqlParameter("username", username), new SqlParameter("isadmin", isadmin));
+            var result = query.ToList();
+            return result;
         }
 
-        // GET: api/Api_DonPOMuaHang/5
-        [ResponseType(typeof(MH_PO_MUA_HANG))]
-        public IHttpActionResult GetMH_PO_MUA_HANG(string id)
-        {
-            MH_PO_MUA_HANG mH_PO_MUA_HANG = db.MH_PO_MUA_HANG.Find(id);
-            if (mH_PO_MUA_HANG == null)
-            {
-                return NotFound();
-            }
 
-            return Ok(mH_PO_MUA_HANG);
+        // Chi tiet PO mua hang
+        [Route("api/Api_DonPOMuaHang/ChiTietPOMuaHang/{masoPO}")]
+        public ChiTietPOMuaHang ChiTietPOMuaHang(string masoPO)
+        {
+            var data = db.Database.SqlQuery<GetAll_ThongTinChungDonHangPO_MuaHang_Result>("GetAll_ThongTinChungDonHangPO_MuaHang @masoPO", new SqlParameter("masoPO", masoPO));
+            var resultdata = data.FirstOrDefault();
+            var query = db.Database.SqlQuery<GetAll_ChiTiet_DonHangPO_MuaHang_Result>("GetAll_ChiTiet_DonHangPO_MuaHang @masoPO", new SqlParameter("masoPO", masoPO));
+            var resultquery = query.ToList();
+            ChiTietPOMuaHang baogia = new ChiTietPOMuaHang();
+            baogia.ChungPO = resultdata;
+            baogia.ChiTietPO = resultquery;
+            return baogia;
         }
+
 
         // PUT: api/Api_DonPOMuaHang/5
         [ResponseType(typeof(void))]
@@ -169,9 +177,7 @@ namespace ERP.Web.Api.MuaHang
                 newpoct.THANH_TIEN_CHUA_VAT = item.THANH_TIEN_CHUA_VAT;
                 newpoct.THOI_GIAN_GIAO_HANG = item.THOI_GIAN_GIAO_HANG;
                 newpoct.GHI_CHU = item.GHI_CHU;
-                newpoct.DA_NHAP_KHO = item.DA_NHAP_KHO;
                 newpoct.GIA_BAN_RA = item.GIA_BAN_RA;
-                newpoct.ID_BAN_HANG = item.ID_BAN_HANG;
                 db.MH_PO_CT_MUA_HANG.Add(newpoct);
             }
 
