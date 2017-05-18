@@ -5,7 +5,10 @@
 
 <div ng-app="myApp" ng-controller="danhmucCtrl">
     <div class="panel content panel-default col-md-9" style="overflow: auto;">
-        <div class="panel-heading title">Thông báo</div>
+        <div class="panel-heading title">
+            <span><b>Mục tiêu 1: </b>Phần mềm phải hỗ trợ được mọi nhân viên làm việc theo quy trình thông minh,  khoa học hơn nhằm đạt  hiệu quả  và năng suất cao hơn. </span>
+            <span ng-hide="true"><b>Mục tiêu 2: </b>Tự động tương tác, giao dịch với khách hàng </span>
+        </div>
         <div class="panel-body">
             <div ng-repeat="item in listpost | orderBy : '-NGAY_DANG_BAI'" class="col-md-12" style="margin-bottom: 20px;padding: 20px;border: 1px solid #DCF5FC;box-shadow: 3px 3px 3px #DCF5FC; border-radius:5px">
                 <div class=col-md-3>
