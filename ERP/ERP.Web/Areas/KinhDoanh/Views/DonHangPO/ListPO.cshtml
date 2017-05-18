@@ -3,28 +3,12 @@
 <script src="~/Content/self-writing/js/Services/DonHangPOService.js"></script>
 <script src="~/Content/self-writing/js/Controllers/DonHangPOCtrl.js"></script>
 
-<style>
-    .border-td {
-        border: 1px solid black;
-    }
 
-    .table > tbody > tr > td {
-        border-top: 1px solid black;
-    }
-
-    .table > thead > tr > th {
-        border-bottom: 1px solid black;
-    }
-
-    h4 {
-        color: lightskyblue;
-    }
-</style>
 <div ng-app="myApp" ng-controller="DonHangPOCtrl" class="content">
     <input type="hidden" value="@Session["USERNAME"]" id="username" />
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
-    <div class="col-md-12" style="margin: 10px 0px 10px 0px">
-        <i class="fa fa-check" aria-hidden="true"></i> : Đã duyệt  |  <i class="fa fa-times" aria-hidden="true"></i> : Chưa duyệt  | <i class="fa fa-spinner" aria-hidden="true"></i> : Đang chờ duyệt  |  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> : Đang duyệt
+    <div class="col-md-12" style="margin: 10px 0px 10px 0px; color;#red;">
+        Trạng thái: <i class="fa fa-check" aria-hidden="true"></i> : Đã duyệt  |  <i class="fa fa-times" aria-hidden="true"></i> : Chưa duyệt  | <i class="fa fa-spinner" aria-hidden="true"></i> : Đang chờ duyệt  |  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> : Đang duyệt
     </div>
     <div class="col-md-8">
         <table class="table">
@@ -75,7 +59,7 @@
     <div class="col-md-4">
         <table class="table">
             <tr>
-                <td colspan="2" class="border-td"><h4>PO đang chờ duyệt</h4></td>
+                <th colspan="2" class="border-td"><h4>PO đang chờ duyệt</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
@@ -98,7 +82,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>PO đã duyệt(chưa lên đơn bán)</h4></td>
+                <th class="border-td" colspan="2"><h4>PO đã duyệt(chưa lên đơn bán)</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
@@ -121,7 +105,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>PO đã lên đơn bán hàng</h4></td>
+                <th class="border-td" colspan="2"><h4>PO đã lên đơn bán hàng</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
