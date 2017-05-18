@@ -95,8 +95,38 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
         ListTaiKhoan: [],
         ListAdd: [],
         SearchHang: [],
-        ListKho: []
+        ListKho: [],
+        ListDN:[]
     }
+
+
+    $scope.SelectDonDeNghiNhapKho = function (item) {
+        $scope.item = item;
+        //$scope.ThamChieu.ListSelect = [];
+        //$scope.ThamChieu.ListSelect.push({ SO_CHUNG_TU: item.MA_SO_BH });
+        $(".tableselect").css({ "display": "none" });
+
+        $http({
+            method: 'GET',
+            url: '/api/Api_MH_DE_NGHI_NHAP_KHO/GetDetailMH_DeNghiNhapKho/' + item.MA_SO_DN,
+        }).then(function (response) {
+            if (typeof (response.data) == "object") {
+                $scope.Detail.ListAdd = response.data.ctmhdenghinhapkho;
+                $scope.GeneralInfo.NhanVienMuaHang = response.data.mhdenghinhapkho.NGUOI_DN,
+                $scope.GeneralInfo.TenNhanVien = response.data.mhdenghinhapkho.HO_VA_TEN,
+                $scope.GeneralInfo.DienGiai = response.data.mhdenghinhapkho.DIEN_GIAI
+
+            }
+            else {
+                ErrorSystem();
+            }
+        }, function (error) {
+            ConnectFail();
+        });
+
+
+    }
+
 
     //Lấy dữ liệu hàng hóa
     $scope.SearchHH = function (mh) {
@@ -168,10 +198,10 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
         //-------------------------------
         $http({
             method: 'GET',
-            url: '/api/Api_BanHang/Get_DON_BAN_HANG'
+            url: '/api/Api_MH_DE_NGHI_NHAP_KHO/GetAllMH_DeNghiNhapKho'
         }).then(function (response) {
             if (typeof (response.data) == "object") {
-                $scope.DonBanHang = response.data;
+                $scope.DeNghiMH = response.data;
             }
             else {
                 ErrorSystem();
@@ -180,20 +210,7 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
             ConnectFail();
         });
 
-        //-----------
-        $http({
-            method: 'GET',
-            url: '/api/Api_BanHang/Get_DON_BAN_HANG_DA_XUAT/' + IsAdmin + '/' + Username
-        }).then(function (response) {
-            if (typeof (response.data) == "object") {
-                $scope.DonBanHangDaXuat = response.data;
-            }
-            else {
-                ErrorSystem();
-            }
-        }, function (error) {
-            ConnectFail();
-        });
+       
     }
 
     init();
@@ -211,10 +228,10 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
         $scope.Detail.ListAdd.push({
             MA_CHUAN: null,
             TEN_HANG: null,
-            MA_KHO_CON: null,
+            MA_KHO: null,
             TK_HACH_TOAN_KHO: null,
             DON_GIA: null,
-            SO_LUONG: null,
+            SL: null,
             DVT: null,
             TK_NO: null,
             TK_CO: null,
@@ -314,6 +331,7 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
     };
     $scope.SelectKho = function (index, item, kho) {
         item.MA_KHO_CON = kho.MA_KHO;
+        item.TEN_KHO = kho.TEN_KHO;
         $(".tableselect").css({ "display": "none" });
     };
 
@@ -341,37 +359,12 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
         var check = true;
         $scope.GeneralInfo.NgayChungTu = $("#GeneralInfo_NgayChungTu").val();
         $scope.GeneralInfo.NgayHachToan = $("#GeneralInfo_NgayHachToan").val();
-        if ($scope.GeneralInfo.NhanVienBanHang == null) {
-            $scope.ValidateGeneral.NhanVienBanHang = false;
-            check = false;
-        } else {
-            $scope.ValidateGeneral.NhanVienBanHang = true;
-        }
-        if ($scope.GeneralInfo.NgayChungTu == null || $scope.GeneralInfo.NgayChungTu == "") {
-            $scope.ValidateGeneral.NgayChungTu = false;
-            check = false;
-        } else {
-            $scope.ValidateGeneral.NgayChungTu = true;
-        }
-        if ($scope.GeneralInfo.NgayHachToan == null || $scope.GeneralInfo.NgayHachToan == "") {
-            $scope.ValidateGeneral.NgayHachToan = false;
-            check = false;
-        }
-        else {
-            $scope.ValidateGeneral.NgayHachToan = true;
-        }
-        if (ConvertToDate($scope.GeneralInfo.NgayHachToan) < ConvertToDate($scope.GeneralInfo.NgayChungTu)) {
-            $scope.ValidateGeneral.NgayHachToanLess = false;
-            check = false;
-        }
-        else {
-            $scope.ValidateGeneral.NgayHachToanLess = true;
-        }
+      
         return check;
     }
     var a = $('#username').val();
     var b = $('#macongty').val();
-    $scope.SaveXuatKho = function () {
+    $scope.SaveNhapKho = function () {
         if (CheckAll() == false) {
             return;
         }
@@ -381,21 +374,18 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
             NGAY_HACH_TOAN: $scope.GeneralInfo.NgayHachToan,
             ChiTiet: $scope.Detail.ListAdd,
             ThamChieu: $scope.ThamChieu.ListSelect,
-            LOAI_XUAT_KHO: 'Xuất kho bán hàng',
+            LOAI_NHAP_KHO: 'Nhập kho mua hàng',
             KHACH_HANG: $scope.GeneralInfo.KhachHang,
-            NHAN_VIEN_BAN_HANG: $scope.GeneralInfo.Username,
-            LY_DO_XUAT: $scope.GeneralInfo.DienGiai,
-            NGUOI_NHAN: $scope.GeneralInfo.NguoiNhan,
-            PHIEU_BAN_HANG: $scope.ThamChieu.DonBanHang,
+            NHAN_VIEN_MUA_HANG: $scope.GeneralInfo.NhanVienMuaHang,
             NGUOi_LAP_PHIEU: a,
             TRUC_THUOC: b,
+            MA_SO_DN: $scope.item.MA_SO_DN
         }
 
-        $http.post("/api/Api_XuatKhoBanHang/PostKHO_XUAT_KHO", data).then(function (response) {
+        $http.post("/api/Api_NhapKhoMH/PostKHO_NHAP_KHOMH", data).then(function (response) {
             //console.log(response);
             $scope.datareturn = response.data;
             init();
-            //response.data = jQuery.parseJSON(response.data);
             if (response.data == config.INPUT_ERROR) {
                 InputFail();
                 
@@ -419,31 +409,7 @@ app.controller('NhapKhoMHController', function ($rootScope, $scope, $http, confi
 
 
 
-    $scope.SelectDonDeNghiNhapKho = function (item) {
-        $scope.ThamChieu.ListSelect = [];
-        $scope.ThamChieu.ListSelect.push({ SO_CHUNG_TU: item.MA_SO_BH });
-        $(".tableselect").css({ "display": "none" });
-
-        $http({
-            method: 'GET',
-            url: '/api/Api_MH_DE_NGHI_NHAP_KHO/GetDetailMH_DeNghiNhapKho/' + item.MA_SO_DN,
-        }).then(function (response) {
-            if (typeof (response.data) == "object") {
-                $scope.Detail.ListAdd = response.data.ctmhdenghinhapkho;
-                $scope.GeneralInfo.NhanVienMuaHang = response.data.mhdenghinhapkho.NGUOI_DN,
-                $scope.GeneralInfo.TenNhanVien = response.data.mhdenghinhapkho.HO_VA_TEN,
-                $scope.GeneralInfo.DienGiai = response.data.mhdenghinhapkho.DIEN_GIAI
-               
-            }
-            else {
-                ErrorSystem();
-            }
-        }, function (error) {
-            ConnectFail();
-        });
-
-
-    }
+    
 
     
     

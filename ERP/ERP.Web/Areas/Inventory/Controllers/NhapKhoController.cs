@@ -17,5 +17,9 @@ namespace ERP.Web.Areas.Inventory.Controllers
         {
             return View();
         }
+        public ActionResult NhapKhoMH()
+        {
+            return View();
+        }
     }
 }

@@ -275,7 +275,7 @@
                             </td>
                             <td colspan="1">
                                 <div class="has-feedback" ng-click="ShowKho(index)">
-                                    <input type="text" ng-model="item.MA_KHO_CON" class="input showtableselect">
+                                    <input type="text" ng-model="item.TEN_KHO" class="input showtableselect">
                                     <div class="form-control-feedback">
                                     </div>
                                 </div>
@@ -309,13 +309,13 @@
                                 <input type="text" ng-model="item.DVT" class="input">
                             </td>
                             <td colspan="1">
-                                <input type="number" ng-model="item.SO_LUONG" class="input">
+                                <input type="number" ng-model="item.SL" class="input">
                             </td>
                             <td colspan="1" style="text-align: right;">
-                                <input type="text" ng-model="item.DON_GIA" format="number" class="input" style="text-align: right;">
+                                <input type="text" ng-model="item.DON_GIA_CHUA_VAT" format="number" class="input" style="text-align: right;">
                             </td>
                             <td colspan="1" style="text-align: right;">
-                                {{item.DON_GIA * item.SO_LUONG | currency:""}}
+                                <input type="text" ng-model="item.THANH_TIEN_CHUA_VAT" format="number" class="input" style="text-align: right;">
                             </td>
                             <td colspan="1" class="text-center"><button ng-click="RemoveRow($index)" style="background: none !important; border: none !important;"><span class="glyphicon glyphicon-remove" style="color:red;"></span></button></td>
 
@@ -340,9 +340,9 @@
                 <td>
                     <div style="height:410px;overflow-y:auto;">
                         <table style="width:100%;cursor:pointer;">
-                            <tr ng-repeat="item in DonBanHang" ng-click="SelectDonDeNghiNhapKho(item)">
-                                <td colspan="2" class="text-left">{{item.MA_SO_BH}}</td>
-                                <td class="text-left">{{item.NGAY_BH | date:'dd/MM/yyyy'}}</td>
+                            <tr ng-repeat="item in DeNghiMH" ng-click="SelectDonDeNghiNhapKho(item)">
+                                <td colspan="2" class="text-left">{{item.MA_SO_DN}}</td>
+                                <td class="text-left">{{item.NGAY_DN | date:'dd/MM/yyyy'}}</td>
                             </tr>
 
                         </table>

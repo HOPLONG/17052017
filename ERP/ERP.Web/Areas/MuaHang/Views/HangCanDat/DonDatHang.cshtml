@@ -35,6 +35,7 @@
                     <th>Hình thức thanh toán</th>
                     <th>Địa điểm giao hàng</th>
                     <th>Nhân viên tạo</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -47,6 +48,9 @@
                     <td>{{item.HINH_THUC_THANH_TOAN}}</td>
                     <td>{{item.DIA_DIEM_GIAO_HANG}}</td>
                     <td>{{item.TEN_NGUOI_TAO}}</td>
+                    <td>
+                        <a href="/MuaHang/HangCanDat/DeNghiNhapKho/{{item.MA_SO_PO}}">Tạo đề nghị nhập kho</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
