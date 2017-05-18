@@ -71,7 +71,6 @@ namespace ERP.Web.Api.BaoGia
                 var baogia = db.BH_CT_BAO_GIA.Where(x => x.ID == item.ID).FirstOrDefault();
                 if (baogia != null)
                 {
-                    baogia.SO_BAO_GIA = item.SO_BAO_GIA;
                     baogia.MA_HANG = item.MA_HANG;
                     baogia.MA_DIEU_CHINH = item.MA_DIEU_CHINH;
                     baogia.TEN_HANG = item.TEN_HANG;
