@@ -29,5 +29,15 @@ namespace ERP.Web.Areas.MuaHang.Controllers
         {
             return View();
         }
+
+        public ActionResult SuaDonDatHang(string id)
+        {
+            return View();
+        }
+
+        public ActionResult DeNghiNhapKho(string id)
+        {
+            return View();
+        }
     }
 }

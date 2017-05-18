@@ -21,6 +21,8 @@ namespace ERP.Web.Api.MuaHang
     {
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
 
+        List<MH_PO_CT_MUA_HANG> chitietdonPO = new List<MH_PO_CT_MUA_HANG>();
+
         public string GenerateMaSoPO()
         {
             Regex digitsOnly = new Regex(@"[^\d]");
@@ -81,28 +83,36 @@ namespace ERP.Web.Api.MuaHang
 
 
         // PUT: api/Api_DonPOMuaHang/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutMH_PO_MUA_HANG(string id, MH_PO_MUA_HANG mH_PO_MUA_HANG)
+        // Sua thong tin chung PO mua hang
+        [Route("api/Api_DonPOMuaHang/EditThongTinChung")]
+        public IHttpActionResult EditThongTinChung(MH_PO_MUA_HANG mH_PO_MUA_HANG)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != mH_PO_MUA_HANG.MA_SO_PO)
+            var query = db.MH_PO_MUA_HANG.Where(x => x.MA_SO_PO == mH_PO_MUA_HANG.MA_SO_PO).FirstOrDefault();
+            if(query != null)
             {
-                return BadRequest();
+                query.THUE_VAT = mH_PO_MUA_HANG.THUE_VAT;
+                query.DIA_DIEM_GIAO_HANG = mH_PO_MUA_HANG.DIA_DIEM_GIAO_HANG;
+                query.HINH_THUC_VAN_CHUYEN = mH_PO_MUA_HANG.HINH_THUC_VAN_CHUYEN;
+                query.HINH_THUC_THANH_TOAN = mH_PO_MUA_HANG.HINH_THUC_THANH_TOAN;
+                query.THOI_HAN_THANH_TOAN = mH_PO_MUA_HANG.THOI_HAN_THANH_TOAN;
+                query.TIEN_THUE_VAT = mH_PO_MUA_HANG.TIEN_THUE_VAT;
+                query.TONG_TIEN_BANG_CHU = mH_PO_MUA_HANG.TONG_TIEN_BANG_CHU;
+                query.TONG_TIEN_HANG = mH_PO_MUA_HANG.TONG_TIEN_HANG;
+                query.THUE_VAT = mH_PO_MUA_HANG.THUE_VAT;
+                query.TONG_TIEN_DA_BAO_GOM_VAT = mH_PO_MUA_HANG.TONG_TIEN_DA_BAO_GOM_VAT;
             }
-
-            db.Entry(mH_PO_MUA_HANG).State = EntityState.Modified;
-
             try
             {
                 db.SaveChanges();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MH_PO_MUA_HANGExists(id))
+                if (!MH_PO_MUA_HANGExists(mH_PO_MUA_HANG.MA_SO_PO))
                 {
                     return NotFound();
                 }
@@ -113,6 +123,45 @@ namespace ERP.Web.Api.MuaHang
             }
 
             return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        // Sua chi tiet don PO mua hang
+        [Route("api/Api_DonPOMuaHang/EditChiTietPO")]
+        public async Task<IHttpActionResult> EditChiTietPO([FromBody] List<ChiTietPOMuaHang> mH_CT_DON_HANG_PO)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            //if (id != bH_CT_DON_HANG_PO.ID)
+            //{
+            //    return BadRequest();
+            //}
+            foreach (var item in mH_CT_DON_HANG_PO)
+            {
+                var donhangPO = db.MH_PO_CT_MUA_HANG.Where(x => x.ID == item.ID).FirstOrDefault();
+                if (donhangPO != null)
+                {
+                    donhangPO.SL = item.SL;
+                    donhangPO.DON_GIA_CHUA_VAT = item.DON_GIA_CHUA_VAT;
+                    donhangPO.THANH_TIEN_CHUA_VAT = item.THANH_TIEN_CHUA_VAT;
+                    donhangPO.THOI_GIAN_GIAO_HANG = item.THOI_GIAN_GIAO_HANG;
+                    donhangPO.GHI_CHU = item.GHI_CHU;
+                }
+            }
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+
+                throw;
+
+            }
+            //return this.CreatedAtRoute("GetNH_NTTK", new { id = nH_NTTK.SO_CHUNG_TU }, nH_NTTK);
+            return Ok(mH_CT_DON_HANG_PO);
         }
 
         // POST: api/Api_DonPOMuaHang
@@ -158,7 +207,7 @@ namespace ERP.Web.Api.MuaHang
             return Ok(newpo);
         }
 
-        // Chi tiet PO mua hang
+        //Them Chi tiet PO mua hang
         [HttpPost]
         [Route("api/Api_DonPOMuaHang/ChiTietPOMuaHang")]
         public IHttpActionResult ChiTietPOMuaHang(List<ChiTietPOMuaHang> muahang)
@@ -180,11 +229,18 @@ namespace ERP.Web.Api.MuaHang
                 newpoct.GIA_BAN_RA = item.GIA_BAN_RA;
                 db.MH_PO_CT_MUA_HANG.Add(newpoct);
             }
+            db.SaveChanges();
+
+            var masoPO = muahang.FirstOrDefault();
+
+            
+            var query = db.MH_PO_CT_MUA_HANG.Where(x =>x.MA_SO_PO == masoPO.MA_SO_PO).ToList();               
+            
 
 
             try
             {
-                 db.SaveChanges();
+                 
             }
             catch (DbUpdateException)
             {
@@ -193,7 +249,7 @@ namespace ERP.Web.Api.MuaHang
                 
             }
 
-            return Ok(muahang);
+            return Ok(query);
         }
 
         // DELETE: api/Api_DonPOMuaHang/5
