@@ -122,9 +122,13 @@
 
         if(kiemtra == true)
         {
+            $scope.Detail.ListAdd.push({
+                ID : $scope.item.ID,
+            })
             if ($scope.Detail.ListNew.length == 0) {
                 $scope.Detail.ListNew.push({
-                    id_ban_hang : $scope.item.ID,
+                    id_ban_hang: $scope.item.ID,
+                    ten_hang : $scope.item.TEN_HANG,
                     ma_hang: $scope.item.MA_HANG,
                     so_luong: $scope.item.SO_LUONG,
                     don_gia_chua_vat: 0,
@@ -149,6 +153,7 @@
                 if (count == 0) {
                     $scope.Detail.ListNew.push({
                         id_ban_hang: $scope.item.ID,
+                        ten_hang: $scope.item.TEN_HANG,
                         ma_hang: $scope.item.MA_HANG,
                         so_luong: $scope.item.SO_LUONG,
                         don_gia_chua_vat: 0,
@@ -238,14 +243,19 @@
                     $http.post("/api/Api_DonPOMuaHang/ChiTietPOMuaHang", $scope.arrayChiTiet)
                         .then(function successCallback(response) {
                             SuccessSystem("Thêm thành công!");
-                            //$(function () {
-                            //    setTimeout(function () {
-                            //        window.location.href = "/KinhDoanh/BaoGia/BaoGiaHome";
+                            $http.post('/api/Api_ChiTiet_DonHangPO/SuaDatHang', $scope.Detail.ListAdd).then(function (response) {
+                                $http.get('/api/Api_HangCanDatPurchase/GetHangCanDatPurchase/' + isadmin + '/' + username).then(function (response) {
+                                    $scope.list_hangcandatpurc = response.data;
+                                });
+                            });
+                            $(function () {
+                                setTimeout(function () {
+                                    window.location.href = "/MuaHang/HangCanDat/DatHang";
 
-                            //    }, 2000);
-                            //});
+                                }, 2000);
+                            });
                         }, function errorCallback(response) {
-                            ErrorSystem("Không lưu được chi tiết của báo giá");
+                            ErrorSystem("Không lưu được chi tiết của đơn PO mua hàng");
                         });
                     return;
                 }
@@ -254,6 +264,48 @@
                 console.log(response);
                 ErrorSystem("Sự cố hệ thống, Không thêm được đơn PO mua hàng, Bạn vui lòng liên hệ với admin để khắc phục");
             });
+    };
+
+
+    $http.post('/api/Api_DonPOMuaHang/ListPOMuaHang/' + isadmin + '/' + username).then(function (response) {
+        $scope.list_donPOMUaHang = response.data;
+    });
+
+    $scope.chitietPOmuahang = function (masopo) {
+        window.location.href = window.location.origin + '/MuaHang/HangCanDat/ChiTietDonDatHang/' + masopo;
+    };
+
+    //this gets the full url
+    var url = document.location.href;
+    //this removes the anchor at the end, if there is one
+    url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+    //this removes the query after the file name, if there is one
+    url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+    //this removes everything before the last slash in the path
+    url = url.substring(url.lastIndexOf("/") + 1, url.length);
+    //return
+
+
+    //hàm tìm kiếm
+    $scope.getdatadonPO = function () {
+        $http.post(window.location.origin + '/api/Api_DonPOMuaHang/ChiTietPOMuaHang/' + url)
+         .then(function (response) {
+             if (response.data) {
+                 $scope.thongtinmuahang = response.data;
+                 $scope.thongtinchung = $scope.thongtinmuahang.ChungPO;
+                 $scope.thongtinchitiet = $scope.thongtinmuahang.ChiTietPO;
+             }
+         }, function (error) {
+             console.log(error);
+         })
+    }
+    $scope.getdatadonPO();
+
+    $scope.check123 = function () {
+        console.log($scope.thongtinchung.TEN_NHA_CUNG_CAP);
+        for (i = 0; i < $scope.thongtinchitiet.length; i++) {
+            console.log($scope.thongtinchitiet[i].MA_CHUAN)
+        }
     };
 
     var mangso = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];
