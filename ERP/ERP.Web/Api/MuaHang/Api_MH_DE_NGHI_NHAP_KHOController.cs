@@ -54,10 +54,13 @@ namespace ERP.Web.Api.MuaHang
         }
 
         // GET: api/Api_MH_DE_NGHI_NHAP_KHO
-        public IQueryable<MH_DE_NGHI_NHAP_KHO> GetMH_DE_NGHI_NHAP_KHO()
+        [Route("api/Api_MH_DE_NGHI_NHAP_KHO/GetAllMH_DeNghiNhapKho/")]
+        public List<GetAll_DeNghiMuaHang_Result> GetAllMH_DeNghiNhapKho()
         {
-            return db.MH_DE_NGHI_NHAP_KHO;
+            var data = db.Database.SqlQuery<GetAll_DeNghiMuaHang_Result>("GetAll_DeNghiMuaHang");
+            return data.ToList();
         }
+
 
         // GET: api/Api_MH_DE_NGHI_NHAP_KHO/5
         public class GetMH_DeNghiNhapKho
