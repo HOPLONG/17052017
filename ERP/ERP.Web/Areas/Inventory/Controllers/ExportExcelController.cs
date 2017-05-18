@@ -16,13 +16,13 @@ namespace ERP.Web.Areas.Inventory.Controllers
         // GET: Inventory/ExportExcel
         public ActionResult ExportPhieuXuatKho()
         {
-            return View(db.GetAll_KhachHang());
+            return View(db.Prod_HH_GetAllHH());
         }
 
         public ActionResult ExportToExcel()
         {
             var gv = new GridView();
-            gv.DataSource = db.GetAll_KhachHang();
+            gv.DataSource = db.Prod_HH_GetAllHH();
             gv.DataBind();
             Response.ClearContent();
             
