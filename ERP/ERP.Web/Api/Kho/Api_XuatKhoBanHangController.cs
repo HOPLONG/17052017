@@ -123,6 +123,14 @@ namespace ERP.Web.Api.Kho
             xk.LOAI_XUAT_KHO = kho_xuatkho.LOAI_XUAT_KHO;
             db.KHO_XUAT_KHO.Add(xk);
 
+            // Lưu Đơn bán hàng 
+            BH_DON_BAN_HANG dbh = db.BH_DON_BAN_HANG.Where(x => x.MA_SO_BH == xk.PHIEU_BAN_HANG).FirstOrDefault();
+            if (dbh.DA_XUAT_KHO == false)
+            {
+                dbh.DA_XUAT_KHO = true;
+            }
+
+
             //Lưu thông tin tham chiếu
             if (kho_xuatkho.ThamChieu.Count > 0)
             {

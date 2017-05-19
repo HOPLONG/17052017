@@ -1,24 +1,11 @@
 ﻿@{Layout = null;
-}
-<style>
-    .border-td {
-        border: 1px solid black;
-    }
 
-    .table > tbody > tr > td {
-        border-top: 1px solid black;
-    }
+         }
 
-    .table > thead > tr > th {
-        border-bottom: 1px solid black;
-    }
 
-    h4 {
-        color: lightskyblue;
-    }
-</style>
-<div ng-app="myApp" ng-controller="baogiaCtrl" class="content">
-    <input type="hidden" value="@Session["USERNAME"]" id="username" />
+    <div ng-app="myApp" ng-controller="baogiaCtrl" class="content">
+    <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
     <div class="col-md-8">
         <table class="table">
@@ -51,11 +38,13 @@
     <div class="col-md-4">
         <table class="table">
             <tr>
-                <td colspan="2" class="border-td"><h4>Báo giá chờ phản hồi</h4></td>
+                <th colspan="2" class="border_th"><h4><b>Báo giá chờ phản hồi</b></h4></th>
             </tr>
             <tr>
-                <td class="border-td">
-                    <div style="height: 400px;overflow:auto">
+
+                <td>
+                    <div  style="height: 400px;overflow:auto">
+
                         <table class="table right-table">
                             <thead>
                                 <tr>
@@ -74,14 +63,16 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Báo giá thành công</h4></td>
+                <th class="border_th" colspan="2"><h4><b>Báo giá thành công</b></h4></th>
             </tr>
             <tr>
                 <td class="border-td">
-                    <div style="height: 400px;overflow:auto">
-                        <table class="table right-table">
+
+                    <div  style="height: 400px;overflow:auto">
+                        <table>
+
                             <thead>
-                                <tr>
+                                <tr class="border_th phahoi">
                                     <th>Số báo giá</th>
                                     <th>Ngày báo giá</th>
                                 </tr>
@@ -97,7 +88,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Báo giá đã hủy</h4></td>
+                <th class="border_th" colspan="2"><h4><b>Báo giá đã hủy</b></h4></th>
             </tr>
             <tr>
                 <td class="border-td">
