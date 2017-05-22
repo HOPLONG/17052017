@@ -91,9 +91,9 @@ namespace ERP.Web.Api.KhachHang
             else
             {
                 query.KHO_PHU_TRACH = datachuyensale.KHO_PHU_TRACH;
-                query.SALE_CU_2 = query.SALE_CU;
-                query.SALE_CU = query.SALE_HIEN_THOI;
+                query.SALE_CU_2 = query.SALE_HIEN_THOI;
                 query.SALE_HIEN_THOI = datachuyensale.SALE_HIEN_THOI;
+                query.SALE_ME = datachuyensale.SALE_ME;
             }
             try
             {

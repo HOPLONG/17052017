@@ -1379,6 +1379,7 @@ input:-ms-input-placeholder {
                     <th>Tình trạng hoạt động </th>
                     <th>Nhân viên kho phụ trách</th>
                     <th>Sales phụ trách</th>
+                    <th>Sales mẹ</th>
                     <th ng-show="isadmin">Sửa</th>
                     <th ng-show="isadmin">Xóa</th>
                     <th ng-show="isadmin">Copy khách hàng</th>
@@ -1420,12 +1421,12 @@ input:-ms-input-placeholder {
                                 </div>
                             </div>
                         </div>
-                    </th>
-                    
-                    <th>
+                    </th>                   
                     <th  ng-show="isadmin"></th>
                     <th ng-show="isadmin"></th>
                     <th ng-show="isadmin"></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="myTable">
@@ -1477,7 +1478,18 @@ input:-ms-input-placeholder {
                             </md-select>
                         </md-input-container>
                     </td>
-
+                    <td class="text-center">
+                        <p ng-hide="editMode" ng-model="item.SALE_ME">{{item.TEN_CUA_SALES_ME}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Sale</label>
+                            <md-select ng-model="item.SALE_ME">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
                     <td  ng-show="isadmin">
                         <button type="submit"  ng-hide="editMode" ng-click="editMode = true; editAppKey(item)" class="button_khachhang fa fa-edit">Edit</button>
                         <button type="submit" ng-show="editMode" ng-click="editMode = false; chuyensale(item)" class="btn btn-default">Save</button>

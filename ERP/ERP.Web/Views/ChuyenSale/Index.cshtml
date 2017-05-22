@@ -28,6 +28,7 @@
                     <th>Nhân viên kho phụ trách</th>
                     <th>Sale cũ 1</th>
                     <th>Sale cũ 2</th>
+                    <th>Sale mẹ</th>
                     <th>Sửa</th>
                 </tr>
             </thead>
@@ -77,6 +78,18 @@
                         <md-input-container ng-show="editMode">
                             <label>Sale</label>
                             <md-select ng-model="entry.SALE_CU_2">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
+                    <td class="text-left">
+                        <p ng-hide="editMode" ng-model="entry.SALE_ME">{{entry.TEN_SALE_ME}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Sale</label>
+                            <md-select ng-model="entry.SALE_ME">
                                 <md-option><em>None</em></md-option>
                                 <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
                                     {{state.HO_VA_TEN}}
