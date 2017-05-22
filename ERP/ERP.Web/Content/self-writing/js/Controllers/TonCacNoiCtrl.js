@@ -63,7 +63,20 @@
 
     }
     //-------------------------
+    //Xem Comment
+    $scope.XemComment = function (mahang) {
+       
+        //Lưu vào CSDL
+        $http.get("/api/Api_TonKhoHL/GetHH_Comment/" + mahang)
+           .then(function successCallback(response) {
+               $scope.xemcommenthanghoa = response.data;
+           }, function errorCallback(response) {
+               console.log(response);
+               ErrorSystem("Sự cố đường truyền, hãy kiểm tra lại mạng Internet");
+           });
 
+    }
+    //==================
 
     $scope.AddNewComment = function (mahang) {
         var username = $('#username').val();
