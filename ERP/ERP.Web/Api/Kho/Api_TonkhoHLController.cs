@@ -26,6 +26,14 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
             return result;
         }
 
+        [Route("api/Api_TonKhoHL/GetHH_Comment/{mahang}")]
+        public List<Prod_HH_Comments_Result> GetHH_Comment(string mahang)
+        {
+            var query = db.Database.SqlQuery<Prod_HH_Comments_Result>("Prod_HH_Comments @mahang", new SqlParameter("mahang", mahang));
+            var result = query.ToList();
+            return result;
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

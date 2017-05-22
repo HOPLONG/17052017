@@ -78,6 +78,7 @@ hr.dots {
         font-size: 20px;
         background-color: #f5f5f5;
         border-color: #ddd;
+        width: 100%;
     }
 
 table
