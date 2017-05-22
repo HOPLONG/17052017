@@ -935,7 +935,7 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
         //    $scope.editing = false;
         //}
         //$scope.phantrangkh(1);
-        $scope.$scope.phantrangkh(1);
+       $scope.phantrangkh(1);
     };
 
     $scope.load_nhanvienkd = function () {
@@ -1085,6 +1085,7 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
             MA_KHACH_HANG: $scope.item.MA_KHACH_HANG,
             SALE_HIEN_THOI: $scope.item.SALES_PHU_TRACH,
             KHO_PHU_TRACH: $scope.item.KHO_PHU_TRACH,
+            SALE_ME : $scope.item.SALE_ME,
         }
         khachhangService.save_listchuyensale(data).then(function () {
             $scope.phantrangkh(0);
