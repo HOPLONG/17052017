@@ -331,6 +331,28 @@
                          $scope.thongtinchitiet.splice(i)
                      }
                  }
+                 var tong_tien_hang = 0;
+
+                 if ($scope.thongtinchitiet.length > 0)
+                 {
+                     for (i = 0; i < $scope.thongtinchitiet.length; i++) {
+                         $scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT = parseFloat($scope.thongtinchitiet[i].SL * parseInt($scope.thongtinchitiet[i].DON_GIA_CHUA_VAT));
+                         $scope.thongtinchitiet[i].TIEN_THUE_GTGT = parseFloat($scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT * ($scope.thongtinchung.THUE_VAT / 100));
+                         tong_tien_hang = parseInt(tong_tien_hang + $scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT);
+                     }
+                     $scope.thongtinchung.TONG_TIEN_HANG = tong_tien_hang;
+                     $scope.thongtinchung.TIEN_THUE_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG * ($scope.thongtinchung.THUE_VAT / 100));
+                     $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG + $scope.thongtinchung.TIEN_THUE_VAT);
+                     $scope.thongtinchung.TONG_TIEN_BANG_CHU = docso(parseInt($scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT));
+                 } else
+                 {
+                     $scope.thongtinchung.TONG_TIEN_HANG = 0;
+                     $scope.thongtinchung.TIEN_THUE_VAT = 0;
+                     $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT = 0;
+                     $scope.thongtinchung.TONG_TIEN_BANG_CHU = 'Không';
+                 }
+
+                 
              }
          }, function (error) {
              console.log(error);
