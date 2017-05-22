@@ -240,8 +240,9 @@
                             </td>
                         </tr>
                         <tr>
-                            <td colspan="7" style="text-align:center; cursor:pointer; height:30px; font-size:14px; font-weight:bold; background:#7fdffe" ng-click="addnewproduct()">
-                                Bấm vào đây để thêm mới
+                            
+                            <td colspan="7">
+                                <button class="fa fa-plus button_themdong" ng-click="addnewproduct()">Thêm một dòng</button>
                             </td>
                         </tr>
                         <tr height="31">
@@ -321,7 +322,7 @@
                     </tbody>
                 </table>
             </center>
-            <button class="btn btn-default" style="margin-top: 15px" ng-click="TaoPOMoi()">Hoàn thành tạo đơn PO mới</button>
+            <center><button class="btn fa fa-check-circle-o" style="margin-top: 15px" ng-click="TaoPOMoi()">Hoàn thành</button></center>
         </fieldset>
     </div>
 

@@ -399,9 +399,9 @@
 
         </div>
         <div style="margin-top: 15px" class="col-md-12">
-            <input class="btn btn-primary" ng-click="CreateNewBaoGiaFromBaoGia()" value="Thêm mới">
-            <a href="/KinhDoanh/BaoGia/GetBaoGia_THUC/{{BANGBAOGIA.SO_BAO_GIA}}"><input class="btn btn-primary" value="In báo giá"></a>
-            <a href="/KinhDoanh/BaoGia/GetBaoGia/{{BANGBAOGIA.SO_BAO_GIA}}"><input class="btn btn-primary" value="In báo giá(CM)"></a>
+            <button class="btn fa fa-plus" ng-click="CreateNewBaoGiaFromBaoGia()">Tạo báo giá</button>
+            <a href="/KinhDoanh/BaoGia/GetBaoGia_THUC/{{BANGBAOGIA.SO_BAO_GIA}}"><button class="btn fa fa-print">In báo giá</button></a>
+            <a href="/KinhDoanh/BaoGia/GetBaoGia/{{BANGBAOGIA.SO_BAO_GIA}}"><button class="btn fa fa-print">In báo giá (CM)</button></a>
             <input ng-show="createnewPOvalue" class="btn btn-primary" data-toggle="modal" data-target="#thongtinPO" value="Tạo đơn PO">
 
         </div>
