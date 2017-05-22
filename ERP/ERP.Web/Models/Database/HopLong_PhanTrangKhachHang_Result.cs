@@ -81,6 +81,10 @@ public partial class HopLong_PhanTrangKhachHang_Result
 
     public string TEN_LOAI_KHACH { get; set; }
 
+    public string SALE_ME { get; set; }
+
+    public string TEN_CUA_SALES_ME { get; set; }
+
 }
 
 }

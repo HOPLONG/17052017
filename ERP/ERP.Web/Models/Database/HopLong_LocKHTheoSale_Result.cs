@@ -65,6 +65,24 @@ public partial class HopLong_LocKHTheoSale_Result
 
     public string TEN_CUA_SALES_PHU_TRACH { get; set; }
 
+    public string SALE_ME { get; set; }
+
+    public string TEN_CUA_SALES_ME { get; set; }
+
+    public string KHO_PHU_TRACH { get; set; }
+
+    public string TEN_CUA_KHO_PHU_TRACH { get; set; }
+
+    public Nullable<bool> KHACH_DO_MARKETING_TIM_KIEM { get; set; }
+
+    public Nullable<bool> KHACH_MUA_DOANH_SO_CAO { get; set; }
+
+    public Nullable<bool> KHACH_MUA_SO_LUONG_NHIEU { get; set; }
+
+    public Nullable<bool> KHACH_DAC_BIET { get; set; }
+
+    public Nullable<bool> THONG_TIN_DA_DAY_DU { get; set; }
+
 }
 
 }
