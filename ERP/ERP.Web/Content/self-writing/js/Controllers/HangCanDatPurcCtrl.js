@@ -7,6 +7,11 @@
         ListNew: [],
         ListTach: [],
         ListXoa: [],
+        ListMua: [],
+        ListGop: [],
+        ListDeNghiNhapKho: [],
+        ListJoin: [],
+        ListMH_JOIN_DN: [],
     }
 
 
@@ -243,6 +248,30 @@
                     $http.post("/api/Api_DonPOMuaHang/ChiTietPOMuaHang", $scope.arrayChiTiet)
                         .then(function successCallback(response) {
                             SuccessSystem("Thêm thành công!");
+                            for (i = 0; i < response.data.length; i++)
+                            {
+                                $scope.Detail.ListMua.push({
+                                    ID_MUA_HANG : response.data[i].ID
+                                })
+                            }
+                            
+                            for (j = 0; j < $scope.Detail.ListMua.length; j++)
+                            {
+                                for(k=0;k< $scope.Detail.ListAdd.length;k++)
+                                {
+                                    $scope.Detail.ListGop.push({
+                                        ID_PO_MUA_HANG: $scope.Detail.ListMua[j].ID_MUA_HANG,
+                                        ID_PO_BAN_HANG : $scope.Detail.ListAdd[k].ID,
+                                    })
+                                }
+                            }
+
+                            $http.post('/api/Api_MH_JOIN_BH/PostMH_JOIN_BH', $scope.Detail.ListGop).then(function (response) {
+                                SuccessSystem("Lưu MH_JOIN_BH thành công!");
+                            }, function errorCallback(response) {
+                                ErrorSystem("Không lưu được MH_JOIN_BH");
+                            });
+
                             $http.post('/api/Api_ChiTiet_DonHangPO/SuaDatHang', $scope.Detail.ListAdd).then(function (response) {
                                 $http.get('/api/Api_HangCanDatPurchase/GetHangCanDatPurchase/' + isadmin + '/' + username).then(function (response) {
                                     $scope.list_hangcandatpurc = response.data;
@@ -294,18 +323,216 @@
                  $scope.thongtinmuahang = response.data;
                  $scope.thongtinchung = $scope.thongtinmuahang.ChungPO;
                  $scope.thongtinchitiet = $scope.thongtinmuahang.ChiTietPO;
+                 for (i = 0; i < $scope.thongtinchitiet.length; i++) {
+                     $scope.thongtinchitiet[i].TIEN_THUE_GTGT = parseFloat($scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT * ($scope.thongtinchung.THUE_VAT / 100));
+                     $scope.thongtinchitiet[i].SL = $scope.thongtinchitiet[i].SL - $scope.thongtinchitiet[i].SL_DA_VE;
+                     if( $scope.thongtinchitiet[i].SL == 0)
+                     {
+                         $scope.thongtinchitiet.splice(i)
+                     }
+                 }
+                 var tong_tien_hang = 0;
+
+                 if ($scope.thongtinchitiet.length > 0)
+                 {
+                     for (i = 0; i < $scope.thongtinchitiet.length; i++) {
+                         $scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT = parseFloat($scope.thongtinchitiet[i].SL * parseInt($scope.thongtinchitiet[i].DON_GIA_CHUA_VAT));
+                         $scope.thongtinchitiet[i].TIEN_THUE_GTGT = parseFloat($scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT * ($scope.thongtinchung.THUE_VAT / 100));
+                         tong_tien_hang = parseInt(tong_tien_hang + $scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT);
+                     }
+                     $scope.thongtinchung.TONG_TIEN_HANG = tong_tien_hang;
+                     $scope.thongtinchung.TIEN_THUE_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG * ($scope.thongtinchung.THUE_VAT / 100));
+                     $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG + $scope.thongtinchung.TIEN_THUE_VAT);
+                     $scope.thongtinchung.TONG_TIEN_BANG_CHU = docso(parseInt($scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT));
+                 } else
+                 {
+                     $scope.thongtinchung.TONG_TIEN_HANG = 0;
+                     $scope.thongtinchung.TIEN_THUE_VAT = 0;
+                     $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT = 0;
+                     $scope.thongtinchung.TONG_TIEN_BANG_CHU = 'Không';
+                 }
+
+                 
              }
          }, function (error) {
              console.log(error);
          })
+        
     }
     $scope.getdatadonPO();
 
-    $scope.check123 = function () {
-        console.log($scope.thongtinchung.TEN_NHA_CUNG_CAP);
+    $scope.kiemtra = function (detail) {
+        $scope.detail = detail;
+        var tong_tien_hang = 0;
+
+        $scope.detail.THANH_TIEN_CHUA_VAT = parseFloat($scope.detail.SL * parseInt($scope.detail.DON_GIA_CHUA_VAT));
+
         for (i = 0; i < $scope.thongtinchitiet.length; i++) {
-            console.log($scope.thongtinchitiet[i].MA_CHUAN)
+            tong_tien_hang = parseInt(tong_tien_hang + $scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT);
         }
+        $scope.thongtinchung.TONG_TIEN_HANG = tong_tien_hang;
+        $scope.thongtinchung.TIEN_THUE_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG * ($scope.thongtinchung.THUE_VAT / 100));
+        $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG + $scope.thongtinchung.TIEN_THUE_VAT);
+        $scope.thongtinchung.TONG_TIEN_BANG_CHU = docso(parseInt($scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT));
+    };
+
+    $scope.EditPOMua = function () {
+        $scope.ThongTinChungEdit = {
+            MA_SO_PO : url,
+            DIA_DIEM_GIAO_HANG: $scope.thongtinchung.DIA_DIEM_GIAO_HANG,
+            HINH_THUC_VAN_CHUYEN: $scope.thongtinchung.HINH_THUC_VAN_CHUYEN,
+            HINH_THUC_THANH_TOAN: $scope.thongtinchung.HINH_THUC_THANH_TOAN,
+            THOI_HAN_THANH_TOAN: $scope.thongtinchung.THOI_HAN_THANH_TOAN,
+            TIEN_THUE_VAT: $scope.thongtinchung.TIEN_THUE_VAT,
+            TONG_TIEN_BANG_CHU: $scope.thongtinchung.TONG_TIEN_BANG_CHU,
+            TONG_TIEN_HANG: $scope.thongtinchung.TONG_TIEN_HANG,
+            THUE_VAT: $scope.thongtinchung.THUE_VAT,
+            TONG_TIEN_DA_BAO_GOM_VAT: $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT
+        };
+
+        $scope.arrayChiTietEdit = [];
+
+        for (var i = 0; i < $scope.thongtinchitiet.length; i++) {
+
+
+            var MuaHangChiTiet = {
+                ID : $scope.thongtinchitiet[i].ID,
+                SL: $scope.thongtinchitiet[i].SL,
+                DON_GIA_CHUA_VAT: $scope.thongtinchitiet[i].DON_GIA_CHUA_VAT,
+                THANH_TIEN_CHUA_VAT: $scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT,
+                THOI_GIAN_GIAO_HANG: $scope.thongtinchitiet[i].THOI_GIAN_GIAO_HANG,
+                GHI_CHU: $scope.thongtinchitiet[i].GHI_CHU,
+            }
+            //PUSH ChiTietGiu VÀO MẢNG arrayChiTietGiu
+            $scope.arrayChiTietEdit.push(MuaHangChiTiet);
+        }
+
+        //Lưu vào CSDL
+        $http.post("/api/Api_DonPOMuaHang/EditThongTinChung", $scope.ThongTinChungEdit)
+            .then(function successCallback(response) {                                        
+                SuccessSystem("Sửa thông tin chung thành công");
+                if ($scope.arrayChiTietEdit.length > 0) {
+                    $http.post("/api/Api_DonPOMuaHang/EditChiTietPO", $scope.arrayChiTietEdit)
+                        .then(function successCallback(response) {
+                            SuccessSystem("Sửa thông tin chi tiết thành công!");
+                            $(function () {
+                                setTimeout(function () {
+                                    window.location.href = "/MuaHang/HangCanDat/DonDatHang";
+                                }, 2000);
+                            });
+                        }, function errorCallback(response) {
+                            ErrorSystem("Không sửa được chi tiết của đơn PO mua hàng");
+                        });
+                    return;
+                }
+            }, function errorCallback(response) {
+                console.log(response);
+                ErrorSystem("Sự cố hệ thống, Không sửa được đơn PO mua hàng, Bạn vui lòng liên hệ với admin để khắc phục");
+            });
+    };
+
+
+    $scope.kiemtranhapkho = function (detail) {
+        $scope.detail = detail;
+        var tong_tien_hang = 0;
+        var tong_tien_thue = 0;
+
+        $scope.detail.THANH_TIEN_CHUA_VAT = parseFloat($scope.detail.SL * parseInt($scope.detail.DON_GIA_CHUA_VAT));
+        $scope.detail.TIEN_THUE_GTGT = parseFloat($scope.detail.THANH_TIEN_CHUA_VAT * ($scope.thongtinchung.THUE_VAT / 100));
+        for (i = 0; i < $scope.thongtinchitiet.length; i++) {
+            tong_tien_hang = parseInt(tong_tien_hang + $scope.thongtinchitiet[i].THANH_TIEN_CHUA_VAT);
+            tong_tien_thue = parseInt(tong_tien_thue + $scope.thongtinchitiet[i].TIEN_THUE_GTGT);
+        }
+        $scope.thongtinchung.TONG_TIEN_HANG = tong_tien_hang;
+        $scope.thongtinchung.TIEN_THUE_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG * ($scope.thongtinchung.THUE_VAT / 100));
+        $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT = parseFloat($scope.thongtinchung.TONG_TIEN_HANG + $scope.thongtinchung.TIEN_THUE_VAT);
+        $scope.thongtinchung.TONG_TIEN_BANG_CHU = docso(parseInt($scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT));
+    };
+
+    $scope.TickPhieuNhapKho = function (trangthai,detail) {
+        if (trangthai == true) {
+            $scope.detail = detail;
+            $scope.Detail.ListDeNghiNhapKho.push({
+                ID : $scope.detail.ID,
+                MA_HANG: $scope.detail.MA_HANG,
+                SL: $scope.detail.SL,
+                TK_NO: 156,
+                TK_CO: 331,
+                DON_GIA_CHUA_VAT: $scope.detail.DON_GIA_CHUA_VAT,
+                THANH_TIEN_CHUA_VAT: $scope.detail.THANH_TIEN_CHUA_VAT,
+                DIEN_GIAI_THUE: $scope.detail.DIEN_GIAI_THUE,
+                THUE_GTGT: $scope.thongtinchung.THUE_VAT,
+                TIEN_THUE_GTGT: $scope.detail.TIEN_THUE_GTGT,
+                TK_THUE : 1331,
+            })
+        }
+        console.log($scope.Detail.ListDeNghiNhapKho);
+    };
+
+    $scope.MoveToDeNghiNhapKho = function () {
+        window.location.href = "/MuaHang/HangCanDat/DeNghiNhapKho/" + url;
+    };
+
+    $scope.DeNghiNhapKho = function () {
+        $scope.ThongTinChungDeNghi = {
+            MA_SO_PO: url,
+            NGUOI_DN: username,
+            NGAY_VE_DU_KIEN: $scope.ngay_ve_du_kien,
+            MA_NCC: $scope.thongtinchung.NHA_CUNG_CAP,
+            ID_NGUOI_LIEN_HE : $scope.thongtinchung.NGUOI_LIEN_HE,
+            DIEN_GIAI: $scope.thongtinchung.DIEN_GIAI,
+            HINH_THUC_VAN_CHUYEN: $scope.thongtinchung.HINH_THUC_VAN_CHUYEN,
+            HINH_THUC_THANH_TOAN: $scope.thongtinchung.HINH_THUC_THANH_TOAN,
+            THOI_HAN_THANH_TOAN: $scope.thongtinchung.THOI_HAN_THANH_TOAN,
+            TIEN_THUE_VAT: $scope.thongtinchung.TIEN_THUE_VAT,
+            TONG_TIEN_BANG_CHU: $scope.thongtinchung.TONG_TIEN_BANG_CHU,
+            TONG_TIEN_HANG: $scope.thongtinchung.TONG_TIEN_HANG,
+            THUE_GTGT: $scope.thongtinchung.THUE_VAT,
+            TONG_TIEN_DA_BAO_GOM_VAT: $scope.thongtinchung.TONG_TIEN_DA_BAO_GOM_VAT
+        };
+
+        $http.post('/api/Api_MH_DE_NGHI_NHAP_KHO/PostMH_DE_NGHI_NHAP_KHO', $scope.ThongTinChungDeNghi).then(function successCallback(response) {
+            SuccessSystem("Thêm thông tin chung đề nghị nhập kho thành công");
+            $scope.ThongTinChungDeNghi = response.data;
+            $scope.ThongTinChungDeNghi.MA_SO_DN;
+            for (i = 0; i < $scope.Detail.ListDeNghiNhapKho.length; i++) {
+                $scope.Detail.ListDeNghiNhapKho[i].MA_SO_DN = $scope.ThongTinChungDeNghi.MA_SO_DN;
+            }
+            $http.post('/api/Api_MH_DE_NGHI_NHAP_KHO/ChiTietDeNghiNhapKho', $scope.Detail.ListDeNghiNhapKho).then(function (response) {
+                SuccessSystem("Thêm chi tiết đề nghị nhập kho thành công");
+                for (i = 0; i < response.data.length; i++)
+                {
+                    $scope.Detail.ListJoin.push({
+                        ID_DE_NGHI: response.data[i].ID,
+                        SL_VE: response.data[i].SL,
+                    })
+                }
+
+                for (j = 0; j < $scope.Detail.ListJoin.length; j++)
+                {
+                    
+                    $scope.Detail.ListMH_JOIN_DN.push({
+                        ID_DE_NGHI: $scope.Detail.ListJoin[j].ID_DE_NGHI,
+                        ID_PO_DAT_HANG: $scope.Detail.ListDeNghiNhapKho[j].ID,
+                        SL_VE: $scope.Detail.ListJoin[j].SL_VE,
+                    })
+                    
+                }
+                $http.post('/api/Api_MH_JOIN_DENGHI/PostMH_DE_NGHI_JOIN_PO_MH', $scope.Detail.ListMH_JOIN_DN).then(function (response) {
+                    $(function () {
+                        setTimeout(function () {
+                            window.location.href = "/MuaHang/HangCanDat/DonDatHang";
+
+                        }, 2000);
+                    });
+                });
+            }, function errorCallback(response) {
+                ErrorSystem("Không lưu được chi tiết của đơn PO mua hàng");
+            });                        
+        }, function errorCallback(response) {
+        console.log(response);
+        ErrorSystem("Sự cố hệ thống, Không thêm được đơn PO mua hàng, Bạn vui lòng liên hệ với admin để khắc phục");
+        });
     };
 
     var mangso = ['không', 'một', 'hai', 'ba', 'bốn', 'năm', 'sáu', 'bảy', 'tám', 'chín'];

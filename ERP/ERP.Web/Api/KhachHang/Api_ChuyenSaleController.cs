@@ -35,11 +35,12 @@ namespace ERP.Web.Api.KhachHang
                 SALE_HIEN_THOI = x.SALE_HIEN_THOI,
                 SALE_CU_2 = x.SALE_CU_2,
                 SALE_CU = x.SALE_CU,
+                SALE_ME = x.SALE_ME,
                 TEN_SALE_HIEN_THOI = x.TEN_SALE_HIEN_THOI,
                 TEN_SALE_CU_HON = x.TEN_SALE_CU_HON,
                 TEN_SALE_CU = x.TEN_SALE_CU,
                 TEN_KHO_PHU_TRACH = x.TEN_KHO_PHU_TRACH,
-
+                TEN_SALE_ME = x.TEN_SALE_ME,
             }).ToList();
             //var vData = (from t1 in db.KHs
             //             join t2 in db.KH_CHUYEN_SALES on t1.MA_KHACH_HANG equals t2.MA_KHACH_HANG
@@ -83,17 +84,17 @@ namespace ERP.Web.Api.KhachHang
                 chuyensale.KHO_PHU_TRACH = datachuyensale.KHO_PHU_TRACH;
                 chuyensale.SALE_CU = datachuyensale.SALE_CU;
                 chuyensale.SALE_CU_2 = datachuyensale.SALE_CU_2;
+                chuyensale.SALE_ME = datachuyensale.SALE_ME;
                 db.KH_CHUYEN_SALES.Add(chuyensale);
             }
             else
             {
-
-                        query.SALE_CU_2 = query.SALE_CU;
-                        query.SALE_CU = query.SALE_HIEN_THOI;
-                        query.SALE_HIEN_THOI = datachuyensale.SALE_HIEN_THOI;
-                        query.KHO_PHU_TRACH = datachuyensale.KHO_PHU_TRACH;
-                
-                }
+                query.SALE_CU_2 = query.SALE_HIEN_THOI;
+                query.SALE_CU = datachuyensale.SALE_CU;
+                query.SALE_HIEN_THOI = datachuyensale.SALE_HIEN_THOI;
+                query.KHO_PHU_TRACH = datachuyensale.KHO_PHU_TRACH;
+                query.SALE_ME = datachuyensale.SALE_ME;
+            }
 
             try
             {
