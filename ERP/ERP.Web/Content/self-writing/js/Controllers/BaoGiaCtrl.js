@@ -2507,14 +2507,14 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
             MA_KHACH_HANG: $scope.thongtinchung.MA_KHACH_HANG,
             TEN_LIEN_HE: $scope.thongtinchung.NGUOI_LIEN_HE,
             HINH_THUC_THANH_TOAN: $scope.thongtinchung.PHUONG_THUC_THANH_TOAN,
-            TONG_TIEN_THANH_TOAN: $scope.thongtinchung.TONG_GIA_TRI_THU_CUA_KHACH,
-            TONG_TIEN_HANG: $scope.thongtinchung.TONG_GIA_TRI_DON_HANG_THUC_TE,
+            TONG_TIEN_THANH_TOAN: $scope.thongtinchung.GIA_TRI_THUC_THU_TU_KHACH,
+            TONG_TIEN_HANG: $scope.thongtinchung.TONG_TIEN,
             TONG_TIEN_THUE_GTGT: $scope.thongtinchung.TIEN_THUE_GTGT,
-            SO_TIEN_VIET_BANG_CHU: docso($scope.thongtinchung.TONG_GIA_TRI_THU_CUA_KHACH),
+            SO_TIEN_VIET_BANG_CHU: docso($scope.thongtinchung.GIA_TRI_THUC_THU_TU_KHACH),
             THUE_SUAT_GTGT: $scope.thongtinchung.THUE_SUAT_GTGT,
             TRUC_THUOC: 'HOPLONG',
             DA_BAN_HANG: false,
-            NHAN_VIEN_QUAN_LY: salehienthoi,
+            NHAN_VIEN_QUAN_LY: username,
             SO_BAO_GIA: url,
             NGAY_GIAO_HANG: $scope.ngay_giao_hang,
             DIA_DIEM_GIAO_HANG: $scope.dia_diem_giao_hang,
@@ -2544,7 +2544,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
                 TIEN_CHI_PHI_HOA_DON: $scope.thongtinchung.TONG_CHI_PHI_HOA_DON,
                 THUE_VAT: $scope.thongtinchung.THUE_SUAT_GTGT,
                 TIEN_THUE_VAT: $scope.thongtinchung.TIEN_THUE_GTGT,
-                TONG_GIA_TRI_THU_CUA_KHACH: $scope.thongtinchung.TONG_GIA_TRI_THU_CUA_KHACH,
+                TONG_GIA_TRI_THU_CUA_KHACH: $scope.thongtinchung.GIA_TRI_THUC_THU_TU_KHACH,
                 LOI_NHUAN_THUAN: $scope.loi_nhuan_thuan,
                 CHIET_KHAU_CHO_KHACH: $scope.thongtinchung.THUC_NHAN_CUA_KHACH,
                 THANH_TOAN_KHI_DAT_HANG: $scope.thanh_toan_khi_dat_hang,
@@ -2562,7 +2562,12 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
                 url: window.location.origin + '/api/Api_PhuongAnKinhDoanh/PostBH_PHUONG_AN_KINH_DOANH'
             }).then(function successCallback(response) {
                 SuccessSystem('Bạn đã tạo thành công 1 PAKD có mã là ' + response.data.MA_SO_PAKD);
+                $(function () {
+                    setTimeout(function () {
+                        window.location.href = "/KinhDoanh/DonHangPO/DonPOHome";
 
+                    }, 2000);
+                });
             }, function errorCallback(response) {
                 console.log(response);
                 ErrorSystem('Sự cố hệ thống, Không lưu được PAKD, Bạn vui lòng liên hệ với admin để khắc phục ');

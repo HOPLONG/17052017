@@ -47,7 +47,7 @@ namespace ERP.Web.Api.BanHang
             {
                 result = "0" + result;
             }
-            return "PO" + year + month + day + result;
+            return "PAKD" + year + month + day + result;
         }
 
         // GET: api/Api_PhuongAnKinhDoanh

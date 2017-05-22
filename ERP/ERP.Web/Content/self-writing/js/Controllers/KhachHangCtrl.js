@@ -357,13 +357,13 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
             TEN_CONG_TY: $scope.arraythongtin.ten_cong_ty,
             VAN_PHONG_GIAO_DICH: $scope.arraythongtin.van_phong_giao_dich,
             DIA_CHI_XUAT_HOA_DON: $scope.arraythongtin.dia_chi_xuat_hoa_don,
-            MA_SO_THUE: $scope.arraythongtin.ma_so_thue,
+            MST: $scope.arraythongtin.ma_so_thue,
             WEBSITE: $scope.arraythongtin.website,
             HOTLINE: $scope.arraythongtin.hotline,
             FAX: $scope.arraythongtin.fax,
             DIEU_KHOAN_THANH_TOAN: $scope.arraythongtin.dieu_khoan_thanh_toan,
             SO_NGAY_DUOC_NO: $scope.arraythongtin.so_ngay_duoc_no,
-            SO_NO_TOI_DA: $scope.arraythongtin.so_no_toi_da,
+            SO_NO_TOI_DA: parseInt($scope.arraythongtin.so_no_toi_da),
             EMAIL: $scope.arraythongtin.email,
             GHI_CHU: themghichu,
             HO_SO_THANH_TOAN: ho_so_thanh_toan,
@@ -427,6 +427,30 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
         }).then(function successCallback(response) {
             $scope.Thong_tin_KH = response.data;
 
+            $scope.arraythongtin.ten_cong_ty = null;
+            $scope.arraythongtin.van_phong_giao_dich = null;
+            $scope.arraythongtin.dia_chi_xuat_hoa_don = null;
+            $scope.arraythongtin.ma_so_thue = null;
+            $scope.arraythongtin.website = null;
+            $scope.arraythongtin.hotline = null;
+            $scope.arraythongtin.fax = null;
+            $scope.arraythongtin.dieu_khoan_thanh_toan = '';
+            $scope.arraythongtin.so_ngay_duoc_no = null;
+            $scope.arraythongtin.so_no_toi_da = null;
+            $scope.arraythongtin.email = null;
+            CKEDITOR.instances.themghichu.setData('');
+            CKEDITOR.instances.ho_so_thanh_toan.setData('');
+
+            $scope.arraythongtin.tinh = null;
+            $scope.arraythongtin.tinh_trang_hoat_dong = '';
+            $scope.arraythongtin.quoc_gia = null;
+
+            $scope.arraythongtin.khach_do_marketing_tim_kiem = false;
+            $scope.arraythongtin.thong_tin_da_day_du = false;
+            $scope.arraythongtin.khach_mua_so_luong_nhieu = false;
+            $scope.arraythongtin.khach_mua_doanh_so_cao = false;
+            $scope.arraythongtin.khach_dac_biet = false;
+
             $http({
                 method: 'GET',
                 data: $scope.lastmakh,
@@ -436,11 +460,13 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
                 $scope.lastmakh = response.data;
                 var phanloaikh_add = {
                     MA_KHACH_HANG: $scope.lastmakh,
-                    MA_LOAI_KHACH: $scope.ma_loai_khach,
-                    NHOM_NGANH: $scope.nhom_nganh
+                    MA_LOAI_KHACH: $scope.arraythongtin.ma_loai_khach,
+                    NHOM_NGANH: $scope.arraythongtin.nhom_nganh
                 }
                 khachhangService.add_phanloaikh(phanloaikh_add).then(function (response) {
                     //$scope.phantrangkh(1);
+                    $scope.arraythongtin.ma_loai_khach = '';
+                    $scope.arraythongtin.nhom_nganh = '';
                     $scope.phantrangkh(0);
                 });
 
@@ -1087,9 +1113,15 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
             KHO_PHU_TRACH: $scope.item.KHO_PHU_TRACH,
             SALE_ME : $scope.item.SALE_ME,
         }
-        khachhangService.save_listchuyensale(data).then(function () {
+        var txt;
+        var r = confirm("Thay đổi sale phụ trách sẽ làm mất khách hàng của bạn.Bạn có chắc chắn muốn thay đổi không?");
+        if (r == true) {
+            khachhangService.save_listchuyensale(data).then(function () {
+                $scope.phantrangkh(0);
+            });
+        } else {
             $scope.phantrangkh(0);
-        });
+        }       
     };
 
 
