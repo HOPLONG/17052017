@@ -6,14 +6,14 @@
 <script src="~/Content/self-writing/js/Controllers/RouteCtrl.js"></script>
 <script src="~/Content/self-writing/js/Services/HangCanDatService.js"></script>
 <script src="~/Content/self-writing/js/Controllers/HangCanDatCtrl.js"></script>
+<link href="~/Content/self-writing/css/Kinhdoanh/hangcangxuat.css" rel="stylesheet" />
+<div class="panel-heading">
+    <marquee width="80%">Bạn đang xem danh mục hàng cần xuất</marquee>
+</div>
 <div ng-app="myApp"
      ng-controller="HomeHangCanDatCtrl"
      layout="column">
-    <md-toolbar>
-        <h2 class="md-toolbar-tools">
-            <span>Bạn đang trong mục Hàng cần đặt</span>
-        </h2>
-    </md-toolbar>
+
     <md-tabs md-stretch-tabs
              md-selected="selectedIndex">
         <md-tab label="List hàng cần đặt"></md-tab>
