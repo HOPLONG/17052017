@@ -19,7 +19,8 @@
             SALE_HIEN_THOI: $scope.entry.SALE_HIEN_THOI,
             KHO_PHU_TRACH: $scope.entry.KHO_PHU_TRACH,
             SALE_CU: $scope.entry.SALE_CU,
-            SALE_CU_2 : $scope.entry.SALE_CU_2,
+            SALE_CU_2: $scope.entry.SALE_CU_2,
+            SALE_ME : $scope.entry.SALE_ME
         }
         chuyensaleService.save_listchuyensale(data_save).then(function () {
             $scope.load_listchuyensale();

@@ -103,7 +103,7 @@
             </div>
 
             <div class="col-md-12" style="text-align: right;margin-bottom: 10px; margin-top:20px;">
-                <b>Tiền khách muốn nhận : </b><input type="text" ng-model="tien_khach_muon_nhan" style="border:1px solid #F0F0F0 !important;" format="number" />
+                <b>Tổng tiền hóa đơn khách muốn ghi : </b><input type="text" ng-model="tien_khach_muon_nhan" style="border:1px solid #F0F0F0 !important;" format="number" />
                 <button class="fa fa-calculator button_cm" ng-click="tinh_cm_khach(tien_khach_muon_nhan)">Tính CM</button>
             </div>
             <div class="col-md-12" style="text-align: right;margin-bottom: 20px;">
@@ -120,16 +120,16 @@
                     <table id="tbl" cellspacing="0" cellpadding="0">
                         <thead>
                             <tr>
-                                <th width="15%"><span>Descriptions</span></th>
-                                <th width="4%"><span>Qty</span></th>
-                                <th width="4%"><span>Uom</span></th>
-                                <th width="8%"><span>U.Price</span></th>
-                                <th width="8%"><span>Total Amount(VND)</span></th>
-                                <th width="8%"><span>Dilivery Time</span></th>
-                                <th width="10%"><span>Đơn giá tính theo Price List</span></th>
-                                <th width="10%"><span>Đơn giá tính theo Giá Nhậ</span>p</th>
-                                <th width="7%"><span>Giá báo đi net</span></th>
-                                <th width="22%" ng-show="newCM">Tính CM cho khách</span></th>
+                                <th width="15%">Descriptions</th>
+                                <th width="4%">Qty</th>
+                                <th width="4%">Uom</th>
+                                <th width="8%">U.Price</th>
+                                <th width="8%">Total Amount(VND)</th>
+                                <th width="8%">Dilivery Time</th>
+                                <th width="10%">Đơn giá tính theo Price List</th>
+                                <th width="10%">Đơn giá tính theo Giá Nhập</th>
+                                <th width="7%">Giá báo đi net</th>
+                                <th width="22%" ng-show="newCM">Tính CM cho khách</th>
                                 <th width="5%">Xóa</th>
                             </tr>
                         </thead>
@@ -334,7 +334,7 @@
                                                 <label class="control-label">Phí vận chuyển </label>
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control" ng-model="phivanchuyen" id="tienvanchuyen" ng-init="phivanchuyen=0.00" ng-change="test(detail)" />
+                                                <input type="text" class="form-control" format="number" ng-model="phivanchuyen" id="tienvanchuyen" ng-init="phivanchuyen=0.00" ng-change="test(detail)" />
                                             </td>
                                             <td style="padding-left:10px">
                                                 <label class="control-label">Thuế suất GTGT (%) </label>
@@ -400,9 +400,9 @@
 
         </div>
         <div style="margin-top: 15px" class="col-md-12">
-            <input class="btn btn-primary" ng-click="CreateNewBaoGiaFromBaoGia()" value="Thêm mới">
-            <a href="/KinhDoanh/BaoGia/GetBaoGia_THUC/{{BANGBAOGIA.SO_BAO_GIA}}"><input class="btn btn-primary" value="In báo giá"></a>
-            <a href="/KinhDoanh/BaoGia/GetBaoGia/{{BANGBAOGIA.SO_BAO_GIA}}"><input class="btn btn-primary" value="In báo giá(CM)"></a>
+            <button class="btn fa fa-plus" ng-click="CreateNewBaoGiaFromBaoGia()">Tạo báo giá</button>
+            <a href="/KinhDoanh/BaoGia/GetBaoGia_THUC/{{BANGBAOGIA.SO_BAO_GIA}}"><button class="btn fa fa-print">In báo giá</button></a>
+            <a href="/KinhDoanh/BaoGia/GetBaoGia/{{BANGBAOGIA.SO_BAO_GIA}}"><button class="btn fa fa-print">In báo giá (CM)</button></a>
             <input ng-show="createnewPOvalue" class="btn btn-primary" data-toggle="modal" data-target="#thongtinPO" value="Tạo đơn PO">
 
         </div>
