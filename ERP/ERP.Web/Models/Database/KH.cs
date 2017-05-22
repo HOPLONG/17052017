@@ -56,6 +56,10 @@ public partial class KH
 
         this.KH_PHAN_LOAI_KHACH = new HashSet<KH_PHAN_LOAI_KHACH>();
 
+        this.KH_CONG_NO = new HashSet<KH_CONG_NO>();
+
+        this.KH_CONG_NO1 = new HashSet<KH_CONG_NO>();
+
     }
 
 
@@ -182,6 +186,14 @@ public partial class KH
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<KH_PHAN_LOAI_KHACH> KH_PHAN_LOAI_KHACH { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<KH_CONG_NO> KH_CONG_NO { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<KH_CONG_NO> KH_CONG_NO1 { get; set; }
 
 }
 
