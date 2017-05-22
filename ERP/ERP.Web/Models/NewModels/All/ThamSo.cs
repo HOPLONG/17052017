@@ -11,5 +11,7 @@ namespace ERP.Web.Models.NewModels.All
         public int sotrang { get; set; }
         public string ussername { get; set; }
         public bool isadmin { get; set; }
+
+        public string macongty { get; set; }
     }
 }

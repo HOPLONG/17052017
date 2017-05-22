@@ -145,10 +145,10 @@
 
                                     </tr>
                                     <tr height="23">
-                                        <td></td>
+                                        <td><a data-toggle="modal" data-target="#myModal" ng-show="showhide" ng-click="edit(item)" style="cursor:pointer">Hỏi giá</a></td>
                                     </tr>
                                     <tr height="23">
-                                        <td></td>
+                                        <td><a data-toggle="modal" data-target="#nhatky" ng-show="showhide" ng-click="nhatkyhoihang(item.MA_HANG)" style="cursor:pointer">Lịch sử</a></td>
                                     </tr>
 
                                 </table>
@@ -156,28 +156,34 @@
 
                             </td>
                            
-                            <td>
-                                <table style="height: 100%; width:100%">
+                            @*<td>
+                                <table style="height: 100%; width:100%" border="0">
                                     <tr height="23">
-                                        <td class="text-right">{{item.GIA_LIST | number:0}}</td>
+                                        <td class="text-right">{{item.GIA_LIST_NCC1 | number:0}}</td>
                                     </tr>
                                     <tr height="23">
-                                        <td><a data-toggle="modal" data-target="#myModal" ng-show="showhide" ng-click="edit(item)" style="cursor:pointer">Hỏi giá</a></td>
+                                        
+                                        <td class="text-right" style="border-right:0px">{{item.GIA_LIST_NCC2 | number:0}}</td>
 
                                     </tr>
                                     <tr height="23">
-                                        <td><a data-toggle="modal" data-target="#nhatky" ng-show="showhide" ng-click="nhatkyhoihang(item.MA_HANG)" style="cursor:pointer">Lịch sử</a></td>
+                                       
+                                        <td class="text-right">{{item.GIA_LIST_NCC3 | number:0}}</td>
                                     </tr>
                                     <tr height="23">
-                                        <td></td>
+                                        <td class="text-right">{{item.GIA_LIST_NCC4 | number:0}}</td>
                                     </tr>
 
                                 </table>
                                
-                            </td>
-                            <td colspan="3">
+                            </td>*@
+                            <td colspan="4">
                                 <table style="height: 100%; width:100%">
                                     <tr  height="23">
+                                        <td class="text-right" style="width:20px;">{{item.GIA_LIST_NCC1 | number:0}}</td>
+                                        <td width="10px">
+                                            Sup1
+                                        </td>
                                         <td> 
                                             {{item.GIA1| number:0}}
                                         </td>
@@ -189,6 +195,10 @@
                                         </td>
                                     </tr>
                                     <tr height="23">
+                                        <td class="text-right">{{item.GIA_LIST_NCC2 | number:0}}</td>
+                                        <td width="10px">
+                                            Sup2
+                                        </td>
                                         <td>
                                             {{item.GIA4| number:0}}
                                         </td>
@@ -200,6 +210,10 @@
                                         </td>
                                     </tr>
                                     <tr height="23">
+                                        <td class="text-right">{{item.GIA_LIST_NCC3 | number:0}}</td>
+                                        <td width="10px">
+                                            Sup3
+                                        </td>
                                         <td>
                                             {{item.GIA7| number:0}}
                                         </td>
@@ -211,6 +225,10 @@
                                         </td>
                                     </tr>
                                     <tr height="23">
+                                        <td class="text-right">{{item.GIA_LIST_NCC4 | number:0}}</td>
+                                        <td width="10px">
+                                            Sup4
+                                        </td>
                                         <td>
                                             {{item.GIA10}}
                                         </td>
