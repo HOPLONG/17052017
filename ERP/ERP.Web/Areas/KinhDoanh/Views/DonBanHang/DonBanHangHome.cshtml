@@ -6,16 +6,16 @@
 <script src="~/Content/self-writing/js/Controllers/RouteCtrl.js"></script>
 <script src="~/Content/self-writing/js/Controllers/BanHangCtrl.js"></script>
 <script src="~/Content/self-writing/js/Services/BanHangService.js"></script>
+<link href="~/Content/self-writing/css/Kinhdoanh/donhangPO.css" rel="stylesheet" />
+<div class="panel-heading">
+    <marquee width="80%">Bạn đang xem danh mục đơn bán hàng</marquee>
+</div>
 <div ng-app="myApp"
      ng-controller="HomeBanHangCtrl"
      layout="column">
     <input type="hidden" value="@Session["USERNAME"]" id="username" />
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
-    <md-toolbar>
-        <h2 class="md-toolbar-tools">
-            <span>Bạn đang trong mục Đơn bán hàng</span>
-        </h2>
-    </md-toolbar>
+
     <md-tabs md-stretch-tabs
              md-selected="selectedIndex">
         <md-tab label="List đơn bán hàng"></md-tab>

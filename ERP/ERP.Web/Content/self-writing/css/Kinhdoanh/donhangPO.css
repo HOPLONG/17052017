@@ -141,6 +141,7 @@ fieldset{
     border: 1px solid silver;
     padding: 8px;
     border-radius: 4px;
+    margin: 10px 10px 10px 10px;
 }
 legend{
     width: auto;
