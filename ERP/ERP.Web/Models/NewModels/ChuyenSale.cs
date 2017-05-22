@@ -23,6 +23,9 @@ namespace ERP.Web.Models.NewModels
         public string TEN_KHO_PHU_TRACH { set; get; }
         public string TEN_SALE_CU { set; get; }
         public string TEN_SALE_CU_HON { set; get; }
+
+        public string TEN_SALE_ME { set; get; }
+        public string SALE_ME { set; get; }
     
     }
 }

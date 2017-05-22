@@ -1,22 +1,11 @@
 ﻿@{Layout = null;
+
          }
 
-<style>
-    .border-td{
-        border: 1px solid black;
-    }
-    .table>tbody>tr>td{
-        border-top: 1px solid black;
-    }
-    .table>thead>tr>th{
-        border-bottom: 1px solid black;
-    }
-    h4{
-        color: lightskyblue;
-    }
-</style>
+
     <div ng-app="myApp" ng-controller="baogiaCtrl" class="content">
     <input type="hidden" value="@Session["USERNAME"]" id="username"/>
+
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
     <div class="col-md-8">
         <table class="table">
@@ -28,16 +17,20 @@
                     <th>Người liên hệ</th>
                     <th>Tổng giá trị đơn hàng thực tế</th>
                     <th>Sale báo giá</th>
+                    <th>Sửa</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in ds_baogia_kinhdoanh">
+                <tr ng-repeat="item in ds_baogia_kinhdoanh" ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                     <td>{{item.SO_BAO_GIA}}</td>
                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                     <td>{{item.TEN_KHACH_HANG}}</td>
                     <td>{{item.NGUOI_LIEN_HE}}</td>
                     <td>{{item.TONG_GIA_TRI_DON_HANG_THUC_TE | currency: '' : 0}}</td>
                     <td>{{item.TEN_NGUOI_BAO_GIA}}</td>
+                    <td>
+                        <a href="/KinhDoanh/BaoGia/EditBaoGia/{{item.SO_BAO_GIA}}">Sửa báo giá</a>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -45,11 +38,13 @@
     <div class="col-md-4">
         <table class="table">
             <tr>
-                <td colspan="2" class="border-td"><h4>Báo giá chờ phản hồi</h4></td>
+                <th colspan="2" class="border_th"><h4><b>Báo giá chờ phản hồi</b></h4></th>
             </tr>
             <tr>
-                <td class="border-td">
+
+                <td>
                     <div  style="height: 400px;overflow:auto">
+
                         <table class="table right-table">
                             <thead>
                                 <tr>
@@ -58,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi" ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -68,20 +63,22 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Báo giá thành công</h4></td>
+                <th class="border_th" colspan="2"><h4><b>Báo giá thành công</b></h4></th>
             </tr>
             <tr>
                 <td class="border-td">
+
                     <div  style="height: 400px;overflow:auto">
-                        <table class="table right-table">
+                        <table>
+
                             <thead>
-                                <tr>
+                                <tr class="border_th phahoi">
                                     <th>Số báo giá</th>
                                     <th>Ngày báo giá</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong" ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -91,11 +88,11 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Báo giá đã hủy</h4></td>
+                <th class="border_th" colspan="2"><h4><b>Báo giá đã hủy</b></h4></th>
             </tr>
             <tr>
                 <td class="border-td">
-                    <div  style="height: 400px;overflow:auto">
+                    <div style="height: 400px;overflow:auto">
                         <table class="table right-table">
                             <thead>
                                 <tr>
@@ -104,7 +101,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dahuy">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dahuy" ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -114,9 +111,6 @@
                 </td>
             </tr>
         </table>
-
     </div>
 </div>
-
-
 

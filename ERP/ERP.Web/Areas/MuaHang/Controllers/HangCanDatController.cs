@@ -9,25 +9,33 @@ namespace ERP.Web.Areas.MuaHang.Controllers
     public class HangCanDatController : Controller
     {
         // GET: MuaHang/HangCanDat
-        public ActionResult HangCanDat()
-        {
-            return View();
-        }
-        public ActionResult HangCanDatChuaDat()
-        {
-            return View();
-        }
-        public ActionResult HangCanDatDaDat()
-        {
-            return View();
-        }
 
         public ActionResult HangCanDatHome()
         {
             return View();
         }
 
-            public ActionResult DatHang()
+        public ActionResult DatHang()
+        {
+            return View();
+        }
+
+        public ActionResult DonDatHang()
+        {
+            return View();
+        }
+
+        public ActionResult ChiTietDonDatHang(string id)
+        {
+            return View();
+        }
+
+        public ActionResult SuaDonDatHang(string id)
+        {
+            return View();
+        }
+
+        public ActionResult DeNghiNhapKho(string id)
         {
             return View();
         }

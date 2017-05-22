@@ -51,9 +51,12 @@ namespace ERP.Web.Areas.KinhDoanh.Controllers
             return View();
         }
 
-    
+        public ActionResult EditBaoGia()
+        {
+            return View();
+        }
 
-    public ActionResult Index()
+        public ActionResult Index()
 
         {
             return View();

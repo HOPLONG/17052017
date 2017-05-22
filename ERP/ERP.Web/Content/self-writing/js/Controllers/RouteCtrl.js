@@ -4,25 +4,25 @@
     $scope.$watch('selectedIndex', function (current, old) {
         switch (current) {
             case 0:
-                $location.url("/ThemBaoGiaMoi");
-                break;
-            case 1:
                 $location.url("/ListBaoGia");
                 break;
+            case 1:
+                $location.url("/ThemBaoGiaMoi");
+                break;
             case 2:
-                $location.url("/ListBaoGiaDaHuy");
+                $location.url("/ListBaoGiaDaLenPO");
                 break;
             case 3:
                 $location.url("/ListBaoGiaThanhCong");
                 break;
             case 4:
-                $location.url("/ListBaoGiaThatBai");
-                break;
-            case 5:
                 $location.url("/ListBaoGiaDangChoPhanHoi");
                 break;
+            case 5:
+                $location.url("/ListBaoGiaThatBai");
+                break;
             case 6:
-                $location.url("/ListBaoGiaDaLenPO");
+                $location.url("/ListBaoGiaDaHuy");
                 break;
         }
     });

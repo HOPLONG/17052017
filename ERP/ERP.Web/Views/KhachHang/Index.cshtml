@@ -160,12 +160,12 @@ input:-ms-input-placeholder {
         <div class="col-md-12">
             <br />
             <button type="button" class="button_khachhang fa fa-plus" data-toggle="modal" data-target="#myModal">Thêm khách mới</button>
-            <input type="button" class="button_khachhang fa fa-stack-overflow" ng-show="isadmin" onclick="location.href='/ChuyenSale/Index';" value="Chuyển Sale" />
-            <input type="button" class="button_khachhang fa fa-search-plus" ng-show="isadmin" onclick="location.href = '/KhachHang/TimKiem_KhachHang';" value="Tìm kiếm khách trên toàn hệ thống" />
-            <input type="button" class="btn btn-info" ng-show="isadmin" onclick="location.href = '/KhachHang/KhachChuaGiaoDich';" value="Danh sách khách chưa có giao dịch" />
-            <span style="cursor:pointer; text-decoration:underline" class="button_khachhang fa fa-plus-circle" ng-show="isadmin"><a href="/KhachHang/Import_KhachHang">Update thông tin khách hàng loạt</a></span>
-            <input type="button" class="button_khachhang btn-info" value="Hủy lọc" ng-show="huyloc" style="float:right" ng-click="cancel_locKH()" />
-        </div>
+            <button type="button" class="button_khachhang fa fa-stack-overflow" ng-show="isadmin" onclick="location.href='/ChuyenSale/Index';">Chuyển sales</button>
+            <button type="button" class="button_khachhang fa fa-search-plus" ng-show="isadmin" onclick="location.href = '/KhachHang/TimKiem_KhachHang';">Tìm kiếm khách trên toàn hệ thống</button>
+            <button type="button" class="button_khachhang fa fa-user-o" ng-show="isadmin" onclick="location.href = '/KhachHang/KhachChuaGiaoDich';">Danh sách khách chưa có giao dịch</button>
+            <button type="button" class="button_khachhang fa fa-wrench" ng-show="isadmin"<a href="/KhachHang/Import_KhachHang">Update thông tin khách hàng loạt</a></button>
+                <button type="button" class="button_khachhang btn-info" value="Hủy lọc" ng-show="huyloc" style="float:right" ng-click="cancel_locKH()" />
+</div>
 
         <!-- Modal Add New khách hàng -->
         <div class="modal fade" id="myModal" role="dialog" tabindex="-1">
@@ -1213,49 +1213,49 @@ input:-ms-input-placeholder {
                         <form class="form-horizontal" name="myForm" novalidate>
                             <fieldset>
                                 <!-- Form Name -->
-                                <legend>Add New Maker</legend>
+                                <legend>Thêm mới số tài khoản khách hàng</legend>
                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="name">Số tài khoản: </label>
-                                    <div class="col-md-10">
-                                        <input type="text" placeholder="Maker Code" class="form-control input-md" ng-model="so_tai_khoan">
-                                    </div>
-                                </div>
-                                <!-- Text input-->
-                                <div class="form-group">
-                                    <label class="col-md-2 control-label" for="name">Tên tài khoản: </label>
-                                    <div class="col-md-10">
-                                        <input type="text" placeholder="Maker Name" class="form-control input-md" ng-model="ten_tai_khoan">
+                                    <label class="col-md-2 control-label" for="name" style="font-weight: bold">Số tài khoản: </label>
+                                    <div class="col-md-10 form_addnew">
+                                        <input type="text" placeholder="Nhập số tài khoản" class="form-control input-md ng-model="so_tai_khoan">
                                     </div>
                                 </div>
                                 <!-- Text input-->
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="name">Tên ngân hàng : </label>
-                                    <div class="col-md-10">
-                                        <input type="text" placeholder="Maker's Parent Code " class="form-control input-md" ng-model="ten_ngan_hang">
+                                    <label class="col-md-2 control-label" for="name" style="font-weight: bold">Tên tài khoản: </label>
+                                    <div class="col-md-10 form_addnew">
+                                        <input type="text" placeholder="Tên chủ tài khoản" class="form-control input-md" ng-model="ten_tai_khoan">
+                                    </div>
+                                </div>
+                                <!-- Text input-->
+                                <div class="form-group">
+                                    <label class="col-md-2 control-label" for="name" style="font-weight: bold">Tên ngân hàng : </label>
+                                    <div class="col-md-10 form_addnew">
+                                        <input type="text" placeholder="Nhập tên ngân hàng " class="form-control input-md" ng-model="ten_ngan_hang">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="name">Chi nhánh: </label>
-                                    <div class="col-md-10">
-                                        <input type="text" placeholder="Note" class="form-control input-md" ng-model="chi_nhanh">
+                                    <label class="col-md-2 control-label" for="name" style="font-weight: bold">Chi nhánh: </label>
+                                    <div class="col-md-10 form_addnew">
+                                        <input type="text" placeholder="Tên chi nhánh" class="form-control input-md" ng-model="chi_nhanh">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label" for="name">Tỉnh/Thành phố: </label>
-                                    <div class="col-md-10">
-                                        <input type="text" placeholder="Note" class="form-control input-md" ng-model="tinh_tp">
+                                    <label class="col-md-2 control-label" for="name" style="font-weight: bold">Tỉnh/Thành phố: </label>
+                                    <div class="col-md-10 form_addnew">
+                                        <input type="text" placeholder="Tỉnh/Thành phố:" class="form-control input-md" ng-model="tinh_tp">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="addghichu" class="col-sm-2 control-label">Ghi chú</label>
+                                    <label for="addghichu" class="col-sm-2 control-label" style="font-weight: bold">Ghi chú</label>
                                     <div class="col-sm-10">
-                                        <textarea class="form-control" rows="3" placeholder="Ghi chú" id="addghichu" ng-model="ghi_chu_tk"></textarea>
+                                        <textarea class="form_addnew" rows="3" placeholder="Ghi chú" id="addghichu" ng-model="ghi_chu_tk"></textarea>
                                     </div>
                                 </div>
                                 <div class="form-group" style="margin-top: 50px;">
                                     <label class="col-sm-2 control-label">Loại tài khoản</label>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-3">
                                         <select ng-model="loai_tai_khoan" class="form-control input-md">
                                             <option ng-repeat="loaitaikhoan in list_loaitaikhoan" value="{{loaitaikhoan.MA_LOAI}}">{{loaitaikhoan.TEN_LOAI}}</option>
                                         </select>
@@ -1379,6 +1379,7 @@ input:-ms-input-placeholder {
                     <th>Tình trạng hoạt động </th>
                     <th>Nhân viên kho phụ trách</th>
                     <th>Sales phụ trách</th>
+                    <th>Sales mẹ</th>
                     <th ng-show="isadmin">Sửa</th>
                     <th ng-show="isadmin">Xóa</th>
                     <th ng-show="isadmin">Copy khách hàng</th>
@@ -1420,12 +1421,12 @@ input:-ms-input-placeholder {
                                 </div>
                             </div>
                         </div>
-                    </th>
-                    
-                    <th>
+                    </th>                   
                     <th  ng-show="isadmin"></th>
                     <th ng-show="isadmin"></th>
                     <th ng-show="isadmin"></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="myTable">
@@ -1477,7 +1478,18 @@ input:-ms-input-placeholder {
                             </md-select>
                         </md-input-container>
                     </td>
-
+                    <td class="text-center">
+                        <p ng-hide="editMode" ng-model="item.SALE_ME">{{item.TEN_CUA_SALES_ME}}</p>
+                        <md-input-container ng-show="editMode">
+                            <label>Sale</label>
+                            <md-select ng-model="item.SALE_ME">
+                                <md-option><em>None</em></md-option>
+                                <md-option ng-repeat="state in list_nhanvienkd" ng-value="state.USERNAME">
+                                    {{state.HO_VA_TEN}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </td>
                     <td  ng-show="isadmin">
                         <button type="submit"  ng-hide="editMode" ng-click="editMode = true; editAppKey(item)" class="button_khachhang fa fa-edit">Edit</button>
                         <button type="submit" ng-show="editMode" ng-click="editMode = false; chuyensale(item)" class="btn btn-default">Save</button>
