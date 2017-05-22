@@ -3,23 +3,7 @@
     Layout = null;
 }
 <script src="~/Content/self-writing/js/Controllers/HangCanXuatCtrl.js"></script>
-<style>
-    .border-td {
-        border: 1px solid black;
-    }
 
-    .table > tbody > tr > td {
-        border-top: 1px solid black;
-    }
-
-    .table > thead > tr > th {
-        border-bottom: 1px solid black;
-    }
-
-    h4 {
-        color: lightskyblue;
-    }
-</style>
 <div ng-app="myApp" ng-controller="HangCanXuatCtrl" class="content">
     <input type="hidden" value="@Session["USERNAME"]" id="username" />
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
@@ -58,7 +42,7 @@
     <div class="col-md-4">
         <table class="table">
             <tr>
-                <td colspan="2" class="border-td"><h4>Hàng cần xuất chưa đặt</h4></td>
+                <th colspan="2" class="border-td"><h4>Hàng cần xuất chưa đặt</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
@@ -81,7 +65,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Hàng đã giữ chưa bán</h4></td>
+                <th class="border-td" colspan="2"><h4>Hàng đã giữ chưa bán</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
@@ -104,7 +88,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Hàng đã bán</h4></td>
+                <th class="border-td" colspan="2"><h4>Hàng đã bán</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
