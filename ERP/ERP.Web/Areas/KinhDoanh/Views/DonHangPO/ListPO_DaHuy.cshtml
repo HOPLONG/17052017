@@ -53,7 +53,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in list_PO_DangChoDuyet">
+                                <tr ng-repeat="item in list_PO_DangChoDuyet"  ng-click="xemchitietPO(item.MA_SO_PO)">
                                     <td>{{item.MA_SO_PO}}</td>
                                     <td>{{item.NGAY_LEN_PO | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -76,7 +76,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in list_PO_ChuaLenDonBan">
+                                <tr ng-repeat="item in list_PO_ChuaLenDonBan"  ng-click="xemchitietPO(item.MA_SO_PO)">
                                     <td>{{item.MA_SO_PO}}</td>
                                     <td>{{item.NGAY_LEN_PO | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -99,7 +99,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in list_PO_DaLenDonBanHang">
+                                <tr ng-repeat="item in list_PO_DaLenDonBanHang" ng-click="xemchitietPO(item.MA_SO_PO)">
                                     <td>{{item.MA_SO_PO}}</td>
                                     <td>{{item.NGAY_LEN_PO | date: 'dd/MM/yyyy'}}</td>
                                 </tr>

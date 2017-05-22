@@ -29,7 +29,8 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
         DienGiai: null,
         KemTheo: null,
         ChiTiet: null,
-        TenDoiTuong: null
+        TenDoiTuong: null,
+        DiaChi: null
 
     };
     $scope.GeneralInfo.DienGiai = $scope.StoreType;
@@ -583,7 +584,8 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
                 $scope.GeneralInfo.KhachHang = response.data.donbanhang.MA_KHACH_HANG,
                 $scope.GeneralInfo.TenDoiTuong = response.data.donbanhang.TEN_CONG_TY,
                 $scope.GeneralInfo.NhanVienBanHang = response.data.donbanhang.HO_VA_TEN,
-                $scope.GeneralInfo.Username = response.data.donbanhang.NHAN_VIEN_QUAN_LY
+                $scope.GeneralInfo.Username = response.data.donbanhang.NHAN_VIEN_QUAN_LY,
+                $scope.GeneralInfo.DiaChi = response.data.donbanhang.DIA_CHI_XUAT_HOA_DON
                 $scope.LoadHangTra = true;
                 $("#SearchDonHangTra").modal("toggle");
             }
@@ -609,7 +611,8 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
                 $scope.GeneralInfo.KhachHang = response.data.donbanhang.MA_KHACH_HANG,
                 $scope.GeneralInfo.TenDoiTuong = response.data.donbanhang.TEN_CONG_TY,
                 $scope.GeneralInfo.NhanVienBanHang = response.data.donbanhang.HO_VA_TEN,
-                $scope.GeneralInfo.Username = response.data.donbanhang.NHAN_VIEN_QUAN_LY
+                $scope.GeneralInfo.Username = response.data.donbanhang.NHAN_VIEN_QUAN_LY,
+                $scope.GeneralInfo.DiaChi = response.data.donbanhang.DIA_CHI_XUAT_HOA_DON
                 $scope.LoadHangTra = true;
                 
             }
