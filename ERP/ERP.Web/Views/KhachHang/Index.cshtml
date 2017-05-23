@@ -739,7 +739,7 @@ input:-ms-input-placeholder {
                                     <li><a data-toggle="tab" href="#phanhoikhachhang">Phản hồi khách hàng</a></li>
                                     <li><a data-toggle="tab" href="#thongkemuahang">Thống kê mua hàng</a></li>
                                     <li><a data-toggle="tab" href="#policy">POLICY</a></li>
-                                    <li><a data-toggle="tab" ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017')" href="#congnokhachhang">Công nợ khách hàng</a></li>
+                                    <li><a data-toggle="tab" @*ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017')"*@ href="#congnokhachhang">Công nợ khách hàng</a></li>
                                     <li><a data-toggle="tab" href="#hosothanhtoan">Hồ sơ thanh toán</a></li>
                                     <li><a data-toggle="tab" href="#taikhoankhachhang">Tài khoản</a></li>
                                 </ul>
@@ -748,10 +748,10 @@ input:-ms-input-placeholder {
                                     <div id="congnokhachhang" class="tab-pane fade">
                                         <div class="col-md-12">
 
-                                            <button ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017'); GetDataComment_CongNoKH(item.MA_KHACH_HANG,'4-T5-2017')">4/T5-2017</button>
+                                            <button ng-repeat="tuancongno in list_danhsachtuancongno" ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,tuancongno); GetDataComment_CongNoKH(item.MA_KHACH_HANG,tuancongno)">{{tuancongno.TUAN_CONG_NO}}</button>
 
                                         </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12" ng-show="hienthicongno">
                                             <table class="table" border="1" cellpadding="0" cellspacing="0">
                                                 <tbody>
                                                     <tr >
@@ -805,7 +805,7 @@ input:-ms-input-placeholder {
                                                     </tr>
                                                     <tr ng-repeat="item in ListCongNoKH">
                                                         <td>
-                                                            {{item.NGAY_HACH_TOAN}}
+                                                            {{item.NGAY_HACH_TOAN | date: 'dd/MM/yyyy'}}
                                                         </td>
                                                         <td>
                                                             {{item.SO_CHUNG_TU}}
@@ -820,22 +820,22 @@ input:-ms-input-placeholder {
                                                             {{item.DIEN_GIAI}}
                                                         </td>
                                                         <td class="text-right">
-                                                            {{item.PS_NO}}
+                                                            {{item.PS_NO | number:0}}
                                                         </td>
                                                         <td class="text-right">
-                                                            {{item.PS_CO}}
+                                                            {{item.PS_CO| number:0}}
                                                         </td>
                                                         <td class="text-right">
-                                                            {{item.SO_DU_NO}}
+                                                            {{item.SO_DU_NO| number:0}}
                                                         </td>
                                                         <td class="text-right">
-                                                            {{item.SO_DU_CO}}
+                                                            {{item.SO_DU_CO| number:0}}
                                                         </td>
                                                         <td class="text-right">
-                                                           {{item.SO_LUONG}}
+                                                           {{item.SO_LUONG| number:0}}
                                                         </td>
                                                         <td>
-                                                            {{item.HAN_THANH_TOAN}}
+                                                            {{item.HAN_THANH_TOAN | date: 'dd/MM/yyyy'}}
                                                         </td>
                                                         <td>
                                                             {{item.TEN_NHAN_VIEN}}
@@ -851,14 +851,14 @@ input:-ms-input-placeholder {
 
                                         <br />
                                         <!--COMMENTS-->
-                                        <div class="col-md-12">
+                                        <div class="col-md-12" ng-show="hienthicongno">
                                             <div class="panel panel-default widget">
                                                 <div class="panel-heading" style="text-align:left">
                                                     <span><b>Phản hồi gần đây</b></span>
                                                 </div>
                                                 <div class="panel-body">
-                                                    <ul class="list-group" ng-repeat="item in ListCommentCongNo">
-                                                        <li class="list-group-item">
+                                                    <ul class="list-group" >
+                                                        <li class="list-group-item" ng-repeat="item in ListCommentCongNo">
                                                             <div class="row">
                                                                 <div class="col-xs-2 col-md-1">
                                                                     <img src="~/Content/Images/Avatar/{{item.AVATAR}}" class="img-circle img-responsive" alt="{{item.TEN_NGUOI_COMMENTS}}" />
@@ -869,7 +869,7 @@ input:-ms-input-placeholder {
                                                                             {{item.TEN_NGUOI_COMMENTS}}
                                                                         </a>
                                                                         <div class="mic-info">
-                                                                            Ngày: {{item.NGAY_COMMENTS}}
+                                                                            Ngày: {{item.NGAY_COMMENTS | date: 'dd/MM/yyyy'}}
                                                                         </div>
                                                                     </div>
                                                                     <div class="comment-text">
@@ -878,8 +878,12 @@ input:-ms-input-placeholder {
                                                                 </div>
                                                             </div>
                                                         </li>
+                                                        <li class="list-group-item" ng-show="add_new_reply">
+                                                            <textarea ng-model="new_comment" placeholder="Comment mới" class="form-control"></textarea>
+                                                            <button ng-click="Comment()" class="btn btn-default">Lưu</button>
+                                                        </li>
                                                     </ul>
-                                                    <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> Trả lời</a>
+                                                    <a href="#" ng-click="open_newcomment()" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> Trả lời</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -1581,7 +1585,7 @@ input:-ms-input-placeholder {
                 </tr>
             </thead>
             <tbody id="myTable">
-                <tr ng-repeat="item in filtered" ng-click="transfer(item);get_lienhe(item.MA_KHACH_HANG);get_taikhoan(item.MA_KHACH_HANG);get_phanhoi(item.MA_KHACH_HANG);get_thongkemuahang(item.MA_KHACH_HANG);get_policy(item.MA_KHACH_HANG)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                <tr ng-repeat="item in filtered" ng-click="transfer(item);get_lienhe(item.MA_KHACH_HANG);get_taikhoan(item.MA_KHACH_HANG);get_phanhoi(item.MA_KHACH_HANG);get_thongkemuahang(item.MA_KHACH_HANG);get_policy(item.MA_KHACH_HANG);load_danhsachtuancongno(item.MA_KHACH_HANG)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
                     <td>
                         <input type="checkbox" ng-model="item.KHACH_DAC_BIET" style="display:none"/>
                         <i class="fa fa-star-o" aria-hidden="true" ng-show="item.KHACH_DAC_BIET"></i>

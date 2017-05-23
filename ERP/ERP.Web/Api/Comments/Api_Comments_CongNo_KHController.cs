@@ -87,11 +87,11 @@ namespace ERP.Web.Api.Comments
             congno.NGUOI_COMMENTS = cOMMENTS_CONG_NO_KH.NGUOI_COMMENTS;
             congno.MA_KHACH_HANG = cOMMENTS_CONG_NO_KH.MA_KHACH_HANG;
             congno.NOI_DUNG_COMMENTS = cOMMENTS_CONG_NO_KH.NOI_DUNG_COMMENTS;
-
+            congno.TUAN_CONG_NO = cOMMENTS_CONG_NO_KH.TUAN_CONG_NO;
             db.COMMENTS_CONG_NO_KH.Add(congno);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = congno.ID }, congno);
+            return Ok(congno);
         }
 
         // DELETE: api/Api_Comments_CongNo_KH/5
