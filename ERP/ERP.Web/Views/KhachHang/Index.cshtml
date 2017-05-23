@@ -391,8 +391,8 @@ input:-ms-input-placeholder {
         <!--end modal-->
         <!-- Modal Update khách hàng-->
         <div class="modal fade" id="myEdit" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-md" style="width: 65%">
-                <div class="modal-content" style="height: 800px;overflow:scroll">
+            <div class="modal-dialog modal-md" style="width: 75%">
+                <div class="modal-content" style="height: 700px;overflow:scroll">
                     <div class="mhead">
                         <h2>SỬA THÔNG TIN KHÁCH HÀNG</h2>
                     </div>
@@ -747,7 +747,7 @@ input:-ms-input-placeholder {
                                     <!--tab công nợ-->
                                     <div id="congnokhachhang" class="tab-pane fade">
                                         <div class="col-md-12">
-                                            <button ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017')">4/T5-2017</button>
+                                            <button ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017'); GetDataComment_CongNoKH(item.MA_KHACH_HANG,'4-T5-2017')">4/T5-2017</button>
                                         </div>
                                         <div class="col-md-12">
                                             <table class="table" border="1" cellpadding="0" cellspacing="0">
@@ -846,6 +846,41 @@ input:-ms-input-placeholder {
                                             </table>
 
                                         </div>
+                                        <br />
+                                        <!--COMMENTS-->
+                                        <div class="col-md-12">
+                                            <div class="panel panel-default widget">
+                                                <div class="panel-heading" style="text-align:left">
+                                                    <span><b>Phản hồi gần đây</b></span>
+                                                </div>
+                                                <div class="panel-body">
+                                                    <ul class="list-group" ng-repeat="item in ListCommentCongNo">
+                                                        <li class="list-group-item">
+                                                            <div class="row">
+                                                                <div class="col-xs-2 col-md-1">
+                                                                    <img src="~/Content/Images/Avatar/{{item.AVATAR}}" class="img-circle img-responsive" alt="{{item.TEN_NGUOI_COMMENTS}}" />
+                                                                </div>
+                                                                <div class="col-xs-10 col-md-11">
+                                                                    <div>
+                                                                        <a href="#">
+                                                                            {{item.TEN_NGUOI_COMMENTS}}
+                                                                        </a>
+                                                                        <div class="mic-info">
+                                                                            Ngày: {{item.NGAY_COMMENTS}}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="comment-text">
+                                                                        {{item.NOI_DUNG_COMMENTS}}
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                    <a href="#" class="btn btn-primary btn-sm btn-block" role="button"><span class="glyphicon glyphicon-refresh"></span> Trả lời</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--END COMMENTS-->
                                     </div>
                                     <!--end tab công nợ-->
                                     <!--Tab chi tiết hàng hóa-->
@@ -890,8 +925,8 @@ input:-ms-input-placeholder {
                                                     <td colspan='3' ng-bind-html="item.GHI_CHU | unsafe" class="{{item.MA_KHACH_HANG}}-1"></td>
                                                     
                                                 </tr>
-                                            </table>
-
+                                            </table><br />
+                                            <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEdit" ng-click="edit(item)" class="btn fa fa-pencil-square-o">Sửa</button>
                                         </div>
                                         
                                     </div>
@@ -1233,7 +1268,7 @@ input:-ms-input-placeholder {
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEdit" ng-click="edit(item)" class="btn fa fa-pencil-square-o">Sửa</button>
+                        
                         <button id="exit" name="exit" ng-click="showrow = false" class="btn fa fa-sign-out" data-dismiss="modal">Exit</button>
                     </div>
                 </div>
@@ -1494,6 +1529,7 @@ input:-ms-input-placeholder {
                     <th ng-show="isadmin">Sửa</th>
                     <th ng-show="isadmin">Xóa</th>
                     <th ng-show="isadmin">Copy khách hàng</th>
+                    <th>Sửa nhanh</th>
                     <th>Tạo báo giá</th>
                 </tr>
                 <tr>
@@ -1533,7 +1569,7 @@ input:-ms-input-placeholder {
                             </div>
                         </div>
                     </th>                   
-                    <th  ng-show="isadmin"></th>
+                    <th ></th>
                     <th ng-show="isadmin"></th>
                     <th ng-show="isadmin"></th>
                     <th></th>
@@ -1601,7 +1637,7 @@ input:-ms-input-placeholder {
                             </md-select>
                         </md-input-container>
                     </td>
-                    <td  ng-show="isadmin">
+                    <td >
                         <button type="submit"  ng-hide="editMode" ng-click="editMode = true; editAppKey(item)" class="button_khachhang fa fa-edit">Edit</button>
                         <button type="submit" ng-show="editMode" ng-click="editMode = false; chuyensale(item)" class="btn btn-default">Save</button>
                         <button type="submit" ng-show="editMode" ng-click="editMode = false; cancel()" class="btn btn-default">Cancel</button> 
@@ -1617,32 +1653,23 @@ input:-ms-input-placeholder {
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="11">
-                        <div class="col-md-12" id="thongke_kh">
+                    <td colspan="15">
+                        <div class="col-md-12" id="thongke_kh" style="text-align:center">
                             <div>
-                                <div id="phan_trang_tong_kh" style="width: 30%;display:inline-block"></div>
+                                <div id="phan_trang_tong_kh" style="width: 100%;display:inline-block; text-align:center"></div>
+                                <br />
                             </div>
-                            <div>
+                            @*<div>
                                 <samp>
                                     <span>Current page:</span>
                                     <span id="page-number-phan_trang_tong_kh"></span>
                                 </samp>
-                            </div>
+                            </div>*@
                         </div>
                     </td>
                 </tr>
             </tfoot>
         </table>
-        <div class="card-footer p-0">
-            
-               <center>
-                   Trang:
-                   <select ng-model="tranghienthoi" ng-change="phantrangkh(tranghienthoi)">
-                       <option ng-repeat="item in danhsachtrang">{{item}}</option>
-                   </select>
-               </center>
- 
-        </div>
 
 
         <div class="modal fade" id="delete_item" role="dialog">
