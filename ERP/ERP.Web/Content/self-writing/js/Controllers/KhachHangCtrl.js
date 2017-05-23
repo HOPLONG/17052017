@@ -7,8 +7,9 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
     var phongban = $('#maphongban').val();
 
     //công nợ khách hàng
-    $scope.GetDataCongNoKH = function (makhachhang,tuancongno) {
-        $http.post(window.location.origin + '/api/Api_KH_CongNo/CongNoTheoNhanVien/' + macongty + '/' + makhachhang + '/' + isadmin + '/' + tuancongno)
+    $scope.GetDataCongNoKH = function (makhachhang, tuancongno) {
+        $scope.tuancongno = tuancongno;
+        $http.post(window.location.origin + '/api/Api_KH_CongNo/CongNoTheoNhanVien/' + macongty + '/' + makhachhang + '/' + isadmin + '/' + $scope.tuancongno.TUAN_CONG_NO)
          .then(function (response) {
              if (response.data) {
                  $scope.ListCongNoKH = response.data;
@@ -16,11 +17,14 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
          }, function (error) {
              console.log(error);
          })
+        $scope.hienthicongno = true;
     }
+
 
     //comment công nợ khách hàng
     $scope.GetDataComment_CongNoKH = function (makhachhang, tuancongno) {
-        $http.get(window.location.origin + '/api/Api_Comments_CongNo_KH/GetData_Comments_CongNo/' + makhachhang+ '/'+ tuancongno)
+        $scope.tuancongno = tuancongno;
+        $http.get(window.location.origin + '/api/Api_Comments_CongNo_KH/GetData_Comments_CongNo/' + makhachhang + '/' + $scope.tuancongno.TUAN_CONG_NO)
          .then(function (response) {
              if (response.data) {
                  $scope.ListCommentCongNo = response.data;
@@ -30,10 +34,55 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
          })
     }
 
+    $scope.open_newcomment = function () {
+        $scope.add_new_reply = true;
+    };
+
+    $scope.Comment = function () {
+        var data_add = {
+            NGUOI_COMMENTS: salehienthoi,
+            NOI_DUNG_COMMENTS: $scope.new_comment,
+            MA_KHACH_HANG: $scope.item.MA_KHACH_HANG,
+            TUAN_CONG_NO : $scope.tuancongno.TUAN_CONG_NO,
+        }
+        $http.post('/api/Api_Comments_CongNo_KH', data_add).then(function (response) {
+            SuccessSystem("Thêm comment thành công");
+
+            $http.get(window.location.origin + '/api/Api_Comments_CongNo_KH/GetData_Comments_CongNo/' + response.data.MA_KHACH_HANG + '/' + response.data.TUAN_CONG_NO)
+            .then(function (response) {
+                if (response.data) {
+                    $scope.ListCommentCongNo = response.data;
+                }
+            }, function (error) {
+                console.log(error);
+            })
+
+            $http.post(window.location.origin + '/api/Api_KH_CongNo/CongNoTheoNhanVien/' + macongty + '/' + response.data.MA_KHACH_HANG + '/' + isadmin + '/' + response.data.TUAN_CONG_NO)
+         .then(function (response) {
+             if (response.data) {
+                 $scope.ListCongNoKH = response.data;
+             }
+         }, function (error) {
+             console.log(error);
+         })
+            $scope.add_new_reply = false;
+            $scope.new_comment = '';
+        }, function errorCallback(response1) {
+            ErrorSystem("Không thêm được comment");
+            //alert('Chưa thêm được tài khoản khách hàng');
+        });
+    };
 
     //-------------end công nợ KH----------------------
 
-
+    $scope.load_danhsachtuancongno = function (makh) {
+        $http.get('/api/Api_CongNoKH/DanhSachTuanCongNo/' + makh).then(function (response) {
+            $scope.list_danhsachtuancongno = response.data;
+            $scope.ListCommentCongNo = [];
+            $scope.ListCongNoKH = [];
+            $scope.hienthicongno = false;
+        });
+    };
 
 
     if (isadmin == "True") {

@@ -151,9 +151,12 @@ legend{
     margin-top:20px;
 }
 .boder_themmoi{
-    border:1px;
-    border-style: solid;
-    border-color: #f0f0f0;
+    border:1px solid #ddd;
     padding: 10px;
     border-radius: 4px;
+    margin: 0 5px;
+    width: 49%;
+}
+.form-group{
+    font-weight: bold;
 }

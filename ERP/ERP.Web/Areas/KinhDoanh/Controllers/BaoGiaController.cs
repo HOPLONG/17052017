@@ -56,6 +56,11 @@ namespace ERP.Web.Areas.KinhDoanh.Controllers
             return View();
         }
 
+        public ActionResult BaoGiaLenPO()
+        {
+            return View();
+        }
+
         public ActionResult Index()
 
         {
