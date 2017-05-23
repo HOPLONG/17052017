@@ -31,19 +31,23 @@ public partial class XL_CHUYEN_SALES_Result
 
     public string SALE_HIEN_THOI { get; set; }
 
-    public string SALE_SAP_CHUYEN { get; set; }
-
     public string SALE_CU { get; set; }
 
     public string SALE_CU_2 { get; set; }
 
     public string TEN_SALE_HIEN_THOI { get; set; }
 
-    public string TEN_SALE_SAP_CHUYEN { get; set; }
-
     public string TEN_SALE_CU { get; set; }
 
     public string TEN_SALE_CU_HON { get; set; }
+
+    public string KHO_PHU_TRACH { get; set; }
+
+    public string TEN_KHO_PHU_TRACH { get; set; }
+
+    public string TEN_SALE_ME { get; set; }
+
+    public string SALE_ME { get; set; }
 
 }
 

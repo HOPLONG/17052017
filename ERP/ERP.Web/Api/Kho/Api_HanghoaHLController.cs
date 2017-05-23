@@ -183,6 +183,7 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
             hanghoa.TK_DOANH_THU = Hh.TK_DOANH_THU;
             hanghoa.TK_HACH_TOAN_KHO = Hh.TK_HACH_TOAN_KHO;
             hanghoa.SERIES = Hh.SERIES;
+            hanghoa.MA_DO_SALE_TAO = Hh.MA_DO_SALE_TAO;
             db.HHs.Add(hanghoa);
 
             try

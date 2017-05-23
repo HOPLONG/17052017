@@ -21,6 +21,7 @@ namespace ERP.Web.Models.NewModels.XuatKho
         public string TRUC_THUOC { get; set; }
         public string KHACH_HANG { set; get; }
         public string TEN_KHACH_HANG { set; get; }
+        public string PHIEU_BAN_HANG { set; get; }
         public List<ChiTietXuatKhoBH> ChiTiet { set; get; }
         public List<ThamChieu> ThamChieu { set; get; }
     }

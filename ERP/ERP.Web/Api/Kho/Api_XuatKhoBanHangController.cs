@@ -121,6 +121,7 @@ namespace ERP.Web.Api.Kho
             xk.NGUOI_LAP_PHIEU = kho_xuatkho.NGUOI_LAP_PHIEU;
             xk.TRUC_THUOC = "HOPLONG";
             xk.LOAI_XUAT_KHO = kho_xuatkho.LOAI_XUAT_KHO;
+            xk.PHIEU_BAN_HANG = kho_xuatkho.PHIEU_BAN_HANG;
             db.KHO_XUAT_KHO.Add(xk);
 
             // Lưu Đơn bán hàng 
@@ -251,7 +252,7 @@ namespace ERP.Web.Api.Kho
 
             }
 
-            return Ok("Chứng từ " + xk.SO_CHUNG_TU + "đã được tạo");
+            return Ok(xk.SO_CHUNG_TU);
         }
 
         // DELETE: api/Api_XuatKhoBanHang/5
