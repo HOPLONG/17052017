@@ -252,7 +252,7 @@ namespace ERP.Web.Api.Kho
 
             }
 
-            return Ok("Chứng từ " + xk.SO_CHUNG_TU + "đã được tạo");
+            return Ok(xk.SO_CHUNG_TU);
         }
 
         // DELETE: api/Api_XuatKhoBanHang/5
