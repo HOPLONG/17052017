@@ -20,7 +20,7 @@ public partial class KH_CONG_NO
 
     public int ID { get; set; }
 
-    public string MA_kHACH_HANG { get; set; }
+    public string MA_KHACH_HANG { get; set; }
 
     public System.DateTime NGAY_HACH_TOAN { get; set; }
 
@@ -54,9 +54,9 @@ public partial class KH_CONG_NO
 
     public virtual HH HH { get; set; }
 
-    public virtual KH KH { get; set; }
+    public virtual HT_NGUOI_DUNG HT_NGUOI_DUNG { get; set; }
 
-    public virtual KH KH1 { get; set; }
+    public virtual KH KH { get; set; }
 
 }
 

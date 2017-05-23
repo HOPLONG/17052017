@@ -23,5 +23,6 @@ namespace ERP.Web.Models.NewModels.XuatKho
         public string TEN_KHACH_HANG { set; get; }
         public List<ChiTietXuatKhoBH> ChiTiet { set; get; }
         public List<ThamChieu> ThamChieu { set; get; }
+        public string PHIEU_BAN_HANG { get; set; }
     }
 }
