@@ -75,6 +75,10 @@ public partial class BH_DON_HANG_PO
 
     public string SO_BAO_GIA { get; set; }
 
+    public decimal PHI_VC { get; set; }
+
+    public bool DONG_Y { get; set; }
+
 
 
     public virtual BH_BAO_GIA BH_BAO_GIA { get; set; }
