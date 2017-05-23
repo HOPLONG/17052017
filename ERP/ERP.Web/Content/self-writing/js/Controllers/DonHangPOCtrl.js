@@ -334,6 +334,7 @@
             DA_LAP_HOA_DON: false,
             TRUC_THUOC: 'HOPLONG',
             NHAN_VIEN_QUAN_LY: username,
+            MA_SO_PO : url,
             ChiTietPO: $scope.arrayChiTietPO,
         };
 
