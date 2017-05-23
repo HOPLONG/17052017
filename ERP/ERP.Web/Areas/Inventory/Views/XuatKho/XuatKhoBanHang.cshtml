@@ -317,7 +317,7 @@
                             </td>
                             <td colspan="1">
                                 <div class="has-feedback" ng-click="ShowKho(index)">
-                                    <input type="text" ng-model="item.MA_KHO_CON" class="input showtableselect">
+                                    <input type="text" ng-model="item.TEN_KHO" class="input showtableselect" ng-click="TruyenData(item.MA_CHUAN)">
                                     <div class="form-control-feedback">
                                     </div>
                                 </div>
@@ -325,20 +325,20 @@
                                     <table class="table-hover ">
                                         <thead>
                                             <tr>
-                                                <th style="width:50%">Mã kho</th>
                                                 <th style="width:50%">Tên kho</th>
+                                                <th style="width:50%">Số lượng tồn</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr ng-repeat="(hindex,itemKho) in Detail.ListKho| filter:item.MA_KHO_CON" ng-click="SelectKho(index,item,itemKho)">
-                                                <td>{{itemKho.MA_KHO}}</td>
+                                            <tr ng-repeat="(hindex,itemKho) in Detail.ListKho| filter:item.TEN_KHO" ng-click="SelectKho(index,item,itemKho)">
                                                 <td>{{itemKho.TEN_KHO}}</td>
+                                                <td>{{itemKho.SO_LUONG}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </td>
-                            <td colspan="1">
+                            @*<td colspan="1">
                                 <input type="text" ng-model="item.TK_HACH_TOAN_KHO" class="input">
                             </td>
                             <td colspan="1">
@@ -346,16 +346,16 @@
                             </td>
                             <td colspan="1">
                                 <input type="text" ng-model="item.TK_CO" class="input">
-                            </td>
+                            </td>*@
 
-                            @*<td>
+                            <td>
                                     <div class="has-feedback" ng-click="ShowTaiKhoanKho(index)">
-                                        <input type="text" ng-model="item.TK_KHO" class="input showtableselect">
+                                        <input type="text" ng-model="item.TK_HACH_TOAN_KHO" class="input showtableselect">
                                         <div class="form-control-feedback">
                                             <i class="icon-arrow-down5"></i>
                                         </div>
                                     </div>
-                                    <div class="tableselect" id="DataTaiKhoanKho{{index}}" style="display:none;max-width: 300px;top: 90px;">
+                                    <div class="tableselect" id="DataTaiKhoanKho{{index}}" style="display:none;max-width: 300px;">
                                         <table class="table-hover ">
                                             <thead>
                                                 <tr>
@@ -364,7 +364,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="(tkindex,itemTK) in Detail.ListTaiKhoan| filter:item.TK_KHO" ng-click="SelectTKKho(index,item,itemTK )">
+                                                <tr ng-repeat="(tkindex,itemTK) in Detail.ListTaiKhoan| filter:item.TK_HACH_TOAN_KHO" ng-click="SelectTK_KHO(index,item,itemTK )">
                                                     <td>{{itemTK.SO_TK}}</td>
                                                     <td>{{itemTK.TEN_TK}}</td>
                                                 </tr>
@@ -379,7 +379,7 @@
                                             <i class="icon-arrow-down5"></i>
                                         </div>
                                     </div>
-                                    <div class="tableselect" id="DataTaiKhoanNo{{index}}" style="display:none;max-width: 300px;top: 90px;">
+                                    <div class="tableselect" id="DataTaiKhoanNo{{index}}" style="display:none;max-width: 300px;">
                                         <table class="table-hover ">
                                             <thead>
                                                 <tr>
@@ -388,7 +388,7 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="(tkindex,itemTK) in Detail.ListTaiKhoan| filter:item.TK_NO" ng-click="SelectTKNo(index,item,itemTK)">
+                                                <tr ng-repeat="(tkindex,itemTK) in Detail.ListTaiKhoan| filter:item.TK_NO" ng-click="SelectTK_NO(index,item,itemTK)">
                                                     <td>{{itemTK.SO_TK}}</td>
                                                     <td>{{itemTK.TEN_TK}}</td>
                                                 </tr>
@@ -403,7 +403,7 @@
                                             <i class="icon-arrow-down5"></i>
                                         </div>
                                     </div>
-                                    <div class="tableselect" id="DataTaiKhoanCo{{index}}" style="display:none;max-width: 300px;top: 90px;">
+                                    <div class="tableselect" id="DataTaiKhoanCo{{index}}" style="display:none;max-width: 300px;">
                                         <table class="table-hover ">
                                             <thead>
                                                 <tr>
@@ -412,14 +412,14 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr ng-repeat="(tkindex,itemTK) in Detail.ListTaiKhoan| filter:item.TK_CO" ng-click="SelectTKCo(index,item,itemTK)">
+                                                <tr ng-repeat="(tkindex,itemTK) in Detail.ListTaiKhoan| filter:item.TK_CO" ng-click="SelectTK_CO(index,item,itemTK)">
                                                     <td>{{itemTK.SO_TK}}</td>
                                                     <td>{{itemTK.TEN_TK}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                </td>*@
+                                </td>
                             <td colspan="1">
                                 <input type="text" ng-model="item.DVT" class="input">
                             </td>
@@ -484,22 +484,7 @@
                     </div>
                 </td>
             </tr>
-            <tr>
-                <td><p style="text-shadow: 1px 1px 5px #91DDFD; font-style:italic; font-size: 14px; color: #64B5F6; margin-left:10px; margin-top:5px;margin-bottom:5px; font-weight: bold; text-align:center;">Đơn PO</p></td>
-            </tr>
-            <tr>
-                <td>
-                    <div style="height:200px; overflow-y:auto;">
-                        <table style="width:100%;cursor:pointer;">
-                            <tr ng-repeat="item in DonBanHang" ng-click="SelectDonTraHang(item)">
-                                <td colspan="2" class="text-left">{{item.MA_SO_BH}}</td>
-                                <td class="text-left">{{item.NGAY_BH | date:'dd/MM/yyyy'}}</td>
-
-                            </tr>
-                        </table>
-                    </div>
-                </td>
-            </tr>
+           
 
 
 

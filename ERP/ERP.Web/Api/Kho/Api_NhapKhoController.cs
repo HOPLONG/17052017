@@ -49,8 +49,13 @@ namespace ERP.Web.Api.Kho
             return query.ToList();
         }
 
+        [Route("api/Api_NhapKho/DemSoBanGhi")]
+        public IHttpActionResult DemSoBanGhi()
+        {
+            var query = db.KHO_NHAP_KHO.Count().ToString();
 
-
+            return Ok(query);
+        }
 
 
 
