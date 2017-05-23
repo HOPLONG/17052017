@@ -6,6 +6,23 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
     var isadmin = $('#isadmin').val();
     var phongban = $('#maphongban').val();
 
+    //công nợ khách hàng
+    $scope.GetDataCongNoKH = function (makhachhang,tuancongno) {
+        $http.post(window.location.origin + '/api/Api_KH_CongNo/CongNoTheoNhanVien/' + macongty + '/' + makhachhang + '/' + isadmin + '/' + tuancongno)
+         .then(function (response) {
+             if (response.data) {
+                 $scope.ListCongNoKH = response.data;
+             }
+         }, function (error) {
+             console.log(error);
+         })
+    }
+
+    //-------------end công nợ KH----------------------
+
+
+
+
     if (isadmin == "True") {
         $scope.hienchucnang = true;
     }

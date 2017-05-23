@@ -30,6 +30,8 @@ public partial class KH_CHUYEN_SALES
 
     public string SALE_CU_2 { get; set; }
 
+    public string SALE_ME { get; set; }
+
 
 
     public virtual CCTC_NHAN_VIEN CCTC_NHAN_VIEN { get; set; }
