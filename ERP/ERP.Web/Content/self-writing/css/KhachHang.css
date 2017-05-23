@@ -683,3 +683,6 @@ cursor: pointer;}
     border-color: #F0F0F0;
     width: 400px;
 }
+.nav-tabs{
+    font-weight: bold;
+}
