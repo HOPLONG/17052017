@@ -18,6 +18,19 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
          })
     }
 
+    //comment công nợ khách hàng
+    $scope.GetDataComment_CongNoKH = function (makhachhang, tuancongno) {
+        $http.get(window.location.origin + '/api/Api_Comments_CongNo_KH/GetData_Comments_CongNo/' + makhachhang+ '/'+ tuancongno)
+         .then(function (response) {
+             if (response.data) {
+                 $scope.ListCommentCongNo = response.data;
+             }
+         }, function (error) {
+             console.log(error);
+         })
+    }
+
+
     //-------------end công nợ KH----------------------
 
 
@@ -229,28 +242,34 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
 
     $scope.phantrangkh($scope.tranghienthoi);
     //Lấy tổng số trang
-    $scope.TongSoDong = function () {
+    //$scope.TongSoDong = function () {
 
-        $http.post('/api/Api_KH/TongSoTrang/' + macongty)
-            .then(function successCallback(response) {
-                $scope.tongsodong = response.data;
-                $scope.tongsotrang = $scope.tongsodong / 15;
-                while ($scope.tongsotrang > $scope.tranghienthoi) {
-                    $scope.danhsachtrang.push($scope.tranghienthoi);
-                    $scope.tranghienthoi++;
-                }
-                a = $scope.danhsachtrang;
+    //    $http.post('/api/Api_KH/TongSoTrang/' + macongty)
+    //        .then(function successCallback(response) {
+    //            $scope.tongsodong = response.data;
+    //            $scope.tongsotrang = $scope.tongsodong / 15;
+    //            while ($scope.tongsotrang > $scope.tranghienthoi) {
+    //                $scope.danhsachtrang.push($scope.tranghienthoi);
+    //                $scope.tranghienthoi++;
+    //            }
+    //            a = $scope.danhsachtrang;
 
 
-            }, function errorCallback(response1) {
-                ErrorSystem("Lỗi đường truyền: không lấy được Tổng Số Trang");
-                //alert('Chưa thêm được tài khoản khách hàng');
-            });
-    }
-    $scope.TongSoDong();
+    //        }, function errorCallback(response1) {
+    //            ErrorSystem("Lỗi đường truyền: không lấy được Tổng Số Trang");
+    //            //alert('Chưa thêm được tài khoản khách hàng');
+    //        });
+    //}
+    //$scope.TongSoDong();
     //----------------------------------------
+    var thamso = {
+        sales: salehienthoi,
+        macongty: macongty,
+        isadmin: isadmin,
+        tukhoa: tukhoa
+    }
 
-    $http.post('/api/Api_KH/DemTongSoKH_HL').then(function (response) {
+    $http.post('/api/Api_KH/DemTongSoKH_HL', thamso).then(function (response) {
         $scope.tongsokhachhang_HL = response.data;
         pagination2.make(parseInt($scope.tongsokhachhang_HL), 15);
     });
@@ -278,8 +297,8 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
         container: $("#phan_trang_tong_kh"),
         pageClickCallback: pageClick2,
         maxVisibleElements: 15,
-        showInput: true,
-        inputTitle: "Go to page"
+        //showInput: true,
+        //inputTitle: "Go to page"
     });
 
     // End phan trang khach hang

@@ -313,12 +313,13 @@ namespace ERP.Web.Api.HeThong
         }
 
         [Route("api/Api_KH/DemTongSoKH_HL")]
-        public string DemTongSoKH_HL()
+        public string DemTongSoKH_HL(ThongTinTimKiem timkiem)
         {
-            var query = db.KHs.Count().ToString();
 
-
-            return query;
+            var query = db.Database.SqlQuery<int>("HopLong_LocKHTheoSale_Tongsotrang @sale, @macongty, @isadmin, @tukhoa", new SqlParameter("sale", timkiem.sales), new SqlParameter("macongty", timkiem.macongty), new SqlParameter("isadmin", timkiem.isadmin), new SqlParameter("tukhoa", timkiem.tukhoa));
+            var result = query.FirstOrDefault();
+            string kq = result.ToString();
+            return kq;
         }
 
         // POST: api/Api_KH
