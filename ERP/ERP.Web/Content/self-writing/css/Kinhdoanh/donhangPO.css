@@ -150,10 +150,14 @@ legend{
 .thembaogia{
     margin-top:20px;
 }
-.boder_themmoi{
-    border:1px;
-    border-style: solid;
-    border-color: #f0f0f0;
+.border_themmoi{
+    border:1px solid #ddd;
     padding: 10px;
     border-radius: 4px;
+    width: 49%;
+    margin: 0 5px 15px;
+}
+.text_edit{
+    padding-top: 12px;
+    font-size: 14px;
 }

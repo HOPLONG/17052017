@@ -45,5 +45,12 @@
 
     }
 
+    $scope.BackToList = function () {
+        window.location.href = "/KinhDoanh/DonHangPO/DonPOHome";
+    };
+
+    $scope.BackToEdit = function () {
+        window.location.href = "/KinhDoanh/DonHangPO/Edit/" + url;
+    };
 
 });

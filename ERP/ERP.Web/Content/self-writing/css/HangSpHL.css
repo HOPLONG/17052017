@@ -162,9 +162,28 @@ td,tr,th{
 label{
     vertical-align: middle;
 }
+table
+{
+    width:100%;
+    border-collapse:collapse;
+}
+table,th, td
+
+
+td
+{
+padding:5px;
+}
+
+
+table, td, th
+{
+border:1px solid #DDDDDD;
+}
 th{
-    font-size: 16px;
-    background: white;
+    height: 40px;
+    background-color:#1191BF;
+    color:white;
 }
 .expandrow{
     padding-top: 10px;
@@ -238,6 +257,7 @@ border-radius: 0!important;
 }
 .form-group{
     height: 40px;
+    
 }
 .dactinh{
     margin-bottom: 20px;
@@ -311,3 +331,6 @@ legend{
         border-color: #ddd;
         width: 100%;
     }
+.form_maker{
+    background-color: #1191BF;
+}
