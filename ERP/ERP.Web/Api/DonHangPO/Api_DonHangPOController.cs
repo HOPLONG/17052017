@@ -271,6 +271,7 @@ namespace ERP.Web.Api.DonHangPO
             edit.HINH_THUC_THANH_TOAN = bH_DON_HANG_PO.HINH_THUC_THANH_TOAN;
             edit.TONG_TIEN_THANH_TOAN = bH_DON_HANG_PO.TONG_TIEN_THANH_TOAN;
             edit.SO_TIEN_VIET_BANG_CHU = bH_DON_HANG_PO.SO_TIEN_VIET_BANG_CHU;
+            edit.PHI_VC = bH_DON_HANG_PO.PHI_VC;
             if (bH_DON_HANG_PO.NGAY_GIAO_HANG != null)
                 edit.NGAY_GIAO_HANG = xlnt.Xulydatetime(bH_DON_HANG_PO.NGAY_GIAO_HANG.ToString());
             edit.DIA_DIEM_GIAO_HANG = bH_DON_HANG_PO.DIA_DIEM_GIAO_HANG;
@@ -348,6 +349,7 @@ namespace ERP.Web.Api.DonHangPO
             baogia.TONG_TIEN_HANG = thongtinPO.TONG_TIEN_HANG;
             baogia.TONG_TIEN_THUE_GTGT = thongtinPO.TONG_TIEN_THUE_GTGT;
             baogia.SO_TIEN_VIET_BANG_CHU = thongtinPO.SO_TIEN_VIET_BANG_CHU;
+            baogia.PHI_VC = thongtinPO.PHI_VC;
             baogia.TRUC_THUOC = thongtinPO.TRUC_THUOC;
             baogia.DA_BAN_HANG = thongtinPO.DA_BAN_HANG;
             baogia.NHAN_VIEN_QUAN_LY = thongtinPO.NHAN_VIEN_QUAN_LY;
@@ -429,6 +431,7 @@ namespace ERP.Web.Api.DonHangPO
                 edit.DA_DUYET = thongtinPO.DA_DUYET;
                 edit.LY_DO_HUY = thongtinPO.LY_DO_HUY;
                 edit.DANG_DUYET = thongtinPO.DANG_DUYET;
+                edit.DONG_Y = thongtinPO.DONG_Y;
             }
 
             try
@@ -511,6 +514,7 @@ namespace ERP.Web.Api.DonHangPO
             baogia.TRUC_THUOC = thongtinPO.TRUC_THUOC;
             baogia.NHAN_VIEN_QUAN_LY = thongtinPO.NHAN_VIEN_QUAN_LY;
             baogia.SO_BAO_GIA = thongtinPO.SO_BAO_GIA;
+            baogia.PHI_VC = thongtinPO.PHI_VC;
             if (thongtinPO.NGAY_GIAO_HANG_KD != null)
                 baogia.NGAY_GIAO_HANG = thongtinPO.NGAY_GIAO_HANG_KD;
             baogia.DIA_DIEM_GIAO_HANG = thongtinPO.DIA_DIEM_GIAO_HANG;

@@ -105,7 +105,7 @@
                 }
                 $scope.tong_tien_hang = tong_tien_hang;
                 $scope.tong_tien_thue_GTGT = tong_tien_thue_GTGT
-                $scope.tong_tien_thanh_toan = tong_tien_thanh_toan;
+                $scope.tong_tien_thanh_toan = tong_tien_thanh_toan + $scope.thongtinchung[0].PHI_VC;
                 $scope.so_tien_viet_bang_chu = docso(parseInt($scope.tong_tien_thanh_toan));
             });
         });
@@ -154,10 +154,14 @@
         //this removes everything before the last slash in the path
         url = url.substring(url.lastIndexOf("/") + 1, url.length);
         //
- 
+
+        var ngaygiaohang = $('#ngay_giao_hang').val();
+        var ngaylenpo = $('#ngay_len_po').val();
+            
+        
         var data_save = {
             MA_SO_PO: url,
-            NGAY_LEN_PO: $scope.thongtinchung[0].NGAY_LEN_PO,
+            NGAY_LEN_PO: ngaylenpo,
             MA_KHACH_HANG: $scope.thongtinchung[0].MA_KHACH_HANG,
             TEN_LIEN_HE: $scope.thongtinchung[0].TEN_LIEN_HE,
             HINH_THUC_THANH_TOAN: $scope.thongtinchung[0].HINH_THUC_THANH_TOAN,
@@ -165,7 +169,7 @@
             TONG_TIEN_THUE_GTGT: $scope.tong_tien_thue_GTGT,
             TONG_TIEN_THANH_TOAN: $scope.tong_tien_thanh_toan,
             SO_TIEN_VIET_BANG_CHU: $scope.so_tien_viet_bang_chu,
-            NGAY_GIAO_HANG: $scope.thongtinchung[0].NGAY_GIAO_HANG,
+            NGAY_GIAO_HANG: ngaygiaohang,
             DIA_DIEM_GIAO_HANG: $scope.thongtinchung[0].DIA_DIEM_GIAO_HANG,
             DA_HUY: $scope.thongtinchung[0].DA_HUY,
             LY_DO_HUY: $scope.thongtinchung[0].LY_DO_HUY,
@@ -247,7 +251,8 @@
         var data_duyet = {
             MA_SO_PO: url,
             DA_HUY: $scope.da_huy,
-            DA_DUYET: $scope.da_duyet,
+            DONG_Y : $scope.dong_y,
+            DA_DUYET: true,
             NGUOI_DUYET: username,
             LY_DO_HUY: $scope.ly_do_huy,
             DANG_DUYET : false,
@@ -337,7 +342,13 @@
             data: $scope.ThongTinBanHang,
             url: window.location.origin + '/api/Api_BanHang/PostThemPhieuBanHang'
         }).then(function successCallback(response) {
-            SuccessSystem('Bạn đã tạo thành công 1 đơn bán hàng có mã là ' + response.data)
+            SuccessSystem('Bạn đã tạo thành công 1 đơn bán hàng có mã là ' + response.data);
+            $(function () {
+                setTimeout(function () {
+                    window.location.href = "/KinhDoanh/DonHangPO/DonPOHome";
+
+                }, 2000);
+            });
         }, function errorCallback(response) {
             console.log(response);
             ErrorSystem('Sự cố hệ thống, Không lưu được phiếu giữ kho, Bạn vui lòng liên hệ với admin để khắc phục ');
