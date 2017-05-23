@@ -13,9 +13,10 @@ namespace ERP.Web.Api.KhachHang
     {
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
         [Route("api/Api_KH_CongNo/CongNoTheoNhanVien/{macongty}/{manhanvien}/{isadmin}/{tuancongno}")]
-        public List<Prod_KH_Cong_no_Result> CongNoTheoNhanVien(string macongty, string manhanvien, bool isadmin, string tuancongno)
+        public List<Prod_KH_Cong_no_Result> CongNoTheoNhanVien(string macongty, string manhanvien, string isadmin, string tuancongno)
         {
-            var query = db.Database.SqlQuery<Prod_KH_Cong_no_Result>("Prod_KH_Cong_no @macongty, @manhanvien, @isadmin, @tuancongno",new SqlParameter("macongty", macongty) , new SqlParameter("manhanvien", manhanvien) , new SqlParameter("isadmin",isadmin), new SqlParameter("tuancongno", tuancongno));
+            
+            var query = db.Database.SqlQuery<Prod_KH_Cong_no_Result>("Prod_KH_Cong_no @macongty, @isadmin, @manhanvien,  @tuancongno", new SqlParameter("macongty", macongty), new SqlParameter("isadmin", isadmin), new SqlParameter("manhanvien", manhanvien) , new SqlParameter("tuancongno", tuancongno));
             var result = query.ToList();
             return result;
 

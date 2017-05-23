@@ -739,10 +739,115 @@ input:-ms-input-placeholder {
                                     <li><a data-toggle="tab" href="#phanhoikhachhang">Phản hồi khách hàng</a></li>
                                     <li><a data-toggle="tab" href="#thongkemuahang">Thống kê mua hàng</a></li>
                                     <li><a data-toggle="tab" href="#policy">POLICY</a></li>
+                                    <li><a data-toggle="tab" ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017')" href="#congnokhachhang">Công nợ khách hàng</a></li>
                                     <li><a data-toggle="tab" href="#hosothanhtoan">Hồ sơ thanh toán</a></li>
                                     <li><a data-toggle="tab" href="#taikhoankhachhang">Tài khoản</a></li>
                                 </ul>
                                 <div class="tab-content">
+                                    <!--tab công nợ-->
+                                    <div id="congnokhachhang" class="tab-pane fade">
+                                        <div class="col-md-12">
+                                            <button ng-click="GetDataCongNoKH(item.MA_KHACH_HANG,'4-T5-2017')">4/T5-2017</button>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <table class="table" border="1" cellpadding="0" cellspacing="0">
+                                                <tbody>
+                                                    <tr >
+                                                        <th rowspan="2">
+                                                            Ngày hạch toán
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Số chứng từ
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Số hóa đơn
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Mã hàng
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Diễn giải
+                                                        </th>
+                                                        <th colspan="2">
+                                                            Phát sinh
+                                                        </th>
+                                                        <th colspan="2">
+                                                            Số dư
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Số lượng
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Hạn thanh toán
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Nhân viên bán
+                                                        </th>
+                                                        <th rowspan="2">
+                                                            Ghi chú
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>
+                                                            Nợ
+                                                        </th>
+                                                        <th>
+                                                            Có
+                                                        </th>
+                                                        <th>
+                                                            Nợ
+                                                        </th>
+                                                        <th>
+                                                            Có
+                                                        </th>
+                                                    </tr>
+                                                    <tr ng-repeat="item in ListCongNoKH">
+                                                        <td>
+                                                            {{item.NGAY_HACH_TOAN}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.SO_CHUNG_TU}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.SO_HOA_DON}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.MA_HANG}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.DIEN_GIAI}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.PS_NO}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.PS_CO}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.SO_DU_NO}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                            {{item.SO_DU_CO}}
+                                                        </td>
+                                                        <td class="text-right">
+                                                           {{item.SO_LUONG}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.HAN_THANH_TOAN}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.TEN_NHAN_VIEN}}
+                                                        </td>
+                                                        <td>
+                                                            {{item.GHI_CHU}}
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                    <!--end tab công nợ-->
                                     <!--Tab chi tiết hàng hóa-->
                                     <div id="chitiet" class="tab-pane fade in active">
                                         <div class="col-md-12" style="box-shadow: 3px 3px 3px #ddd">
@@ -1504,7 +1609,7 @@ input:-ms-input-placeholder {
                     </td>
                     <td data-toggle="modal" data-target="#delete_item" ng-click="transfer(item)" ng-show="isadmin">Xóa khách hàng</td>
                     <td data-toggle="modal" data-target="#copy_kh" ng-click="transfer(item)" ng-show="isadmin">Copy khách hàng</td>
-                    <td><button type="button" class="button_khachhang fa fa-plus"><a href="/KhachHang/BaoGiaKhach/{{item.MA_KHACH_HANG}}"><span style="color:#FFF">Tạo báo giá</a></span></button>
+                    <td><button type="button" class="button_khachhang fa fa-plus"><a href="/KhachHang/BaoGiaKhach/{{item.MA_KHACH_HANG}}"><span style="color:#FFF">Tạo báo giá</span></a></button>
                     </td>
                 </tr>
                 <!--Detail row-->
