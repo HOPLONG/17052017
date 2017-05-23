@@ -66,6 +66,10 @@ public partial class BH_CT_BAO_GIA
 
     public Nullable<decimal> KHACH_NHAN_DUOC { get; set; }
 
+    public decimal GIA_LIST_VAT { get; set; }
+
+    public decimal GIA_NHAP_VAT { get; set; }
+
 
 
     public virtual BH_BAO_GIA BH_BAO_GIA { get; set; }

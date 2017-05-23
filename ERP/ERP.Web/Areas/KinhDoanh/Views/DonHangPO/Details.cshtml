@@ -119,7 +119,7 @@
                                     <input type="number" style="height: 27px;" readonly ng-model="item.SO_LUONG" class="form-control">
                                 </td>
                                 <td class="text-center">
-                                    <input type="number" style="height: 27px;" readonly ng-model="item.DON_GIA" class="form-control">
+                                    <input type="text" style="height: 27px;" format="number" readonly ng-model="item.DON_GIA" class="form-control">
                                 </td>
                                 <td class="text-center">
                                     {{item.THANH_TIEN_HANG | currency: '':0}}
@@ -145,6 +145,10 @@
                                         <label class="col-md-3">Thuế VAT : </label>
                                         <p class="col-md-6" style="text-align:left" ng-model="tong_tien_thue_GTGT">{{tong_tien_thue_GTGT | currency: '':0 }} vnd</p>
                                     </div>
+                                    <div class="col-md-12">
+                                        <label class="col-md-3">Phí vận chuyển: </label>
+                                        <p class="col-md-6" style="text-align:left" ng-model="item.PHI_VC">{{item.PHI_VC | currency: '':0 }} vnd</p>
+                                    </div>
                                     <div class="col-md-4">
                                         <hr />
                                     </div>
@@ -166,21 +170,20 @@
         </div>
         <div class="col-md-12 form-group">
             <div class="col-md-2">
-                <label class="col-md-4">Đã hủy</label>
+                <label class="col-md-4">Hủy</label>
                 <input type="checkbox" ng-model="da_huy" />
             </div>
-            <div class="col-md-8" ng-show="da_huy">
-                <textarea class="form-control" ng-model="ly_do_huy" placeholder="Lý do hủy"></textarea>
+            <div class="col-md-2">
+                <label class="col-md-5">Đồng ý</label>
+                <input type="checkbox" ng-model="dong_y" />
             </div>
         </div>
         <div class="col-md-12 form-group">
-            <div class="col-md-2">
-                <label class="col-md-5">Đã duyệt</label>
-                <input type="checkbox" ng-model="da_duyet" />
-            </div>
+            <textarea class="form-control" ng-model="ly_do_huy" placeholder="Comment"></textarea>
         </div>
+        
         <div class="col-md-12" style="text-align:center">
-            <button type="button" class="btn btn-default" ng-click="Save_DuyetDonPO()">Lưu</button>
+            <button type="button" class="btn btn-default" ng-click="Save_DuyetDonPO()">Duyệt</button>
         </div>
     </div>
 
