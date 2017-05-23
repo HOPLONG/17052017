@@ -4,23 +4,7 @@
 
 <script src="~/Content/self-writing/js/Services/BaoGiaService.js"></script>
 <script src="~/Content/self-writing/js/Controllers/BaoGiaCtrl.js"></script>
-<style>
-    .border-td {
-        border: 1px solid black;
-    }
 
-    .table > tbody > tr > td {
-        border-top: 1px solid black;
-    }
-
-    .table > thead > tr > th {
-        border-bottom: 1px solid black;
-    }
-
-    h4 {
-        color: lightskyblue;
-    }
-</style>
 <div ng-app="myApp" ng-controller="baogiaCtrl" class="content">
     <input type="hidden" value="@Session["USERNAME"]" id="username" />
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
@@ -38,7 +22,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong">
+                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong"  ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                     <td>{{item.SO_BAO_GIA}}</td>
                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                     <td>{{item.TEN_KHACH_HANG}}</td>
@@ -52,7 +36,7 @@
     <div class="col-md-4">
         <table class="table">
             <tr>
-                <td colspan="2" class="border-td"><h4>Báo giá chờ phản hồi</h4></td>
+                <th colspan="2" class="border-td"><h4>Báo giá chờ phản hồi</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
@@ -65,7 +49,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dangchophanhoi"  ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -75,7 +59,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Báo giá thành công</h4></td>
+                <th class="border-td" colspan="2"><h4>Báo giá thành công</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
@@ -88,7 +72,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_thanhcong"  ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>
@@ -98,7 +82,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="border-td" colspan="2"><h4>Báo giá đã hủy</h4></td>
+                <th class="border-td" colspan="2"><h4>Báo giá đã hủy</h4></th>
             </tr>
             <tr>
                 <td class="border-td">
@@ -111,7 +95,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dahuy">
+                                <tr ng-repeat="item in ds_baogia_kinhdoanh_dahuy"  ng-click="xemchitietbaogia(item.SO_BAO_GIA)">
                                     <td>{{item.SO_BAO_GIA}}</td>
                                     <td>{{item.NGAY_BAO_GIA | date: 'dd/MM/yyyy'}}</td>
                                 </tr>

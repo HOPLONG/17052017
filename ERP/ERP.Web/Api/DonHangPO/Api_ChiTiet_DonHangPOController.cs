@@ -77,6 +77,40 @@ namespace ERP.Web.Api.DonHangPO
             return Ok(bH_CT_DON_HANG_PO);
         }
 
+        [Route("api/Api_ChiTiet_DonHangPO/SuaDatHang")]
+        public async Task<IHttpActionResult> SuaDatHang([FromBody] List<ChiTietDonHangPO> bH_CT_DON_HANG_PO)
+        {
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
+
+            //if (id != bH_CT_DON_HANG_PO.ID)
+            //{
+            //    return BadRequest();
+            //}
+            foreach (var item in bH_CT_DON_HANG_PO)
+            {
+                var donhangPO = db.BH_CT_DON_HANG_PO.Where(x => x.ID == item.ID).FirstOrDefault();
+                if (donhangPO != null)
+                {
+                    donhangPO.CAN_DAT_HANG = false;
+                }
+            }
+            try
+            {
+                await db.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+
+                throw;
+
+            }
+            //return this.CreatedAtRoute("GetNH_NTTK", new { id = nH_NTTK.SO_CHUNG_TU }, nH_NTTK);
+            return Ok(bH_CT_DON_HANG_PO);
+        }
+
         // POST: api/Api_ChiTiet_DonHangPO
         [ResponseType(typeof(BH_CT_DON_HANG_PO))]
         public IHttpActionResult PostBH_CT_DON_HANG_PO(BH_CT_DON_HANG_PO bH_CT_DON_HANG_PO)
