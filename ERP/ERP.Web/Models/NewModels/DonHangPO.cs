@@ -33,5 +33,6 @@ namespace ERP.Web.Models.NewModels
         public bool DA_LAP_HOA_DON { set; get; }
         public bool DA_HUY { set; get; }
         public string LY_DO_HUY { set; get; }
+        public decimal PHI_VC { set; get; }
     }
 }

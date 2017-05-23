@@ -18,6 +18,7 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
          })
     }
 
+
     //comment công nợ khách hàng
     $scope.GetDataComment_CongNoKH = function (makhachhang, tuancongno) {
         $http.get(window.location.origin + '/api/Api_Comments_CongNo_KH/GetData_Comments_CongNo/' + makhachhang+ '/'+ tuancongno)
@@ -29,6 +30,7 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
              console.log(error);
          })
     }
+
 
 
     //-------------end công nợ KH----------------------

@@ -4,6 +4,12 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
     var isadmin = $('#isadmin').val();
     var username = $('#username').val();
 
+    $scope.get_nhomhang = function () {
+        $http.get("/api/Api_NhomVTHHHL").then(function (response) {
+            $scope.danhsachnhomhang = response.data;
+        });
+    }
+    $scope.get_nhomhang();
 
     var tong_gia_tri_thuc_te_tinh_cm_new = 0;
     var tong_gia_tri_theo_hop_dong_tinh_cm_new = 0;
@@ -530,14 +536,17 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         SO_LUONG_TRONG_KHO: 0,
     }];
     $scope.Detail.ListNew = [{
+        MA_CHUAN: '',
         ma_hang: '',
         ten_hang: '',
         so_luong: 0,
-        ma_dieu_chinh: '',
+        MA_DIEU_CHINH: '',
         dvt: '',
         hang: '',
         gia_list: 0,
+        gia_list_VAT : 0,
         gia_nhap: 0,
+        gia_nhap_VAT : 0,
         don_gia: 0,
         he_so_loi_nhuan: 0,
         chiet_khau: 0,
@@ -1501,6 +1510,8 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
              console.log(error);
          })
     }
+
+
     // hiển thị danh sách đổi tượng(LẤY THEO MÃ)
     $scope.inputstaff = function (kh, index, detail) {
         $scope.showtable_hanghoa = true;
@@ -1545,6 +1556,15 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
             detail.hoa_hong = 0;
             so_luong_trong_kho = 0;
         }
+        var valueArr = $scope.Detail.ListNew.map(function (item) { return item.ma_hang });
+        var isDuplicate = valueArr.some(function (item, idx) {
+            return valueArr.indexOf(item) != idx
+        });
+        if (isDuplicate == true) {
+            alert('Đã có mã này trong báo giá,vui lòng kiểm tra lại!');
+            $scope.Detail.ListNew.splice(index, 1);
+        }
+        console.log(isDuplicate);
         detail.showtable_hanghoa = false;
     }
     //End lọc hàng hóa----------------------------------------------------------------------------------------------------------------------
@@ -1852,7 +1872,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
             HAN_THANH_TOAN: $scope.han_thanh_toan,
             HIEU_LUC_BAO_GIA: $scope.hieu_luc_bao_gia,
             DIEU_KHOAN_THANH_TOAN: $scope.dieu_khoan_thanh_toan,
-            PHI_VAN_CHUYEN: $scope.phivanchuyen,
+            PHI_VAN_CHUYEN: parseInt($scope.phivanchuyen),
             TONG_TIEN: $scope.tong_gia_tri_theo_hop_dong_new,
             TONG_GIA_TRI_DON_HANG_THUC_TE: $scope.tong_gia_tri_thuc_te_new,
             GIA_TRI_THUC_THU_TU_KHACH: $scope.tong_gia_tri_thu_cua_khach_new,
@@ -1976,6 +1996,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
             TONG_TIEN_THUE_GTGT: $scope.thue_vat_new,
             SO_TIEN_VIET_BANG_CHU: docso($scope.tong_gia_tri_thu_cua_khach_new),
             THUE_SUAT_GTGT: $scope.thue_suat_gtgt,
+            PHI_VC : parseInt($scope.phivanchuyen),
             TRUC_THUOC: 'HOPLONG',
             DA_BAN_HANG: false,
             NHAN_VIEN_QUAN_LY: username,
@@ -2512,6 +2533,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
             TONG_TIEN_THUE_GTGT: $scope.thongtinchung.TIEN_THUE_GTGT,
             SO_TIEN_VIET_BANG_CHU: docso($scope.thongtinchung.GIA_TRI_THUC_THU_TU_KHACH),
             THUE_SUAT_GTGT: $scope.thongtinchung.THUE_SUAT_GTGT,
+            PHI_VC : $scope.thongtinchung.PHI_VAN_CHUYEN,
             TRUC_THUOC: 'HOPLONG',
             DA_BAN_HANG: false,
             NHAN_VIEN_QUAN_LY: username,
@@ -2689,9 +2711,39 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         $scope.showtable_KH_BaoGia = false;
         $scope.lienhekh(p_dt.MA_KHACH_HANG)
     }
+    $scope.index = 0;
+    $scope.getindex = function (index) {
+        $scope.index = index;
+    };
 
-
-
+    $scope.CreateNewProductFromKH = function () {
+        var data_add = {
+            MA_CHUAN: $scope.new_ma_chuan,
+            TEN_HANG: $scope.new_ten_hang,
+            XUAT_XU: $scope.new_xuat_xu,
+            DON_VI_TINH: $scope.new_dvt,
+            MA_NHOM_HANG: $scope.new_nhom_hang,
+            TK_HACH_TOAN: 1561,
+            TK_DOANH_THU: 51111,
+            TK_CHI_PHI: 632,
+            MA_DO_SALE_TAO : true
+        }
+        $http.post('/api/Api_HanghoaHL/PostHH', data_add).then(function (response) {
+            $scope.Detail.ListNew[$scope.index].ma_hang = response.data;
+            $scope.Detail.ListNew[$scope.index].ma_chuan = $scope.new_ma_chuan;
+            $scope.Detail.ListNew[$scope.index].ten_hang = $scope.new_ten_hang;
+            $scope.Detail.ListNew[$scope.index].hang = $scope.new_nhom_hang;
+            $scope.Detail.ListNew[$scope.index].dvt = $scope.new_dvt;
+            $scope.new_ma_chuan='';
+            $scope.new_ten_hang='';
+            $scope.new_xuat_xu='';
+            $scope.new_dvt='';
+            $scope.new_nhom_hang = '';
+        }, function errorCallback(response) {
+            console.log(response);
+            ErrorSystem('Không thêm được hàng hóa');
+        });
+    };
 
 });
 

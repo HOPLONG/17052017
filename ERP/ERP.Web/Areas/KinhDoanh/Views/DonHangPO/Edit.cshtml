@@ -7,7 +7,15 @@
 <script src="~/Content/self-writing/js/Controllers/DonHangPOCtrl.js"></script>
 <link href="~/Content/self-writing/css/Kinhdoanh/donhangPO.css" rel="stylesheet" />
 
-
+<script src="~/Content/assets/js/plugins/loaders/pace.min.js"></script>
+<script src="~/Content/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+<script src="~/Content/assets/js/plugins/ui/moment/moment.min.js"></script>
+<script src="~/Content/assets/js/plugins/pickers/datepicker.js"></script>
+<script src="~/Content/assets/js/plugins/pickers/daterangepicker.js"></script>
+<script src="~/Content/Scripts/daterangepicker.js"></script>
+<script src="~/Content/Scripts/moment.min.js"></script>
+<script src="~/Content/download/date_directive.js"></script>
+<script src="~/Content/download/bootstrap-datetimepicker.js"></script>
 
 <div ng-app="myApp" ng-controller="DonHangPOCtrl">
     <input type="hidden" value="@Session["USERNAME"]" id="username" />
@@ -35,7 +43,7 @@
                         <div class="col-md-12 form-group">
                             <div class="form-group">
                                 <label class="col-md-2 text_edit">Ngày lên PO: </label>
-                                <div class="col-md-4"><input type="text" date='dd/MM/yyyy' placeholder="Ngày lên PO" class="form-control" ng-model="item.NGAY_LEN_PO" /></div>
+                                <div class="col-md-4"><input type="text" date='dd/MM/yyyy' id="ngay_len_po" datepicker placeholder="Ngày lên PO" class="form-control" ng-model="item.NGAY_LEN_PO" /></div>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -58,7 +66,7 @@
                         <div class="col-md-12 form-group">
                             <div class="form-group">
                                 <label class="col-md-4 text_edit">Ngày giao hàng: </label>
-                                <div class="col-md-4"><input type="text" date='dd/MM/yyyy' placeholder="Ngày giao hàng" class="form-control " ng-model="item.NGAY_GIAO_HANG" /></div>
+                                <div class="col-md-4"><input type="text" date='dd/MM/yyyy' id="ngay_giao_hang" datepicker placeholder="Ngày giao hàng" class="form-control " ng-model="item.NGAY_GIAO_HANG" /></div>
                             </div>
                         </div>
                         <div class="col-md-12 form-group">
@@ -164,6 +172,10 @@
                                         <div class="col-md-12">
                                             <label class="col-md-3">Thuế VAT : </label>
                                             <p class="col-md-6" style="text-align:left" ng-model="tong_tien_thue_GTGT">{{tong_tien_thue_GTGT | currency: '':0 }} vnd</p>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label class="col-md-3">Phí vận chuyển : </label>
+                                            <p class="col-md-6" style="text-align:left" ng-model="item.PHI_VC">{{item.PHI_VC | currency: '':0 }} vnd</p>
                                         </div>
                                         <div class="col-md-4">
                                             <hr />
