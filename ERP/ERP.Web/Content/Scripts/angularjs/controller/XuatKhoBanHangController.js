@@ -33,6 +33,7 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
         DiaChi: null
 
     };
+  
     $scope.GeneralInfo.DienGiai = $scope.StoreType;
     $scope.ChangeType = function () {
         if ($scope.StoreType != 2) {
@@ -165,10 +166,13 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
     $scope.Detail = {
         ListHangHoa: [],
         ListTaiKhoan: [],
-        ListAdd: [],
+        ListAdd: [
+
+        ],
         SearchHang: [],
         ListKho: []
     }
+
 
     //Lấy dữ liệu hàng hóa
     $scope.SearchHH = function (mh) {
@@ -203,11 +207,10 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
          });
     }
 
-    function Init() {
-
+    $scope.TruyenData = function (mc) {
         $http({
             method: 'GET',
-            url: '/api/Api_KhoHL'
+            url: '/api/Api_XuatNhapKho/GetHHTon/' + 'HOPLONG/' + mc,
         }).then(function (response) {
             if (typeof (response.data) == "object") {
                 $scope.Detail.ListKho = response.data;
@@ -218,6 +221,10 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
         }, function (error) {
             ConnectFail();
         });
+    }
+    function Init() {
+
+        
 
         $http({
             method: 'GET',
@@ -367,7 +374,7 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
         }
     };
     $scope.SelectTK_KHO = function (index, item, tkkho) {
-        item.TK_KHO = tkkho.SO_TK;
+        item.TK_HACH_TOAN_KHO = tkkho.SO_TK;
         $(".tableselect").css({ "display": "none" });
     };
     //Hiển thị khách hàng khi click
@@ -440,7 +447,8 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
         }
     };
     $scope.SelectKho = function (index, item, kho) {
-        item.MA_KHO_CON = kho.MA_KHO;
+        item.MA_KHO_CON = kho.MA_KHO_CON;
+        item.TEN_KHO = kho.TEN_KHO;
         $(".tableselect").css({ "display": "none" });
     };
 
@@ -523,19 +531,23 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
             $scope.datareturn = response.data;
             init();
             //response.data = jQuery.parseJSON(response.data);
-            if (response.data == config.INPUT_ERROR) {
-                InputFail();
-                
-            }
-            else if (response.data == config.FAIL) {
-                ErrorSystem();
-            }
-            else {
+            var result = response.data.substring(0,2)
+            if (result == 'XK') {
                 ResetAfterSave();
                 new PNotify({
                     title: 'Thành công',
-                    text: $scope.datareturn,
+                    text: 'Số chứng từ ' + $scope.datareturn + ' đã được tạo',
                     addclass: 'bg-primary'
+                });
+                
+            }
+            
+            else {
+                
+                new PNotify({
+                    title: 'Không thành công',
+                    text: $scope.datareturn,
+                    addclass: 'bg-danger'
                 });
             }
             
@@ -608,13 +620,15 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
         }).then(function (response) {
             if (typeof (response.data) == "object") {
                 $scope.Detail.ListAdd = response.data.ctdonbanhang;
+
                 $scope.GeneralInfo.KhachHang = response.data.donbanhang.MA_KHACH_HANG,
                 $scope.GeneralInfo.TenDoiTuong = response.data.donbanhang.TEN_CONG_TY,
                 $scope.GeneralInfo.NhanVienBanHang = response.data.donbanhang.HO_VA_TEN,
                 $scope.GeneralInfo.Username = response.data.donbanhang.NHAN_VIEN_QUAN_LY,
                 $scope.GeneralInfo.DiaChi = response.data.donbanhang.DIA_CHI_XUAT_HOA_DON
-                $scope.LoadHangTra = true;
-                
+
+                $scope.LoadHangTra = true; 
+
             }
             else {
                 ErrorSystem();

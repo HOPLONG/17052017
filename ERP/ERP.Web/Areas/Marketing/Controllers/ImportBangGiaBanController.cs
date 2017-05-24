@@ -16,6 +16,7 @@ namespace ERP.Web.Areas.Marketing.Controllers
         decimal cksp1, cksp2, cksp3, giasp1, giasp2, giasp3, slmoq1, slmoq2, slmoq3, ckmoq1, ckmoq2, ckmoq3, giamoq1, giamoq2, giamoq3, ckseries1, ckseries2, ckseries3, giaseries1, giaseries2, giaseries3,
             cklistncc1_1, cklistncc1_2, cklistncc1_3, cklistncc2_1, cklistncc2_2, cklistncc2_3, cklistncc3_1, cklistncc3_2, cklistncc3_3, cklistncc4_1, cklistncc4_2, cklistncc4_3,
              gialistncc1_1, gialistncc1_2, gialistncc1_3, gialistncc2_1, gialistncc2_2, gialistncc2_3, gialistncc3_1, gialistncc3_2, gialistncc3_3, gialistncc4_1, gialistncc4_2, gialistncc4_3;
+        decimal gialistncc1, gialistncc2, gialistncc3;
 
         #region "ImportBangGia"
         public ActionResult ImportBangGia()

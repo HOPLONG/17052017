@@ -207,6 +207,19 @@ namespace ERP.Web.Api.Kho
             
         }
         #endregion
+
+        #region "Get hàng tồn theo từng kho"
+        [HttpGet]
+        [Route("api/Api_XuatNhapKho/GetHHTon/{macongty}/{machuan}")]
+        public List<Prod_KHO_GetHangTonKho_Result> GetHHTon(string macongty, string machuan)
+        {
+            var query = db.Database.SqlQuery<Prod_KHO_GetHangTonKho_Result>("Prod_KHO_GetHangTonKho @macongty,@machuan", new SqlParameter("macongty", macongty), new SqlParameter("machuan", machuan));
+            var resultHHTon = query.ToList();
+
+            return resultHHTon;
+
+        }
+        #endregion
     }
 
 }
