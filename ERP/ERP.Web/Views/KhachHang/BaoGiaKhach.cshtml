@@ -10,13 +10,13 @@
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
     <button ng-show="createnewPOvalue" type="button" class="btn btn-primary" style="float:left" ng-click="movetoPrint()"><i class="icon-floppy-disk"></i>Xem chi tiết trước khi in</button>
     <div class="col-md-12">
-        <h4 class="center" style="color: red;text-align:center">
+        <span class="center" style="color: red;font-size:14px;text-align:center">
             File bảng giá list Schneider,Proface,.... công ty gửi cho kinh doanh sử dụng trước đây khác với giá list trên phần mềm<br />
-            <br />
+            
             Do công thức tính toán trên phần mềm,tất cả giá list là giá list chưa VAT nên giá list các sản phẩm trên là đã được chia 10% VAT<br />
-            <br />
+            
             => Chú ý: Giá list trên phần mềm là khác với giá list Marketing gửi và là giá list chưa bao gồm 10% VAT
-        </h4>
+        </span>
     </div>
     <div>
         <div class="col-md-12" ng-repeat="item in list_chitietkhachhangnew">

@@ -185,7 +185,7 @@
                                             LN:
                                         </td>
                                         <td>
-                                            <input type="number" ng-model="item.HE_SO_LOI_NHUAN" class="col-md-12 style-inline" ng-change="kiemtra(item)">
+                                            <input type="number" ng-model="item.HE_SO_LOI_NHUAN" class="col-md-12 style-inline" ng-change="tinhtien(item)">
                                         </td>
                                     </tr>
                                 </table>
@@ -266,13 +266,13 @@
                                             <label class="control-label">Phí vận chuyển </label>
                                         </td>
                                         <td>
-                                            <input type="text" class="form-control" format="number" ng-model="thongtinchung.PHI_VAN_CHUYEN" id="tienvanchuyen" ng-change="tinhtien(item)" />
+                                            <input type="text" class="form-control" format="number" ng-model="thongtinchung.PHI_VAN_CHUYEN" id="tienvanchuyen" ng-change="suathongtinchung()" />
                                         </td>
                                         <td>
                                             <label class="control-label">Thuế suất GTGT (%) </label>
                                         </td>
                                         <td>
-                                            <input type="number" class="form-control" ng-model="thongtinchung.THUE_SUAT_GTGT" id="thue_suat_gtgt" ng-change="tinhtien(item)" />
+                                            <input type="number" class="form-control" ng-model="thongtinchung.THUE_SUAT_GTGT" id="thue_suat_gtgt" ng-change="suathongtinchung()" />
                                         </td>
                                     </tr>
                                     <tr>
