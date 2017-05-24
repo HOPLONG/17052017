@@ -35,8 +35,10 @@
     //}
 
     $scope.moveFromDetailstoEdit = function () {
-        window.location.href = "/KinhDoanh/BaoGia/BaoGiaHome";
+
+        window.location.href = window.location.origin + '/KinhDoanh/BaoGia/EditBaoGia/' + url;
     };
+
 
     $scope.printToCart = function (printSectionId) {
         var innerContents = document.getElementById(printSectionId).innerHTML;
