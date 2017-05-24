@@ -653,22 +653,13 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr dir-paginate="item in filtered = (list_loai_hang_cung_cap | filter: {CHUNG_LOAI_HANG:search_text}) | itemsPerPage:15 | orderBy: 'item.CHUNG_LOAI_HANG'" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+                                            <tr ng-repeat="item in list_loai_hang_cung_cap"  class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
                                                 <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{item.MA_NHOM_HANG}}</td>
                                                 <td class="text-left" data-toggle="modal" data-target="#chitietkhachhang">{{item.CHUNG_LOAI_HANG}}</td>
                                             </tr>
                                             <!--Detail row-->
                                         </tbody>
-                                        <tfoot>
-                                            <tr>
-                                                <td colspan="9" style="border: none !important">
-                                                    <dir-pagination-controls max-size="12" style="float:right;"
-                                                                             direction-links="true"
-                                                                             boundary-links="true">
-                                                    </dir-pagination-controls>
-                                                </td>
-                                            </tr>
-                                        </tfoot>
+                                        
                                     </table>
                                 </div>
                             </div>
@@ -813,7 +804,7 @@
     </div>
     <!--end modal-->
     <!-- Modal chọn hàng cung cấp -->
-    <div id="modal_theme_primary" class="modal fade" style="display: none;" data-backdrop="static">
+    <div id="modal_theme_primary" class="modal fade" style="display: none;" data-backdrop="static" tabindex="-1">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header bg-primary-300">
@@ -843,9 +834,10 @@
                                     </thead>
                                     <tbody>
                                         <tr ng-repeat="vthh in list_nhomvthh | filter:search_text" style="overflow:scroll;">
-                                            <td><div class="checker border-primary-600 text-primary-800" ng-click="SelectList(vthh,$index)"><span ng-class="vthh.Action?'checked':''"><input type="checkbox" class="control-primary" checked="checked"></span></div></td>
+                                            <td>@*<div class="checker border-primary-600 text-primary-800"><span ng-class="vthh.Action?'checked':''">*@<input type="checkbox" ng-click="SelectList(vthh,$index,checkbox)" ng-model="checkbox" class="control-primary" checked="checked"></span></div></td>
                                             <td>
                                                 {{vthh.MA_NHOM_HANG_CHI_TIET}}
+                                                {{vthh.ID}}
                                             </td>
                                             <td>{{vthh.CHUNG_LOAI_HANG}}</td>
                                         </tr>
@@ -889,7 +881,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr dir-paginate="item in list_nhacungcap | itemsPerPage:15" ng-click="transfer(item);get_lienhencc(item.MA_NHA_CUNG_CAP);get_taikhoanncc(item.MA_NHA_CUNG_CAP);loai_hang_cung_cap(item.MA_NHA_CUNG_CAP)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
+            <tr dir-paginate="item in filtered = (list_nhacungcap) | itemsPerPage:15"   ng-click="transfer(item);get_lienhencc(item.MA_NHA_CUNG_CAP);get_taikhoanncc(item.MA_NHA_CUNG_CAP);get_loai_hang_cung_capncc(item.MA_NHA_CUNG_CAP)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
                 <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{item.MA_NHA_CUNG_CAP}}</td>
                 <td class="text-left" data-toggle="modal" data-target="#chitietkhachhang">{{item.TEN_NHA_CUNG_CAP}}</td>
                 <td class="text-center" data-toggle="modal" data-target="#chitietkhachhang">{{item.EMAIL}}</td>
@@ -907,7 +899,7 @@
         <tfoot>
             <tr>
                 <td colspan="9" style="border: none !important">
-                    <dir-pagination-controls max-size="12" style="float:right;"
+                    <dir-pagination-controls max-size="13" style="float:right;"
                                              direction-links="true"
                                              boundary-links="true">
                     </dir-pagination-controls>
