@@ -835,6 +835,7 @@ app.controller('khachhangCtrl', function (khachhangService, $scope, $http, $loca
         khachhangService.add_lienhe(data_add).then(function successCallback(response) {
             $scope.phantrangkh(0);
             $scope.new_ct_khachhang();
+            $scope.get_lienhe(makh);
             SuccessSystem("Bạn đã thêm thành công 1 liên hệ của khách hàng");
             $scope.nguoi_lien_he = '';
             $scope.chuc_vu = '';
