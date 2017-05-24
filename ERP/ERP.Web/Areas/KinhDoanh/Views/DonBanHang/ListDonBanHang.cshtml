@@ -27,10 +27,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in list_donbanhang_kinhdoanh">
+                <tr ng-repeat="item in list_donbanhang_kinhdoanh" ng-click="chitietbanhang(item.MA_SO_BH)">
                     <td>{{item.MA_SO_BH}}</td>
                     <td>{{item.NGAY_BH | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{item.TEN_KHACH_HANG}}</td>
+                    <td>{{item.TEN_CONG_TY}}</td>
                     <td>{{item.TEN_LIEN_HE}}</td>
                     <td>{{item.TONG_TIEN_THANH_TOAN | currency: '' : 0}}</td>
                     <td>{{item.NGAY_GIAO_HANG | date: 'dd/MM/yyyy'}}</td>

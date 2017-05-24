@@ -870,23 +870,6 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
     };
 
     $scope.Copy = function () {
-        for (var i = 0; i < $scope.Detail.ListAdd.length; i++) {
-            if (!$scope.Detail.ListAdd[i].MA_HANG) {
-                ErrorSystem('Thiếu thông tin Mã hàng - tại dòng ' + (i + 1));
-                return;
-            }
-
-            if (!$scope.Detail.ListAdd[i].SO_LUONG) {
-                ErrorSystem('Thiếu thông tin số lượng giữ - tại dòng ' + (i + 1));
-                return;
-            }
-
-            if (!$scope.Detail.ListAdd[i].DON_GIA_MOI) {
-                ErrorSystem('Thiếu thông tin đơn giá - tại dòng ' + (i + 1));
-                return;
-            }
-
-        }
 
         //this gets the full url
         var url = document.location.href;
@@ -900,87 +883,61 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
 
         var tong_tien = parseInt($('#tong_tien').text());
 
-        $scope.Bao_Gia = {
-            SO_BAO_GIA: $scope.BangBaoGia[0].SO_BAO_GIA,
-            SALES_BAO_GIA: $scope.BangBaoGia[0].SALES_BAO_GIA,
-            MA_KHACH_HANG: $scope.BangBaoGia[0].MA_KHACH_HANG,
-            NGAY_BAO_GIA: $scope.BangBaoGia[0].NGAY_BAO_GIA,
-            MA_DU_KIEN: url,
-            LIEN_HE_KHACH_HANG: $scope.BangBaoGia[0].LIEN_HE_KHACH_HANG,
-            PHUONG_THUC_THANH_TOAN: $scope.BangBaoGia[0].PHUONG_THUC_THANH_TOAN,
-            HAN_THANH_TOAN: $scope.BangBaoGia[0].HAN_THANH_TOAN,
-            HIEU_LUC_BAO_GIA: $scope.BangBaoGia[0].HIEU_LUC_BAO_GIA,
-            DIEU_KHOAN_THANH_TOAN: $scope.BangBaoGia[0].DIEU_KHOAN_THANH_TOAN,
-            PHI_VAN_CHUYEN: $scope.BangBaoGia[0].PHI_VAN_CHUYEN,
-            TONG_TIEN: $scope.tong_gia_tri_theo_hop_dong_edit,
-            DA_DUYET: $scope.BangBaoGia[0].DA_DUYET,
-            DA_TRUNG: $scope.BangBaoGia[0].DA_TRUNG,
-            DA_HUY: $scope.BangBaoGia[0].DA_HUY,
-            TRUC_THUOC: 'HOPLONG',
-            THUE_SUAT_GTGT: $scope.BangBaoGia[0].THUE_SUAT_GTGT,
-            TIEN_THUE_GTGT: $scope.thue_vat_edit,
-            TONG_GIA_TRI_DON_HANG_THUC_TE: $scope.tong_gia_tri_thuc_te_edit,
-            GIA_TRI_THUC_THU_TU_KHACH: $scope.tong_gia_tri_thu_cua_khach_edit,
-            TONG_GIA_TRI_CHENH_LECH: $scope.gia_tri_chenh_lech_edit,
-            TONG_CHI_PHI_HOA_DON: $scope.tong_chi_phi_hoa_don_edit,
-            THUC_NHAN_CUA_KHACH: $scope.tong_khach_nhan_edit,
-            DANG_CHO_PHAN_HOI: true,
-        };
 
         $scope.arrayChiTietBaoGia = [];
 
-        for (var i = 0; i < $scope.Detail.ListAdd.length; i++) {
+        for (var i = 0; i < $scope.thongtinchitiet.length; i++) {
 
             var ChiTietBaoGia = {
-                TEN_HANG: $scope.Detail.ListAdd[i].TEN_HANG,
-                MA_HANG: $scope.Detail.ListAdd[i].MA_HANG,
-                MA_DIEU_CHINH: $scope.Detail.ListAdd[i].MA_DIEU_CHINH,
-                HANG_SP: $scope.Detail.ListAdd[i].HANG_SP,
-                DVT: $scope.Detail.ListAdd[i].DVT,
-                SO_LUONG: $scope.Detail.ListAdd[i].SO_LUONG,
-                DON_GIA: $scope.Detail.ListAdd[i].DON_GIA_MOI,
-                CHIET_KHAU: $scope.Detail.ListAdd[i].CHIET_KHAU,
-                GIA_LIST: parseFloat($scope.Detail.ListAdd[i].GIA_LIST),
-                DON_GIA_NHAP: parseFloat($scope.Detail.ListAdd[i].DON_GIA_NHAP),
-                HE_SO_LOI_NHUAN: $scope.Detail.ListAdd[i].HE_SO_LOI_NHUAN,
-                DON_GIA_BAO_DI_NET: $scope.Detail.ListAdd[i].DON_GIA_BAO_DI_NET,
-                CM: $scope.Detail.ListAdd[i].CM,
-                DON_GIA_MOI: $scope.Detail.ListAdd[i].DON_GIA_MOI,
-                THUE_TNDN: $scope.Detail.ListAdd[i].THUE_TNDN,
-                TIEN_THUE_TNDN: $scope.Detail.ListAdd[i].TIEN_THUE_TNDN,
-                KHACH_NHAN_DUOC: $scope.Detail.ListAdd[i].KHACH_NHAN_DUOC,
-                THANH_TIEN: $scope.Detail.ListAdd[i].THANH_TIEN,
-                THANH_TIEN_NET: $scope.Detail.ListAdd[i].THANH_TIEN_NET,
-                THOI_GIAN_GIAO_HANG: $scope.Detail.ListAdd[i].THOI_GIAN_GIAO_HANG,
-                GHI_CHU: $scope.Detail.ListAdd[i].GHI_CHU,
+                TEN_HANG: $scope.thongtinchitiet[i].TEN_HANG,
+                MA_HANG: $scope.thongtinchitiet[i].MA_HANG,
+                MA_DIEU_CHINH: $scope.thongtinchitiet[i].MA_DIEU_CHINH,
+                HANG_SP: $scope.thongtinchitiet[i].HANG_SP,
+                DVT: $scope.thongtinchitiet[i].DVT,
+                SO_LUONG: $scope.thongtinchitiet[i].SO_LUONG,
+                DON_GIA: $scope.thongtinchitiet[i].DON_GIA_MOI,
+                CHIET_KHAU: $scope.thongtinchitiet[i].CHIET_KHAU,
+                GIA_LIST: parseFloat($scope.thongtinchitiet[i].GIA_LIST),
+                DON_GIA_NHAP: parseFloat($scope.thongtinchitiet[i].DON_GIA_NHAP),
+                HE_SO_LOI_NHUAN: $scope.thongtinchitiet[i].HE_SO_LOI_NHUAN,
+                DON_GIA_BAO_DI_NET: $scope.thongtinchitiet[i].DON_GIA_BAO_DI_NET,
+                CM: $scope.thongtinchitiet[i].CM,
+                DON_GIA_MOI: $scope.thongtinchitiet[i].DON_GIA_MOI,
+                THUE_TNDN: $scope.thongtinchitiet[i].THUE_TNDN,
+                TIEN_THUE_TNDN: $scope.thongtinchitiet[i].TIEN_THUE_TNDN,
+                KHACH_NHAN_DUOC: $scope.thongtinchitiet[i].KHACH_NHAN_DUOC,
+                THANH_TIEN: $scope.thongtinchitiet[i].THANH_TIEN,
+                THANH_TIEN_NET: $scope.thongtinchitiet[i].THANH_TIEN_NET,
+                THOI_GIAN_GIAO_HANG: $scope.thongtinchitiet[i].THOI_GIAN_GIAO_HANG,
+                GHI_CHU: $scope.thongtinchitiet[i].GHI_CHU,
             }
             //PUSH ChiTietGiu VÀO MẢNG arrayChiTietGiu
             $scope.arrayChiTietBaoGia.push(ChiTietBaoGia);
         }
 
         $scope.TongHop = {
-            SALES_BAO_GIA: $scope.BangBaoGia[0].SALES_BAO_GIA,
-            MA_KHACH_HANG: $scope.BangBaoGia[0].MA_KHACH_HANG,
-            NGAY_BAO_GIA: $scope.BangBaoGia[0].NGAY_BAO_GIA,
-            MA_DU_KIEN: url,
-            LIEN_HE_KHACH_HANG: $scope.BangBaoGia[0].LIEN_HE_KHACH_HANG,
-            PHUONG_THUC_THANH_TOAN: $scope.BangBaoGia[0].PHUONG_THUC_THANH_TOAN,
-            HAN_THANH_TOAN: $scope.BangBaoGia[0].HAN_THANH_TOAN,
-            HIEU_LUC_BAO_GIA: $scope.BangBaoGia[0].HIEU_LUC_BAO_GIA,
-            DIEU_KHOAN_THANH_TOAN: $scope.BangBaoGia[0].DIEU_KHOAN_THANH_TOAN,
-            PHI_VAN_CHUYEN: $scope.BangBaoGia[0].PHI_VAN_CHUYEN,
-            TONG_TIEN: $scope.tong_gia_tri_theo_hop_dong_edit,
-            DA_DUYET: $scope.BangBaoGia[0].DA_DUYET,
-            DA_TRUNG: $scope.BangBaoGia[0].DA_TRUNG,
-            DA_HUY: $scope.BangBaoGia[0].DA_HUY,
+            SALES_BAO_GIA: username,
+            MA_KHACH_HANG: $scope.thongtinchung.MA_KHACH_HANG,
+            NGAY_BAO_GIA: $scope.thongtinchung.NGAY_BAO_GIA,
+            MA_DU_KIEN: $scope.thongtinchung.MA_DU_KIEN,
+            LIEN_HE_KHACH_HANG: $scope.thongtinchung.LIEN_HE_KHACH_HANG,
+            PHUONG_THUC_THANH_TOAN: $scope.thongtinchung.PHUONG_THUC_THANH_TOAN,
+            HAN_THANH_TOAN: $scope.thongtinchung.HAN_THANH_TOAN,
+            HIEU_LUC_BAO_GIA: $scope.thongtinchung.HIEU_LUC_BAO_GIA,
+            DIEU_KHOAN_THANH_TOAN: $scope.thongtinchung.DIEU_KHOAN_THANH_TOAN,
+            PHI_VAN_CHUYEN: $scope.thongtinchung.PHI_VAN_CHUYEN,
+            TONG_TIEN: $scope.thongtinchung.TONG_TIEN,
             TRUC_THUOC: 'HOPLONG',
-            THUE_SUAT_GTGT: $scope.BangBaoGia[0].THUE_SUAT_GTGT,
-            TIEN_THUE_GTGT: $scope.thue_vat_edit,
-            TONG_GIA_TRI_DON_HANG_THUC_TE: $scope.tong_gia_tri_thuc_te_edit,
-            GIA_TRI_THUC_THU_TU_KHACH: $scope.tong_gia_tri_thu_cua_khach_edit,
-            TONG_GIA_TRI_CHENH_LECH: $scope.gia_tri_chenh_lech_edit,
-            TONG_CHI_PHI_HOA_DON: $scope.tong_chi_phi_hoa_don_edit,
-            THUC_NHAN_CUA_KHACH: $scope.tong_khach_nhan_edit,
+            DA_DUYET: false,
+            DA_TRUNG: false,
+            DA_HUY : false,
+            THUE_SUAT_GTGT: $scope.thongtinchung.THUE_SUAT_GTGT,
+            TIEN_THUE_GTGT: $scope.thongtinchung.TIEN_THUE_GTGT,
+            TONG_GIA_TRI_DON_HANG_THUC_TE: $scope.thongtinchung.TONG_GIA_TRI_DON_HANG_THUC_TE,
+            GIA_TRI_THUC_THU_TU_KHACH: $scope.thongtinchung.GIA_TRI_THUC_THU_TU_KHACH,
+            TONG_GIA_TRI_CHENH_LECH: $scope.thongtinchung.TONG_GIA_TRI_CHENH_LECH,
+            TONG_CHI_PHI_HOA_DON: $scope.thongtinchung.TONG_CHI_PHI_HOA_DON,
+            THUC_NHAN_CUA_KHACH: $scope.thongtinchung.THUC_NHAN_CUA_KHACH,
             DANG_CHO_PHAN_HOI: true,
             Chitiet: $scope.arrayChiTietBaoGia
         }
@@ -990,10 +947,15 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         //Lưu vào CSDL
         baogiaService.copynewbg($scope.TongHop).then(function successCallback(response) {
             SuccessSystem('Bạn đã sao chép thành công một báo giá mới là ' + response.data);
-            reload();
+            $(function () {
+                setTimeout(function () {
+                    window.location.href = "/KinhDoanh/BaoGia/GetBaoGia/" + response.data;
+
+                }, 2000);
+            });
         }, function errorCallback(response) {
             console.log(response);
-            ErrorSystem('Sự cố hệ thống, Không lưu được phiếu giữ kho, Bạn vui lòng liên hệ với admin để khắc phục ');
+            ErrorSystem('Sự cố hệ thống, Không tạo mới được báo giá, Bạn vui lòng liên hệ với admin để khắc phục ');
         });
 
     };
@@ -2442,7 +2404,12 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
                     url: window.location.origin + '/api/Api_ChiTietBaoGia/PutBH_CT_BAO_GIA'
                 }).then(function successCallback(response) {
                     SuccessSystem("Hoàn Thành Lưu");
-                    reload();
+                    $(function () {
+                        setTimeout(function () {
+                            window.location.href = "/KinhDoanh/BaoGia/GetBaoGia/" + $scope.Bao_Gia.SO_BAO_GIA;
+
+                        }, 2000);
+                    });
                 }, function errorCallback(response) {
                     ErrorSystem('Không lưu được chi tiết giữ kho');
                 });

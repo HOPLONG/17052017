@@ -37,6 +37,12 @@ namespace ERP.Web.Areas.KinhDoanh.Controllers
             return View();
         }
 
+        public ActionResult PhieuBanHang()
+
+        {
+            return View();
+        }
+
         public ActionResult Edit(string id)
         {
             if (id == null)
