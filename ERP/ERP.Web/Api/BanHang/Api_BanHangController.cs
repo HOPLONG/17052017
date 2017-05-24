@@ -13,6 +13,7 @@ using ERP.Web.Models.NewModels;
 using ERP.Web.Models.BusinessModel;
 using System.Text.RegularExpressions;
 using System.Data.SqlClient;
+using ERP.Web.Models.NewModels.BaoGiaAll;
 
 namespace ERP.Web.Api.BanHang
 {
@@ -257,6 +258,7 @@ namespace ERP.Web.Api.BanHang
                 baogia.NGAY_GIAO_HANG = xlnt.Xulydatetime(thongtinPO.NGAY_GIAO_HANG.ToString());
             baogia.DIA_DIEM_GIAO_HANG = thongtinPO.DIA_DIEM_GIAO_HANG;
             baogia.DA_XUAT_KHO = thongtinPO.DA_XUAT_KHO;
+            baogia.MA_SO_PO = thongtinPO.MA_SO_PO;
             db.BH_DON_BAN_HANG.Add(baogia);
             db.SaveChanges();
 
@@ -287,6 +289,16 @@ namespace ERP.Web.Api.BanHang
                 if (query != null) {
                     query.DA_BAN = true;
                     db.SaveChanges();
+                }
+            }
+
+            var data = db.BH_CT_DON_HANG_PO.Where(x => x.MA_SO_PO == thongtinPO.MA_SO_PO && x.DA_BAN == false).ToList();
+            if(data.Count() == 0)
+            {
+                var data1 = db.BH_DON_HANG_PO.Where(x => x.MA_SO_PO == thongtinPO.MA_SO_PO).FirstOrDefault();
+                if(data1 != null)
+                {
+                    data1.DA_BAN_HANG = true;
                 }
             }
                 try
@@ -324,6 +336,20 @@ namespace ERP.Web.Api.BanHang
             db.SaveChanges();
 
             return Ok(donbanhang);
+        }
+
+        [HttpPost]
+        [Route("api/Api_BanHang/PrintBanHang/{masobh}")]
+        public BaoGia_All PrintBanHang(string masobh)
+        {
+            var data = db.Database.SqlQuery<GetAll_ThongTinChungDonBanHang_Result>("GetAll_ThongTinChungDonBanHang @masoBH", new SqlParameter("masoBH", masobh));
+            var resultdata = data.FirstOrDefault();
+            var query = db.Database.SqlQuery<GetAll_ChiTiet_DonBanHang_Result>("GetAll_ChiTiet_DonBanHang @masoBH", new SqlParameter("masoBH", masobh));
+            var resultquery = query.ToList();
+            BaoGia_All banhang = new BaoGia_All();
+            banhang.BanHang = resultdata;
+            banhang.CTBanHang = resultquery;
+            return banhang;
         }
 
         protected override void Dispose(bool disposing)

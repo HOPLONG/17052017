@@ -8,7 +8,7 @@
     <input type="hidden" value="@Session["USERNAME"]" id="username" />
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
     <div class="col-md-12" style="margin: 10px 0px 10px 0px; color;#red;">
-        Trạng thái: <i class="fa fa-check" aria-hidden="true"></i> : Đã duyệt  |  <i class="fa fa-times" aria-hidden="true"></i> : Chưa duyệt  | <i class="fa fa-spinner" aria-hidden="true"></i> : Đang chờ duyệt  |  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> : Đang duyệt
+        Trạng thái: <i class="fa fa-check" aria-hidden="true"></i> : Đã duyệt  |  <i class="fa fa-times" aria-hidden="true"></i> : Chưa duyệt  | <i class="fa fa-spinner" aria-hidden="true"></i> : Đang chờ duyệt  |  <i class="fa fa-pencil-square-o" aria-hidden="true"></i> : Đang duyệt | <i class="fa fa-star-o" aria-hidden="true"></i> : Đã bán đủ hàng | <i class="fa fa-shopping-cart" aria-hidden="true"></i> : Đang bán dở
     </div>
     <div class="col-md-8">
         <table class="table">
@@ -41,24 +41,32 @@
                         <input type="checkbox" ng-model="item.DA_DUYET" style="display:none"/>
                         <input type="checkbox" ng-model="item.DA_HUY" style="display:none" />
                         <input type="checkbox" ng-model="item.DANG_DUYET" style="display:none" />
-                        <div ng-if="item.DA_DUYET == true && item.DA_HUY == false && item.DANG_DUYET == false">
+                        <input type="checkbox" ng-model="item.DA_BAN_HANG" style="display:none" />
+                        <input type="checkbox" ng-model="item.DANG_BAN_DO" style="display:none" />
+                        <div ng-if="item.DA_DUYET == true && item.DA_HUY == false && item.DANG_DUYET == false && item.DANG_BAN_DO == false && item.DA_BAN_HANG == false">
                             <i class="fa fa-check" aria-hidden="true"></i>
                         </div>
-                        <div ng-if="item.DA_DUYET == true && item.DA_HUY == true && item.DANG_DUYET == false">
+                        <div ng-if="item.DA_DUYET == true && item.DA_HUY == true && item.DANG_DUYET == false  && item.DANG_BAN_DO == false && item.DA_BAN_HANG == false">
                             <i class="fa fa-times" aria-hidden="true"></i>
                         </div>
-                        <div >
-                            <i ng-if="item.DA_DUYET == false && item.DA_HUY == false && item.DANG_DUYET == false" class="fa fa-spinner" aria-hidden="true"></i>
+                        <div  ng-if="item.DA_DUYET == false && item.DA_HUY == false && item.DANG_DUYET == false  && item.DANG_BAN_DO == false && item.DA_BAN_HANG == false">
+                            <i class="fa fa-spinner" aria-hidden="true"></i>
                         </div>
-                        <div>
-                            <i ng-if="item.DA_DUYET == false && item.DA_HUY == false && item.DANG_DUYET == true" class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        <div ng-if="item.DA_DUYET == false && item.DA_HUY == false && item.DANG_DUYET == true  && item.DANG_BAN_DO == false && item.DA_BAN_HANG == false">
+                            <i  class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                        </div>
+                        <div ng-if="item.DA_DUYET == true && item.DA_HUY == false && item.DANG_DUYET == false  && item.DANG_BAN_DO == false && item.DA_BAN_HANG == true">
+                            <i class="fa fa-star-o" aria-hidden="true"></i>
+                        </div>
+                        <div ng-if="item.DA_DUYET == true && item.DA_HUY == false && item.DANG_DUYET == false  && item.DANG_BAN_DO == true && item.DA_BAN_HANG == false">
+                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
                         </div>
                     </td>
                     @*<td>
                         <a href="/KinhDoanh/DonHangPO/Edit/{{item.MA_SO_PO}}">Sửa</a>
                     </td>*@
                     <td>
-                        <a href="/KinhDoanh/DonHangPO/POLenBanHang/{{item.MA_SO_PO}}">Tạo phiếu bán hàng</a>
+                        <a href="/KinhDoanh/DonHangPO/POLenBanHang/{{item.MA_SO_PO}}" ng-hide="item.DA_BAN_HANG">Tạo phiếu bán hàng</a>
                     </td>
                 </tr>
             </tbody>

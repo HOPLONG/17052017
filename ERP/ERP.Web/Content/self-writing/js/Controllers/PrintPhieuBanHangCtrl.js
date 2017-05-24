@@ -1,4 +1,4 @@
-﻿app.controller('PrintBaoGiaCtrl', function ($scope, $http) {
+﻿app.controller('PrintPhieuBanHangCtrl', function ($scope, $http) {
     //this gets the full url
     var url = document.location.href;
     //this removes the anchor at the end, if there is one
@@ -11,19 +11,19 @@
 
 
     //hàm tìm kiếm
-    $scope.getdataBaoGia = function (sobaogia) {
-        $http.post(window.location.origin + '/api/Api_BaoGia/PrintBaoGia/' +sobaogia)
+    $scope.getdataBanHang = function (masobh) {
+        $http.post('/api/Api_BanHang/PrintBanHang/' + masobh)
          .then(function (response) {
              if (response.data) {
-                 $scope.thongtinbaogia = response.data;
-                 $scope.thongtinchung = $scope.thongtinbaogia.BG;
-                 $scope.thongtinchitiet = $scope.thongtinbaogia.CTBG;
+                 $scope.thongtinbanhang = response.data;
+                 $scope.thongtinchung = $scope.thongtinbanhang.BanHang;
+                 $scope.thongtinchitiet = $scope.thongtinbanhang.CTBanHang;
              }
          }, function (error) {
              console.log(error);
          })
     }
-    $scope.getdataBaoGia(url);
+    $scope.getdataBanHang(url);
     $scope.CurrentDate = new Date();
     //$scope.getTotal = function () {
     //    var total = 0;
@@ -34,11 +34,9 @@
     //    return total;
     //}
 
-    $scope.moveFromDetailstoEdit = function () {
-
-        window.location.href = window.location.origin + '/KinhDoanh/BaoGia/EditBaoGia/' + url;
+    $scope.backToList = function () {
+        window.location.href = "/KinhDoanh/DonBanHang/DonBanHangHome";
     };
-
 
     $scope.printToCart = function (printSectionId) {
         var innerContents = document.getElementById(printSectionId).innerHTML;
@@ -48,6 +46,6 @@
         popupWinindow.document.close();
 
     }
-    
+
 
 });
