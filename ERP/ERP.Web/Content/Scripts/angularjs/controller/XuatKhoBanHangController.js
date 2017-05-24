@@ -883,9 +883,7 @@ app.controller('XuatKhoBanHangController', function ($rootScope, $scope, $http, 
     };
     $scope.RemoveThamChieu = function (index) {
         $scope.ThamChieu.ListSelect.splice(index, 1);
-        if ($scope.LoadHangTra == true) {
-            ResetAfterSave();
-        }
+        
     }
 
     $scope.RemoveRow = function (index) {
