@@ -34,6 +34,9 @@
     //    return total;
     //}
 
+    $scope.moveFromDetailstoEdit = function () {
+        window.location.href = window.location.origin + '/KinhDoanh/BaoGia/EditBaoGia/' + url;
+    };
 
 
     $scope.printToCart = function (printSectionId) {
