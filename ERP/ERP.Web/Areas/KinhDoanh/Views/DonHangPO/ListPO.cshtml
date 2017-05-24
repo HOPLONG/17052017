@@ -23,6 +23,7 @@
                     <th>Địa điểm giao hàng</th>
                     <th>Nhân viên quản lý</th>
                     <th>Trạng thái</th>
+                    @*<th>Sửa</th>*@
                     <th>Tạo phiếu bán hàng</th>
                 </tr>
             </thead>
@@ -53,8 +54,11 @@
                             <i ng-if="item.DA_DUYET == false && item.DA_HUY == false && item.DANG_DUYET == true" class="fa fa-pencil-square-o" aria-hidden="true"></i>
                         </div>
                     </td>
+                    @*<td>
+                        <a href="/KinhDoanh/DonHangPO/Edit/{{item.MA_SO_PO}}">Sửa</a>
+                    </td>*@
                     <td>
-                        <a href="/KinhDoanh/DonHangPO/Edit/{{item.MA_SO_PO}}">Tạo phiếu bán hàng</a>
+                        <a href="/KinhDoanh/DonHangPO/POLenBanHang/{{item.MA_SO_PO}}">Tạo phiếu bán hàng</a>
                     </td>
                 </tr>
             </tbody>

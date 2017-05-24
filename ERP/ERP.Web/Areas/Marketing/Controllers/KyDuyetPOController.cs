@@ -33,5 +33,10 @@ namespace ERP.Web.Areas.Marketing.Controllers
         {
             return View();
         }
+
+        public ActionResult DetailDuyetPO()
+        {
+            return View();
+        }
     }
 }

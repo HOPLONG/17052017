@@ -1,4 +1,5 @@
-﻿@model ERP.Web.Models.Database.BH_DON_HANG_PO
+﻿
+@model ERP.Web.Models.Database.BH_DON_HANG_PO
 
 @{
     ViewBag.Title = "Edit";
@@ -22,23 +23,23 @@
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
     <fieldset>
         <legend>Sửa đơn PO</legend>
-        
+
         <div class="content">
             <div class="col-md-12" ng-repeat="item in thongtinchung">
                 <div class="col-md-12">
                     <div class="col-md-6 border_themmoi">
                         <div class="form-group col-md-12">
                             <label class="col-md-2 text_edit">Khách hàng: </label>
-                            
-                                <md-input-container>
-                                    <md-select ng-model="item.MA_KHACH_HANG">
-                                        <md-option><em>None</em></md-option>
-                                        <md-option ng-repeat="state in list_khachhang" ng-value="state.MA_KHACH_HANG">
-                                            {{state.TEN_CONG_TY}}
-                                        </md-option>
-                                    </md-select>
-                                </md-input-container>
-                         
+
+                            <md-input-container>
+                                <md-select ng-model="item.MA_KHACH_HANG">
+                                    <md-option><em>None</em></md-option>
+                                    <md-option ng-repeat="state in list_khachhang" ng-value="state.MA_KHACH_HANG">
+                                        {{state.TEN_CONG_TY}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
                         </div>
                         <div class="col-md-12 form-group">
                             <div class="form-group">
@@ -131,31 +132,31 @@
                                     </td>
                                     <td>
                                         <div>
-                                            <input type="text" style="height: 27px;" ng-model="item.MA_HANG" class="form-control">
+                                            <input type="text" style="height: 27px;" ng-model="item.MA_HANG" class="form-control" readonly>
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <input type="text" style="height: 27px;" ng-model="item.MA_DIEU_CHINH" class="form-control">
+                                            <input type="text" style="height: 27px;" ng-model="item.MA_DIEU_CHINH" class="form-control" readonly>
                                         </div>
                                     </td>
                                     <td>
                                         <div>
-                                            <input type="text" style="height: 27px;" ng-model="item.DVT" class="form-control">
+                                            <input type="text" style="height: 27px;" ng-model="item.DVT" class="form-control" readonly>
                                         </div>
                                     </td>
                                     <td>
-                                        <input type="number" style="height: 27px;" ng-model="item.SO_LUONG" class="form-control" ng-change="kiemtra(item)">
+                                        <input type="number" style="height: 27px;" ng-model="item.SO_LUONG" class="form-control" ng-change="kiemtra(item)" readonly>
                                     </td>
                                     <td class="text-center">
-                                        <input type="number" style="height: 27px;" ng-model="item.DON_GIA" class="form-control" ng-change="kiemtra(item)">
+                                        <input type="number" style="height: 27px;" ng-model="item.DON_GIA" class="form-control" ng-change="kiemtra(item)" readonly>
                                     </td>
                                     <td class="text-center">
                                         {{item.THANH_TIEN_HANG | currency: '':0}}
                                         <input ng-model="item.THANH_TIEN_HANG" style="height: 27px;" class="form-control" type="hidden" ng-disabled="true" />
                                     </td>
                                     <td class="text-center">
-                                        <input type="number" style="height: 27px;" ng-model="item.THUE_GTGT" class="form-control" ng-change="kiemtra(item)">
+                                        <input type="number" style="height: 27px;" ng-model="item.THUE_GTGT" class="form-control" ng-change="kiemtra(item)" readonly>
                                     </td>
                                     <td class="text-center">
                                         {{item.TIEN_THUE_GTGT | currency: '':0}}
@@ -199,6 +200,9 @@
             </div>
         </div>
         <div class="col-md-12" style="text-align:center">
-            <button type="button" class="btn btn-default" ng-click="savePO()">Lưu</button>
+            <button type="button" class="btn btn-default" ng-show="daduyetphieu" ng-click="AddNew_PhieuBanHang()">Tạo phiếu bán hàng</button>
         </div>
-    </div>
+</div>
+
+
+
