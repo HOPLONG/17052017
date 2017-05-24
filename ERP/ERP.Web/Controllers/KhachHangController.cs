@@ -273,13 +273,14 @@ namespace ERP.Web.Controllers
 
 
                                 //Thêm khách hàng
-
+                                //string makh = workSheet.Cells[rowIterator, 1].Value.ToString();
                                 var query = db.KHs.Where(x => x.MST == MST).FirstOrDefault();
                                 if (query == null)
                                 {
                                     #region "Xuly"
                                     KH khachhang = new KH();
-                                    khachhang.MA_KHACH_HANG = GenerateMAKH();
+                                     khachhang.MA_KHACH_HANG = GenerateMAKH();
+                                    //khachhang.MA_KHACH_HANG = workSheet.Cells[rowIterator, 1].Value.ToString();
                                     khachhang.TEN_CONG_TY = tencongty;
                                     if (diachivpgiaodich != "")
                                         khachhang.VAN_PHONG_GIAO_DICH = diachivpgiaodich;
@@ -313,6 +314,7 @@ namespace ERP.Web.Controllers
                                         khachhang.TRUC_THUOC = tructhuoc;
                                     if (ghichu != "")
                                         khachhang.GHI_CHU = ghichu;
+                                    //khachhang.KHACH_DO_MARKETING_TIM_KIEM = Convert.ToBoolean(workSheet.Cells[rowIterator, 43].Value);
 
                                     db.KHs.Add(khachhang);
                                     db.SaveChanges();

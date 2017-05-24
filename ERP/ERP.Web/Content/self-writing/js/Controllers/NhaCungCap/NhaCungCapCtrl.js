@@ -223,11 +223,23 @@ app.controller('nhacungcapCtrl', function (nhacungcapService, $scope, $http, $lo
 
     }
 
-    $scope.loai_hang_cung_cap = function (mancc) {
-        nhacungcapService.get_loaihangcungcap(mancc).then(function (a) {
-            $scope.list_loai_hang_cung_cap = a;
+    $scope.get_loai_hang_cung_capncc = function (mancc) {
+        $http({
+            method: 'GET',
+            url: '/api/Api_GetLoaiHangCungCap/' + mancc
+        }).then(function (response) {
+            if (typeof (response.data) == "object") {
+                $scope.list_loai_hang_cung_cap = response.data;
+            }
+            else {
+                ErrorSystem();
+            }
+        }, function (error) {
+            ConnectFail();
         });
-    }
+
+    };
+    
 
     $scope.load_phanloaincc = function () {
         nhacungcapService.get_phanloaincc().then(function (b) {
@@ -334,7 +346,7 @@ app.controller('nhacungcapCtrl', function (nhacungcapService, $scope, $http, $lo
                 url: window.location.origin + '/api/Api_NhaCungCap/' + mancc
             }).then(function successCallback(response1) {
                 SuccessSystem('Sửa nhà cung cấp thành công');
-                $scope.load_nhacungcap();
+                loadncc();
             }, function errorCallback(response1) {
                 ErrorSystem('Sửa nhà cung cấp lỗi');
             });
@@ -378,7 +390,7 @@ app.controller('nhacungcapCtrl', function (nhacungcapService, $scope, $http, $lo
             url: window.location.origin + '/api/Api_LienHeNhaCungCap/PuttNCC_LIEN_HE/'
         }).then(function successCallback(response1) {
             SuccessSystem('Sửa liên hệ nhà cung cấp thành công');
-            $scope.load_nhacungcap();
+            loadncc();
         }, function errorCallback(response1) {
             ErrorSystem('Sửa liên hệ nhà cung cấp lỗi');
         });
@@ -409,7 +421,7 @@ app.controller('nhacungcapCtrl', function (nhacungcapService, $scope, $http, $lo
                 url: window.location.origin + '/api/Api_LienHeNhaCungCap/'
         }).then(function successCallback(response1) {
             SuccessSystem('Thêm mới liên hệ nhà cung cấp thành công');
-            $scope.load_nhacungcap();
+            loadncc();
         }, function errorCallback(response1) {
             ErrorSystem('Thêm mới liên hệ nhà cung cấp lỗi');
         });
@@ -434,7 +446,7 @@ app.controller('nhacungcapCtrl', function (nhacungcapService, $scope, $http, $lo
             url: window.location.origin + '/api/Api_TaiKhoanNCC/'
         }).then(function successCallback(response1) {
             SuccessSystem('Thêm mới tài khoản nhà cung cấp thành công');
-            $scope.load_nhacungcap();
+            loadncc();
         }, function errorCallback(response1) {
             ErrorSystem('Thêm mới tài khoản nhà cung cấp lỗi');
         });
@@ -526,21 +538,35 @@ app.controller('nhacungcapCtrl', function (nhacungcapService, $scope, $http, $lo
         });
     }
 
-    $scope.SelectList = function (vthh) {
-        if (vthh.Action == true) {
-            vthh.Action = false;
-        }
-        else {
-            vthh.Action = true;
-
-        }
-        var check = false;
+    $scope.SelectList = function (vthh, index, checkbox) {
         $scope.vthh = vthh;
-        if (!check) {
-            $scope.ListSelect.push({
-                MA_NHOM_HANG_CHI_TIET: $scope.vthh.MA_NHOM_HANG_CHI_TIET
-            });
-            console.log($scope.ListSelect);
+        //if (vthh.Action == true) {
+        //    vthh.Action = false;
+        //}
+        //else {
+        //    vthh.Action = true;
+
+        //}
+        //var check = false;
+        //$scope.vthh = vthh;
+        //if (!check) {
+        //    $scope.ListSelect.push({
+        //        MA_NHOM_HANG_CHI_TIET: $scope.vthh.MA_NHOM_HANG_CHI_TIET
+        //    });
+        //    console.log($scope.ListSelect);
+        //}
+        if (checkbox == true) {
+               $scope.ListSelect.push({
+                   MA_NHOM_HANG_CHI_TIET: $scope.vthh.MA_NHOM_HANG_CHI_TIET
+               });
+        } else {
+            for(i=0;i<$scope.ListSelect.length;i++)
+            {
+                if($scope.ListSelect[i].MA_NHOM_HANG_CHI_TIET == $scope.vthh.MA_NHOM_HANG_CHI_TIET)
+                {
+                    $scope.ListSelect.splice(i, 1);
+                }
+            }
         }
     };
     $scope.RemoveList = function (index) {

@@ -67,6 +67,18 @@ public partial class GetAll_ThongTinChungDonHangPO_Result
 
     public string DIA_CHI_XUAT_HOA_DON { get; set; }
 
+    public decimal PHI_VC { get; set; }
+
+    public bool DA_DUYET { get; set; }
+
+    public string NGUOI_DUYET { get; set; }
+
+    public bool DA_GIU { get; set; }
+
+    public bool DANG_DUYET { get; set; }
+
+    public Nullable<bool> DA_BAN_HANG { get; set; }
+
 }
 
 }
