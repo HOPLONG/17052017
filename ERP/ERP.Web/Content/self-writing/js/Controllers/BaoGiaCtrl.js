@@ -263,9 +263,9 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         var tong_chi_phi_hoa_don_edit = 0;
         var tong_khach_nhan_edit = 0;
 
-        if (parseFloat($scope.item.GIA_LIST) != null && parseFloat($scope.item.GIA_LIST) != "") {
+        if (parseFloat($scope.item.GIA_LIST) != null) {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.GIA_LIST) - parseFloat((parseFloat($scope.item.GIA_LIST) * ($scope.item.CHIET_KHAU / 100)));
-        } else if ($scope.item.DON_GIA_NHAP != null && $scope.item.DON_GIA_NHAP != "") {
+        } else {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.DON_GIA_NHAP) + parseFloat((parseFloat($scope.item.DON_GIA_NHAP) * ($scope.item.HE_SO_LOI_NHUAN / 100)));
         };
 
@@ -309,9 +309,9 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         var tong_chi_phi_hoa_don_new = 0;
         var tong_khach_nhan_new = 0;
 
-        if (parseFloat($scope.detail.gia_list) != null && parseFloat($scope.detail.gia_list) != "") {
+        if ($scope.detail.gia_list != null) {
             $scope.detail.gia_bao_di_net = parseFloat($scope.detail.gia_list) - parseFloat((parseFloat($scope.detail.gia_list) * ($scope.detail.chiet_khau / 100)));
-        } else if ($scope.detail.gia_nhap != null && $scope.detail.gia_nhap != "") {
+        } else  {
             $scope.detail.gia_bao_di_net = parseFloat($scope.detail.gia_nhap) + parseFloat((parseFloat($scope.detail.gia_nhap) * ($scope.detail.he_so_loi_nhuan / 100)));
         };
 
@@ -2296,9 +2296,9 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         var tong_chi_phi_hoa_don_edit = 0;
         var tong_khach_nhan_edit = 0;
 
-        if (parseFloat($scope.item.GIA_LIST) != null && parseFloat($scope.item.GIA_LIST) != "") {
+        if ($scope.item.GIA_LIST != null) {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.GIA_LIST) - parseFloat((parseFloat($scope.item.GIA_LIST) * ($scope.item.CHIET_KHAU / 100)));
-        } else if ($scope.item.DON_GIA_NHAP != null && $scope.item.DON_GIA_NHAP != "") {
+        } else {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.DON_GIA_NHAP) + parseFloat((parseFloat($scope.item.DON_GIA_NHAP) * ($scope.item.HE_SO_LOI_NHUAN / 100)));
         };
 
@@ -2333,6 +2333,30 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         $scope.thongtinchung.GIA_TRI_THUC_THU_TU_KHACH = parseFloat($scope.thongtinchung.TONG_GIA_TRI_DON_HANG_THUC_TE + $scope.thongtinchung.TONG_CHI_PHI_HOA_DON + $scope.thongtinchung.TIEN_THUE_GTGT + $scope.thongtinchung.THUC_NHAN_CUA_KHACH + parseInt($scope.thongtinchung.PHI_VAN_CHUYEN));
     };
 
+    $scope.suathongtinchung = function () {
+        var thue_suat_gtgt = $('#thue_suat_gtgt').val() || 0;
+        var tong_gia_tri_thuc_te_edit = 0;
+        var tong_gia_tri_theo_hop_dong_edit = 0;
+        var tong_chi_phi_hoa_don_edit = 0;
+        var tong_khach_nhan_edit = 0;
+        for (var i = 0; i < $scope.thongtinchitiet.length; i++) {
+            tong_gia_tri_thuc_te_edit = parseFloat($scope.thongtinchitiet[i].THANH_TIEN_NET + tong_gia_tri_thuc_te_edit);
+            tong_gia_tri_theo_hop_dong_edit = parseFloat($scope.thongtinchitiet[i].THANH_TIEN + tong_gia_tri_theo_hop_dong_edit);
+            tong_chi_phi_hoa_don_edit = parseFloat($scope.thongtinchitiet[i].TIEN_THUE_TNDN + tong_chi_phi_hoa_don_edit);
+            tong_khach_nhan_edit = parseFloat($scope.thongtinchitiet[i].KHACH_NHAN_DUOC + tong_khach_nhan_edit);
+        }
+        $scope.thongtinchung.TONG_TIEN = tong_gia_tri_theo_hop_dong_edit
+        $scope.thongtinchung.TONG_GIA_TRI_DON_HANG_THUC_TE = tong_gia_tri_thuc_te_edit;
+        $scope.thongtinchung.TONG_CHI_PHI_HOA_DON = tong_chi_phi_hoa_don_edit;
+        $scope.thongtinchung.THUC_NHAN_CUA_KHACH = tong_khach_nhan_edit;
+
+        $scope.thongtinchung.TONG_GIA_TRI_CHENH_LECH = parseFloat($scope.thongtinchung.TONG_TIEN - $scope.thongtinchung.TONG_GIA_TRI_DON_HANG_THUC_TE);
+
+        $scope.thongtinchung.TIEN_THUE_GTGT = parseFloat($scope.thongtinchung.TONG_TIEN * ($scope.thongtinchung.THUE_SUAT_GTGT / 100));
+
+
+        $scope.thongtinchung.GIA_TRI_THUC_THU_TU_KHACH = parseFloat($scope.thongtinchung.TONG_GIA_TRI_DON_HANG_THUC_TE + $scope.thongtinchung.TONG_CHI_PHI_HOA_DON + $scope.thongtinchung.TIEN_THUE_GTGT + $scope.thongtinchung.THUC_NHAN_CUA_KHACH + parseInt($scope.thongtinchung.PHI_VAN_CHUYEN));
+    };
 
     $scope.SaveBaoGia = function () {
         $scope.Bao_Gia = {

@@ -127,10 +127,10 @@
                                         </td>
                                     </tr>
                                     <tr height="45">
-                                        <th height="52" style="height:45px;">
+                                        <th height="52" style="height:45px;width:40px;text-align:center">
                                             No.
                                         </th>
-                                        <td colspan="2">
+                                        <td colspan="2" style="padding-left:3px">
                                             <b>Description of goods</b><span style="font-size:13px">(Mô tả chi tiết hàng hóa)</span><br />
                                             <b>Model</b><span style="font-size: 13px">(Mã hàng)</span>
                                         </td>
@@ -142,7 +142,7 @@
                                             <b>Q'ty</b><br />
                                             <span style="font-size: 13px">(Số lượng)</span>
                                         </td>
-                                        <td style="width:47px;text-align: center;">
+                                        <td style="width:50px;text-align: center;">
                                             <b>UOM</b><br />
                                             <span style="font-size: 13px">(Đơn vị)</span>
                                         </td>
@@ -159,21 +159,21 @@
                                         </th>
                                     </tr>
                                     <tr height="30" ng-repeat="item in thongtinchitiet">
-                                        <td height="30" style="height:30px; text-align: center">{{$index+1}}</td>
-                                        <td align="left" colspan="2" style="padding:3.5px">
+                                        <td height="30" style="height:30px; text-align: center;width:20px">{{$index+1}}</td>
+                                        <td align="left" colspan="2" style="padding-left:3.5px">
                                             <i>{{item.TEN_HANG}}</i>
                                             <br />
                                             <b>{{item.MA_DIEU_CHINH}} </b>
                                         </td>
-                                        <td style="font-size: 13.5px">
+                                        <td style="font-size: 13.5px;text-align:center">
                                             <span style="color:blue">{{item.HANG_SP}}</span>
                                             <br /> <center><i>{{item.XUAT_XU}}</i></center>
                                         </td>
                                         <td style="width:57px; text-align:center">{{item.SO_LUONG}}</td>
                                         <td style="width:47px; text-align:center"> {{item.DVT}}</td>
-                                        <td align="right">{{item.DON_GIA | number:0}}</td>
-                                        <td style="width:87px; text-align:right">{{item.THANH_TIEN | number:0}}</td>
-                                        <td style="width:71px;">{{item.THOI_GIAN_GIAO_HANG}}</td>
+                                        <td align="right" style="padding-right: 2px;">{{item.DON_GIA | number:0}}</td>
+                                        <td style="width:87px; text-align:right;padding-right: 2px;">{{item.THANH_TIEN | number:0}}</td>
+                                        <td style="width:71px;text-align:right;padding-right: 2px;">{{item.THOI_GIAN_GIAO_HANG}}</td>
                                     </tr>
                                     <tr height="30">
                                         <td height="30" colspan="9" style="height:30px;">

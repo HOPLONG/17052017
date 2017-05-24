@@ -295,6 +295,7 @@
     $scope.AddNew_PhieuBanHang = function () {
         
         var username = $('#username').val();
+        var ngaygiaohang = $('#ngay_giao_hang').val();
         $scope.arrayChiTietPO = [];
 
         for (var i = 0; i < $scope.Detail.ListBH.length; i++) {
@@ -328,7 +329,7 @@
             TONG_TIEN_THUE_GTGT: $scope.tong_tien_thue_GTGT,
             TONG_TIEN_THANH_TOAN: $scope.tong_tien_thanh_toan,
             SO_TIEN_VIET_BANG_CHU: $scope.so_tien_viet_bang_chu,
-            NGAY_GIAO_HANG: $scope.thongtinchung[0].NGAY_GIAO_HANG,
+            NGAY_GIAO_HANG: ngaygiaohang,
             DIA_DIEM_GIAO_HANG: $scope.thongtinchung[0].DIA_DIEM_GIAO_HANG,
             DA_XUAT_KHO: false,
             DA_LAP_HOA_DON: false,
