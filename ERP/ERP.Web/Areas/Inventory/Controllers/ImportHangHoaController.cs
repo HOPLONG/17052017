@@ -180,11 +180,11 @@ namespace ERP.Web.Areas.Inventory.Controllers
                                 var hanghoa = db.HHs.Where(x => x.MA_HANG == mahang).FirstOrDefault();
                                 if (hanghoa != null)
                                 {
-                                    if (workSheet.Cells[rowIterator, 3].Value != null)
-                                        hanghoa.MA_CHUAN = workSheet.Cells[rowIterator, 3].Value.ToString();
+                                    //if (workSheet.Cells[rowIterator, 3].Value != null)
+                                    //    hanghoa.MA_CHUAN = workSheet.Cells[rowIterator, 3].Value.ToString();
 
-                                    if (workSheet.Cells[rowIterator, 5].Value != null)
-                                        hanghoa.THONG_SO = workSheet.Cells[rowIterator, 5].Value.ToString();
+                                    //if (workSheet.Cells[rowIterator, 5].Value != null)
+                                    //    hanghoa.THONG_SO = workSheet.Cells[rowIterator, 5].Value.ToString();
                                     
                                     if (workSheet.Cells[rowIterator, 7].Value != null)
                                         hanghoa.TEN_HANG = workSheet.Cells[rowIterator, 7].Value.ToString();
@@ -194,8 +194,8 @@ namespace ERP.Web.Areas.Inventory.Controllers
 
                                     if (workSheet.Cells[rowIterator, 9].Value != null)
                                         hanghoa.DON_VI_TINH = workSheet.Cells[rowIterator, 9].Value.ToString();
-                                    //if (workSheet.Cells[rowIterator, 10].Value != null)
-                                    //    hanghoa.KHOI_LUONG = Convert.ToInt32(workSheet.Cells[rowIterator, 10].Value);
+                                    if (workSheet.Cells[rowIterator, 10].Value != null)
+                                        hanghoa.KHOI_LUONG = Convert.ToInt32(workSheet.Cells[rowIterator, 10].Value);
                                     if (workSheet.Cells[rowIterator, 11].Value != null)
                                         hanghoa.XUAT_XU = workSheet.Cells[rowIterator, 11].Value.ToString();
                                     //if (workSheet.Cells[rowIterator, 12].Value != null)
@@ -207,8 +207,8 @@ namespace ERP.Web.Areas.Inventory.Controllers
 
                                     //if (workSheet.Cells[rowIterator, 15].Value != null)
                                     //    hanghoa.THONG_SO_KY_THUAT = workSheet.Cells[rowIterator, 15].Value.ToString();
-                                    if (workSheet.Cells[rowIterator, 16].Value != null)
-                                        hanghoa.QUY_CACH_DONG_GOI = workSheet.Cells[rowIterator, 16].Value.ToString();
+                                    //if (workSheet.Cells[rowIterator, 16].Value != null)
+                                    //    hanghoa.QUY_CACH_DONG_GOI = workSheet.Cells[rowIterator, 16].Value.ToString();
 
                                     //if (workSheet.Cells[rowIterator, 17].Value != null)
                                     //    hanghoa.DISCONTINUE = Convert.ToBoolean(workSheet.Cells[rowIterator, 17].Value);

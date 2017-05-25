@@ -14,7 +14,7 @@
 
 <!-- Angular Material Library -->
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
-
+<script src="~/Content/self-writing/js/Controllers/GiuHangCtrl.js"></script>
 <style>
     .md-pane-open {
         z-index: 9999;
@@ -24,146 +24,80 @@
     }
 </style>
 
-<div ng-app="myApp" ng-controller="khogiuhangCtrl">
+<div ng-app="myApp" ng-controller="GiuHangHopLongCtrl">
     <div class="content">
-
+        <input type="hidden" name="macongty" id="macongty" value="@Session["MA_CONG_TY"]">
         <div class="content">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Mã giữ kho</th>
-                        <th>Sale giữ</th>
-                        <th>Tên công ty</th>
-                        <th>Ngày giữ</th>
-                        <th>Hủy đơn giữ</th>
-                        <th>Đơn đang xuất</th>
-                        <th>Đơn đã hoàn thành</th>
-                        <th>Sửa</th>
-                    </tr>
-                </thead>
+            <button class="primary" style="margin-bottom:5px" data-toggle="modal" data-target="#themgiuhangmodal">Thêm giữ hàng</button>
+            <br />
+            <table border="1" cellpadding="10" cellspacing="0">
                 <tbody>
-                    <tr data-ng-repeat="entry in list_khogiuhang" ng-click="get_chitietgiuhang(entry);chitiet(entry)" class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
-                        <td data-toggle="modal" data-target="#chitiethanghoa">{{entry.MA_GIU_KHO}}</td>
-                        <td data-toggle="modal" data-target="#chitiethanghoa">{{entry.HO_VA_TEN}}</td>
-                        <td data-toggle="modal" data-target="#chitiethanghoa">{{entry.TEN_CONG_TY}}</td>
-                        <td data-toggle="modal" data-target="#chitiethanghoa">{{entry.NGAY_GIU | stringToDate:"dd/MM/yyyy"}}</td>
-                        <td class="text-left">
-                            <input type="checkbox" data-ng-hide="editMode" ng-model="entry.HUY_DON_GIU" ng-disabled="true" />
-                            <input type="checkbox" data-ng-show="editMode" data-ng-model="entry.HUY_DON_GIU" data-ng-required />
-                        </td>
-                        <td class="text-left">
-                            <input type="checkbox" data-ng-hide="editMode" ng-model="entry.DON_DANG_XUAT" ng-disabled="true" />
-                            <input type="checkbox" data-ng-show="editMode" data-ng-model="entry.DON_DANG_XUAT" data-ng-required />
-                        </td>
-                        <td>
-                            <input type="checkbox" data-ng-hide="editMode" ng-model="entry.DON_DA_HOAN_THANH" ng-disabled="true" />
-                            <input type="checkbox" data-ng-show="editMode" data-ng-model="entry.DON_DA_HOAN_THANH" data-ng-required />
-                        </td>
-                        <td>
-                            <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editAppKey(entry)" class="btn btn-default">Edit</button>
-                            <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; save(entry)" class="btn btn-default">Save</button>
-                            <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel()" class="btn btn-default">Cancel</button>
-                        </td>
+                    <tr height="20">
+                        <th align="center" height="20" style="height:20px;width:10%;">Người giữ</th>
+                        <th align="center" style="width:40%;">Tên khách</th>
+                        <th align="center" style="width:10%;">Mã hàng</th>
+                        <th align="center" style="width:5%;">SL giữ</th>
+                        <th align="center" style="width:10%;">Ngày giữ</th>
+                        <th align="center" style="width:10%;">Ngày xuất</th>
+                        <th align="center" style="width:5%;">Giữ PO?</th>
+                        <th align="center" style="width:5%;">Đã xuất</th>
+                        <th align="center" style="width:5%;">Đã hủy giữ</th>
+                    </tr>
+                    <tr ng-repeat="item in ListDataGiuKho">
+                        <td>{{item.TEN_SALES_GIU}}</td>
+                        <td>{{item.TEN_KHACH_HANG}}</td>
+                        <td>{{item.TEN_HANG}}</td>
+                        <td>{{item.SL_GIU}}</td>
+                        <td>{{item.NGAY_GIU| date: 'dd/MM/yyyy'}}</td>
+                        <td>{{item.NGAY_XUAT| date: 'dd/MM/yyyy'}}</td>
+                        <td>{{item.GIU_PO}}</td>
+                        <td>{{item.DA_XUAT}}</td>
+                        <td>{{item.DA_HUY_GIU}}</td>
                     </tr>
                 </tbody>
             </table>
         </div>
 
-        <div class="modal fade" id="chitiethanghoa" role="dialog" tabindex="-1">
-            <div class="modal-dialog modal-lg" style="width: 90%">
+        <div class="modal fade" id="themgiuhangmodal" role="dialog" tabindex="-1">
+            <div class="modal-dialog modal-md" style="width: 50%">
                 <div class="modal-content" style="width: 100%">
                     <div class="modal-header">
-                        <table class="table" id="thongtin">
-                            <tr>
-                                <td>
-                                    Mã giữ kho : {{item.MA_GIU_KHO}}
-                                </td>
-                                <td>
-                                    Người giữ : {{item.HO_VA_TEN}}
-                                </td>
-                                <td>
-                                    Khách hàng : {{item.TEN_CONG_TY}}
-                                </td>
-                                <td>
-                                    Ngày giữ : {{item.NGAY_GIU | stringToDate: 'dd/MM/yyyy'}}
-                                </td>
-                            </tr>
-                        </table>
+                        Thêm mới hàng giữ
                     </div>
                     <div class="modal-body">
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Mã hàng</th>
-                                    <th>Đơn vị tính</th>
-                                    <th>Xuất xứ</th>
-                                    <th>Số lượng giữ</th>
-                                    <th>Đơn giá</th>
-                                    <th>Thành tiền</th>
-                                    <th>Ngày xuất</th>
-                                    <th>Đã xuất</th>
-                                    <th>Ghi chú</th>
-                                    <th>Sửa</th>
-                                </tr>
-                            </thead>
+                        <table border="1" cellpadding="0" cellspacing="0">
                             <tbody>
-                                <tr dir-paginate="item in filtered = (list_chitietgiukho) |  itemsPerPage:10 track by item.MA_HANG " class="hover" ng-class-odd="'odd'" ng-class-even="'even'">
-                                    <td class="text-left">
-                                        <p style="display:none">{{item.ID}}</p>
-                                        <p style="display:none">{{item.MA_GIU_KHO}}</p>
-                                        <p data-ng-hide="editMode" ng-model="item.MA_HANG">{{item.MA_HANG}}</p>
-                                        <input type="text" data-ng-show="editMode" data-ng-model="item.MA_HANG" data-ng-required readonly/>
-                                    </td>
-                                    <td class="text-left">
-                                        <p data-ng-hide="editMode" ng-model="item.DVT">{{item.DVT}}</p>
-                                        <input type="text" data-ng-show="editMode" data-ng-model="item.DVT" data-ng-required />
-                                    </td>
-                                    <td>
-                                        <p data-ng-hide="editMode" ng-model="item.XUAT_XU">{{item.XUAT_XU}}</p>
-                                        <input type="text" data-ng-show="editMode" data-ng-model="item.XUAT_XU" data-ng-required />
-                                    </td>
-                                    <td class="text-left">
-                                        <p data-ng-hide="editMode" ng-model="item.SL_GIU">{{item.SL_GIU}}</p>
-                                        <input type="text" data-ng-show="editMode" data-ng-model="item.SL_GIU" data-ng-required />
-                                    </td>
-                                    <td class="text-left">
-                                        <p data-ng-hide="editMode" ng-model="item.DON_GIA">{{item.DON_GIA}}</p>
-                                        <input type="text" data-ng-show="editMode" data-ng-model="item.DON_GIA" data-ng-required />
-                                    </td>
-                                    <td class="text-left">
-                                        <p data-ng-hide="editMode" ng-model="item.THANH_TIEN">{{item.THANH_TIEN | currency:'':0}}</p>
-                                        <p type="text" data-ng-show="editMode">{{(item.DON_GIA * item.SL_GIU) | currency:'':0}}</p>
-                                    </td>
-                                    <td>
-                                        <p data-ng-hide="editMode" ng-model="item.NGAY_XUAT">{{item.NGAY_XUAT}}</p>
-                                        <input type="text" data-ng-show="editMode" data-ng-model="item.NGAY_XUAT" data-ng-required />
-                                    </td>
-                                    <td>
-                                        <input type="checkbox" data-ng-hide="editMode" ng-model="item.DA_XUAT" ng-disabled="true" />
-                                        <input type="checkbox" data-ng-show="editMode" data-ng-model="item.DA_XUAT" data-ng-required />
-                                    </td>
-                                    <td>
-                                        <p data-ng-hide="editMode" ng-model="item.GHI_CHU">{{item.GHI_CHU}}</p>
-                                        <input type="text" data-ng-show="editMode" data-ng-model="item.GHI_CHU" data-ng-required />
-                                    </td>
-                                    <td>
-                                        <button type="submit" data-ng-hide="editMode" data-ng-click="editMode = true; editAppKey(entry)" class="btn btn-default">Edit</button>
-                                        <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; save_edit(item)" class="btn btn-default">Save</button>
-                                        <button type="submit" data-ng-show="editMode" data-ng-click="editMode = false; cancel_edit()" class="btn btn-default">Cancel</button>
-                                    </td>
-                                </tr>
-                                <tr ng-if="item.expanded" dir-paginate-end=""></tr>
-                            </tbody>
-                            <tfoot>
                                 <tr>
-                                    <td colspan="9" style="border: none !important">
-                                        <dir-pagination-controls max-size="12" style="float:right;"
-                                                                 direction-links="true"
-                                                                 boundary-links="true">
-                                        </dir-pagination-controls>
-                                    </td>
+                                    <td align="left" style="height:36px;width:10%; background:#76933C; color:white; font-weight:bold">Sale giữ</td>
+                                    <td align="left" style="width:20%;"><input type="text" style="border:none; height:36px; width: 100%" /> </td>
+                                    <td colspan="4" style="width:30%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
                                 </tr>
-                            </tfoot>
+                                <tr>
+                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Khách hàng</td>
+                                    <td align="left"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                    <td colspan="4"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Hàng hóa</td>
+                                    <td colspan="5"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Ngày giữ</td>
+                                    <td colspan="2" style="width:10%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                    <td align="left" style="width:10%;background:#76933C; color:white; font-weight:bold">SL giữ</td>
+                                    <td colspan="2" style="width:60%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Ngày xuất</td>
+                                    <td colspan="2" style="width:10%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                    <td align="left" style="width:10%; background:#76933C; color:white; font-weight:bold">Giữ PO?</td>
+                                    <td colspan="2" style="width:60%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                </tr>
+                                <tr>
+                                    <td align="left" height="36" style="height:36px;background:#76933C; color:white; font-weight:bold">Ghi chú</td>
+                                    <td colspan="5"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                     <div class="modal-footer">

@@ -49,7 +49,7 @@ namespace ERP.Web.Areas.Marketing.Controllers
                                 var workSheet = currentSheet.First();
                                 var noOfCol = workSheet.Dimension.End.Column;
                                 var noOfRow = workSheet.Dimension.End.Row;
-                                for (int rowIterator = 2; rowIterator <= noOfRow; rowIterator++)
+                                for (int rowIterator = 3; rowIterator <= noOfRow; rowIterator++)
                                 {
 
                                     mahang = workSheet.Cells[rowIterator, 2].Value.ToString();
@@ -100,124 +100,120 @@ namespace ERP.Web.Areas.Marketing.Controllers
 
 
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        slmoq1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 11].Value != null)
+                                        slmoq1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 11].Value);
                                     else
                                         slmoq1 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        ckmoq1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 12].Value != null)
+                                        ckmoq1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 12].Value);
                                     else
                                         ckmoq1 = 0;
                                     //=======================================
 
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        giamoq1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 13].Value != null)
+                                        giamoq1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 13].Value);
                                     else
                                         giamoq1 = 0;
                                     //======================================
 
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        slmoq2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 14].Value != null)
+                                        slmoq2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 14].Value);
                                     else
                                         slmoq2 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        ckmoq2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 15].Value != null)
+                                        ckmoq2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 15].Value);
                                     else
                                         ckmoq2 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        giamoq2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 16].Value != null)
+                                        giamoq2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 16].Value);
                                     else
                                         giamoq2 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        slmoq3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 17].Value != null)
+                                        slmoq3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 17].Value);
                                     else
                                         slmoq3 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        ckmoq3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 18].Value != null)
+                                        ckmoq3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 18].Value);
                                     else
                                         ckmoq3 = 0;
                                     //=======================================
 
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        giamoq3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 19].Value != null)
+                                        giamoq3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 19].Value);
                                     else
                                         giamoq3 = 0;
 
 
-
-
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        ckseries1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 26].Value != null)
+                                        ckseries1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 26].Value);
                                     else
                                         ckseries1 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        giaseries1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 27].Value != null)
+                                        giaseries1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 27].Value);
                                     else
                                         giaseries1 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        ckseries2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 28].Value != null)
+                                        ckseries2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 28].Value);
                                     else
                                         ckseries2 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        giaseries2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 29].Value != null)
+                                        giaseries2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 29].Value);
                                     else
                                         giaseries2 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        ckseries3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 30].Value != null)
+                                        ckseries3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 30].Value);
                                     else
                                         ckseries3 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        giaseries3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 31].Value != null)
+                                        giaseries3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 31].Value);
                                     else
                                         giaseries3 = 0;
 
 
 
 
-
-
-
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc1_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 20].Value != null)
+                                        cklistncc1_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 20].Value);
                                     else
                                         cklistncc1_1 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc1_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 21].Value != null)
+                                        gialistncc1_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 21].Value);
                                     else
                                         gialistncc1_1 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc1_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 22].Value != null)
+                                        cklistncc1_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 22].Value);
                                     else
                                         cklistncc1_2 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc1_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator,23].Value != null)
+                                        gialistncc1_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 23].Value);
                                     else
                                         gialistncc1_2 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc1_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 24].Value != null)
+                                        cklistncc1_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 24].Value);
                                     else
                                         cklistncc1_3 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc1_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 25].Value != null)
+                                        gialistncc1_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 25].Value);
                                     else
                                         gialistncc1_3 = 0;
+                                    
 
 
 
@@ -225,33 +221,33 @@ namespace ERP.Web.Areas.Marketing.Controllers
 
 
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc2_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 32].Value != null)
+                                        cklistncc2_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 32].Value);
                                     else
                                         cklistncc2_1 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc2_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 33].Value != null)
+                                        gialistncc2_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 33].Value);
                                     else
                                         gialistncc2_1 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc2_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 34].Value != null)
+                                        cklistncc2_2 = Convert.ToDecimal(workSheet.Cells[rowIterator,34].Value);
                                     else
                                         cklistncc2_2 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc2_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 35].Value != null)
+                                        gialistncc2_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 35].Value);
                                     else
                                         gialistncc2_2 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc2_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 36].Value != null)
+                                        cklistncc2_3 = Convert.ToDecimal(workSheet.Cells[rowIterator,36].Value);
                                     else
                                         cklistncc2_3 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc2_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 37].Value != null)
+                                        gialistncc2_3 = Convert.ToDecimal(workSheet.Cells[rowIterator,37].Value);
                                     else
                                         gialistncc2_3 = 0;
 
@@ -262,33 +258,33 @@ namespace ERP.Web.Areas.Marketing.Controllers
 
 
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc3_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 38].Value != null)
+                                        cklistncc3_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 38].Value);
                                     else
                                         cklistncc3_1 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc3_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 39].Value != null)
+                                        gialistncc3_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 39].Value);
                                     else
                                         gialistncc3_1 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc3_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 40].Value != null)
+                                        cklistncc3_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 40].Value);
                                     else
                                         cklistncc3_2 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc3_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 41].Value != null)
+                                        gialistncc3_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 41].Value);
                                     else
                                         gialistncc3_2 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc3_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 42].Value != null)
+                                        cklistncc3_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 42].Value);
                                     else
                                         cklistncc3_3 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc3_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 43].Value != null)
+                                        gialistncc3_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 43].Value);
                                     else
                                         gialistncc3_3 = 0;
 
@@ -296,37 +292,76 @@ namespace ERP.Web.Areas.Marketing.Controllers
 
 
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc4_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 44].Value != null)
+                                        cklistncc4_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 44].Value);
                                     else
                                         cklistncc4_1 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc4_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 45].Value != null)
+                                        gialistncc4_1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 45].Value);
                                     else
                                         gialistncc4_1 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc4_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 46].Value != null)
+                                        cklistncc4_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 46].Value);
                                     else
                                         cklistncc4_2 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc4_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 47].Value != null)
+                                        gialistncc4_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 47].Value);
                                     else
                                         gialistncc4_2 = 0;
                                     //=======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        cklistncc4_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator, 48].Value != null)
+                                        cklistncc4_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 48].Value);
                                     else
                                         cklistncc4_3 = 0;
                                     //======================================
-                                    if (workSheet.Cells[rowIterator, 1].Value != null)
-                                        gialistncc4_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 1].Value);
+                                    if (workSheet.Cells[rowIterator,49].Value != null)
+                                        gialistncc4_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 49].Value);
+                                    else
+                                        gialistncc4_3 = 0;
+
+                                    //=======================================
+                                    if (workSheet.Cells[rowIterator, 50].Value != null)
+                                        cklistncc4_2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 50].Value);
+                                    else
+                                        cklistncc4_2 = 0;
+                                    //======================================
+                                    if (workSheet.Cells[rowIterator, 51].Value != null)
+                                        gialistncc4_2 = Convert.ToDecimal(workSheet.Cells[rowIterator,51].Value);
+                                    else
+                                        gialistncc4_2 = 0;
+                                    //=======================================
+                                    if (workSheet.Cells[rowIterator, 52].Value != null)
+                                        cklistncc4_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 52].Value);
+                                    else
+                                        cklistncc4_3 = 0;
+                                    //======================================
+                                    if (workSheet.Cells[rowIterator, 53].Value != null)
+                                        gialistncc4_3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 53].Value);
                                     else
                                         gialistncc4_3 = 0;
 
 
+
+                                    
+
+                                    //======================================
+                                    if (workSheet.Cells[rowIterator, 51].Value != null)
+                                        gialistncc1 = Convert.ToDecimal(workSheet.Cells[rowIterator, 51].Value);
+                                    else
+                                        gialistncc1 = 0;
+                                    //=======================================
+                                    if (workSheet.Cells[rowIterator, 52].Value != null)
+                                        gialistncc2 = Convert.ToDecimal(workSheet.Cells[rowIterator, 52].Value);
+                                    else
+                                        gialistncc2 = 0;
+                                    //======================================
+                                    if (workSheet.Cells[rowIterator, 53].Value != null)
+                                        gialistncc3 = Convert.ToDecimal(workSheet.Cells[rowIterator, 53].Value);
+                                    else
+                                        gialistncc3 = 0;
 
 
 
@@ -339,6 +374,13 @@ namespace ERP.Web.Areas.Marketing.Controllers
                                     banggia.MA_HANG = mahang;
                                     banggia.MA_NHOM_HANG = manhomhang;
                                     banggia.SERIES = series;
+
+
+                                    //------------------------------
+                                    banggia.GIA_LIST_NCC1 = gialistncc1;
+                                    banggia.GIA_LIST_NCC2 = gialistncc2;
+                                    banggia.GIA_LIST_NCC3 = gialistncc3;
+
 
                                     //------------------------------
                                     banggia.CK_SP_1 = cksp1;
