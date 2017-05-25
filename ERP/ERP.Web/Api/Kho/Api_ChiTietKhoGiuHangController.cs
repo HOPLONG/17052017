@@ -21,42 +21,42 @@ namespace ERP.Web.Api.Kho
         XuLyNgayThang xlnt = new XuLyNgayThang();
         string mkh;
         // GET: api/Api_ChiTietKhoGiuHang
-        [Route("api/Api_ChiTietKhoGiuHang/{ma_giu_kho}")]
-        public List<Khogiuhang> GetKHO_CT_GIU_HANG(string ma_giu_kho)
-        {
-            var vData = (from t1 in db.KHO_GIU_HANG
-                         join t2 in db.KHO_CT_GIU_HANG on t1.MA_GIU_KHO equals t2.MA_GIU_KHO
-                         where t1.MA_GIU_KHO == ma_giu_kho
-                         select new
-                         {
-                             t2.ID,
-                             t2.DVT,
-                             t2.XUAT_XU,
-                             t2.THANH_TIEN,
-                             t2.DON_GIA,
-                             t2.MA_HANG,
-                             t2.SL_GIU,
-                             t2.NGAY_XUAT,
-                             t2.DA_XUAT,
-                             t2.GHI_CHU,
-                             t2.MA_GIU_KHO
-                         });
-            var result = vData.ToList().Select(x => new Khogiuhang()
-            {
-                ID = x.ID,
-                DVT = x.DVT,
-                MA_GIU_KHO = x.MA_GIU_KHO,
-                THANH_TIEN = x.THANH_TIEN,
-                DON_GIA = x.DON_GIA,
-                XUAT_XU = x.XUAT_XU,
-                MA_HANG = x.MA_HANG,
-                SL_GIU = x.SL_GIU,
-                NGAY_XUAT = x.NGAY_XUAT.ToString(),
-                DA_XUAT = x.DA_XUAT,
-                GHI_CHU = x.GHI_CHU
-            }).ToList();
-            return result;
-        }
+        //[Route("api/Api_ChiTietKhoGiuHang/{ma_giu_kho}")]
+        //public List<Khogiuhang> GetKHO_CT_GIU_HANG(string ma_giu_kho)
+        //{
+        //    var vData = (from t1 in db.KHO_GIU_HANG
+        //                 join t2 in db.KHO_CT_GIU_HANG on t1.MA_GIU_KHO equals t2.MA_GIU_KHO
+        //                 where t1.MA_GIU_KHO == ma_giu_kho
+        //                 select new
+        //                 {
+        //                     t2.ID,
+        //                     t2.DVT,
+        //                     t2.XUAT_XU,
+        //                     t2.THANH_TIEN,
+        //                     t2.DON_GIA,
+        //                     t2.MA_HANG,
+        //                     t2.SL_GIU,
+        //                     t2.NGAY_XUAT,
+        //                     t2.DA_XUAT,
+        //                     t2.GHI_CHU,
+        //                     t2.MA_GIU_KHO
+        //                 });
+        //    var result = vData.ToList().Select(x => new Khogiuhang()
+        //    {
+        //        ID = x.ID,
+        //        DVT = x.DVT,
+        //        MA_GIU_KHO = x.MA_GIU_KHO,
+        //        THANH_TIEN = x.THANH_TIEN,
+        //        DON_GIA = x.DON_GIA,
+        //        XUAT_XU = x.XUAT_XU,
+        //        MA_HANG = x.MA_HANG,
+        //        SL_GIU = x.SL_GIU,
+        //        NGAY_XUAT = x.NGAY_XUAT.ToString(),
+        //        DA_XUAT = x.DA_XUAT,
+        //        GHI_CHU = x.GHI_CHU
+        //    }).ToList();
+        //    return result;
+        //}
 
         // GET: api/Api_ChiTietKhoGiuHang/5
         [ResponseType(typeof(KHO_CT_GIU_HANG))]

@@ -2,21 +2,18 @@
     var salehienthoi = $('#salehienthoi').val();
 
     
-
-
     $scope.edit = function (item) {
         $scope.ton = item;
         $scope.item = item;
     };
-
-
+    //====LOAD DỮ LIỆU TỒN KHO====================
     $scope.datatonkho = function (machuan) {
         TonCacNoiService.get_dataton(machuan).then(function (a) {
             $scope.listtonkho = a;
         });
     };
     $scope.datatonkho('AT8');
-    
+    //-----------------------------------------------
 
 
     //Thêm mới yêu cầu
@@ -62,36 +59,26 @@
            });
 
     }
-    //-------------------------
-    //Xem Comment
-    $scope.XemComment = function (mahang) {
-       
-        //Lưu vào CSDL
-        $http.get("/api/Api_TonKhoHL/GetHH_Comment/" + mahang)
-           .then(function successCallback(response) {
-               $scope.xemcommenthanghoa = response.data;
-           }, function errorCallback(response) {
-               console.log(response);
-               ErrorSystem("Sự cố đường truyền, hãy kiểm tra lại mạng Internet");
-           });
 
-    }
-    //==================
-
-    $scope.AddNewComment = function (mahang) {
-        var username = $('#username').val();
-        $("textarea[name=newcomment]").val(CKEDITOR.instances.newcomment.getData());
-        var newcomment = $("[name=newcomment]").val();
-        var data_save = {
-            NGUOI_COMMENT: username,
-            MA_HANG: mahang,
-            NOI_DUNG_COMMENT: newcomment,
-        }
-        $http.post('/api/Api_TonKhoHL/NewComment', data_save).then(function (response) {
-            SuccessSystem('Thêm comment thành công');
+    $scope.AddNewComment = function (mahang, ghichu) {
+        $http.post('/api/Api_TonKhoHL/CapNhatGhiChu/'+mahang+'/'+ghichu).then(function (response) {
+            SuccessSystem(response.data);
+            $scope.datatonkho('AT8');
         }, function errorCallback(response) {
-            ErrorSystem("Lỗi khi thêm comment");
+            ErrorSystem(response.data);
         });
     };
 
+    //=====Get data giữ hàng=================
+    $scope.GetDataGiuHang = function (mahang) {
+        $http.get(window.location.origin + '/api/Api_KhoGiuHang/GetDataGiuKho/' + macongty+'/'+mahang)
+         .then(function (response) {
+             if (response.data) {
+                 $scope.ListDataGiuKho = response.data;
+             }
+         }, function (error) {
+             console.log(error);
+         });
+    }
+    //----------------------------------------
 });
