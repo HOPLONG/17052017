@@ -16,6 +16,13 @@ using System.Text.RegularExpressions;
 
 namespace ERP.Web.Api.DonHangPO
 {
+    public class TongHopDonPO
+    {
+        public string username { get; set; }
+        public string macongty { get; set; }
+        public Boolean isadmin { get; set; }
+        public string tukhoa { get; set; }
+    }
     public class LocDuLieu
     {
         public string username { get; set; }
@@ -32,12 +39,22 @@ namespace ERP.Web.Api.DonHangPO
         int tongton;
         // GET: api/Api_DonHangPO
         // List PO
-        [Route("api/Api_DonHangPO/ListPO/{isadmin}/{username}")]
-        public List<Prod_BH_List_PO_Result> ListPO(bool isadmin, string username)
+        [Route("api/Api_DonHangPO/ListPO/{page}")]
+        public List<Prod_BH_List_PO_Result> ListPO(int page,TongHopDonPO TongHopDonPO)
         {
-            var query = db.Database.SqlQuery<Prod_BH_List_PO_Result>("Prod_BH_List_PO @macongty,@username,@isadmin", new SqlParameter("macongty", "HOPLONG"),new SqlParameter("username", username), new SqlParameter("isadmin", isadmin));
+            var query = db.Database.SqlQuery<Prod_BH_List_PO_Result>("Prod_BH_List_PO @macongty,@username,@isadmin,@sotrang,@tukhoa", new SqlParameter("macongty", "HOPLONG"),new SqlParameter("username", TongHopDonPO.username), new SqlParameter("isadmin", TongHopDonPO.isadmin), new SqlParameter("sotrang", page), new SqlParameter("tukhoa", TongHopDonPO.tukhoa));
             var result = query.ToList();
             return result;
+        }
+
+        // Dem Tong so Don PO
+        [Route("api/Api_DonHangPO/DemTongSoDonPO")]
+        public string DemTongSoDonPO(TongHopDonPO TongHopDonPO)
+        {
+            var query = db.Database.SqlQuery<int>("Prod_BH_DemTongSoDonPO @username,@macongty,@isadmin", new SqlParameter("username", TongHopDonPO.username), new SqlParameter("macongty", TongHopDonPO.macongty), new SqlParameter("isadmin", TongHopDonPO.isadmin));
+            var result = query.FirstOrDefault();
+            string kq = result.ToString();
+            return kq;
         }
 
         // List PO da duyet

@@ -8,7 +8,7 @@
     }];
     var username = $('#username').val();
     var isadmin = $('#isadmin').val();
-
+    var macongty = $('#macongty').val();
 
     var salehienthoi = $('#username').val();
 
@@ -19,38 +19,38 @@
     };
     $scope.load_donbanhang();
 
-    $scope.load_thongtinchung_banhang = function () {
-        //this gets the full url
-        var url = document.location.href;
-        //this removes the anchor at the end, if there is one
-        url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
-        //this removes the query after the file name, if there is one
-        url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
-        //this removes everything before the last slash in the path
-        url = url.substring(url.lastIndexOf("/") + 1, url.length);
-        //
-        BanHangService.get_thongtinchung_donbanhang(url).then(function (abc) {
-            $scope.thongtinchung = abc;
+    //$scope.load_thongtinchung_banhang = function () {
+    //    //this gets the full url
+    //    var url = document.location.href;
+    //    //this removes the anchor at the end, if there is one
+    //    url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+    //    //this removes the query after the file name, if there is one
+    //    url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+    //    //this removes everything before the last slash in the path
+    //    url = url.substring(url.lastIndexOf("/") + 1, url.length);
+    //    //
+    //    BanHangService.get_thongtinchung_donbanhang(url).then(function (abc) {
+    //        $scope.thongtinchung = abc;
 
-            BanHangService.get_thongtinchitiet_donbanhang(url).then(function (b) {
-                $scope.Detail.ListAdd = b;
+    //        BanHangService.get_thongtinchitiet_donbanhang(url).then(function (b) {
+    //            $scope.Detail.ListAdd = b;
 
-                var tong_tien_hang = 0;
-                var tong_tien_thue_GTGT = 0;
-                var tong_tien_thanh_toan = 0;
+    //            var tong_tien_hang = 0;
+    //            var tong_tien_thue_GTGT = 0;
+    //            var tong_tien_thanh_toan = 0;
 
-                for (var i = 0; i < $scope.Detail.ListAdd.length; i++) {
-                    tong_tien_hang = parseFloat($scope.Detail.ListAdd[i].THANH_TIEN_HANG + tong_tien_hang);
-                    tong_tien_thue_GTGT = parseFloat($scope.Detail.ListAdd[i].TIEN_THUE_GTGT + tong_tien_thue_GTGT);
-                    tong_tien_thanh_toan = parseFloat($scope.Detail.ListAdd[i].TIEN_THANH_TOAN + tong_tien_thanh_toan)
-                }
-                $scope.tong_tien_hang = tong_tien_hang;
-                $scope.tong_tien_thue_GTGT = tong_tien_thue_GTGT
-                $scope.tong_tien_thanh_toan = tong_tien_thanh_toan;
-                $scope.so_tien_viet_bang_chu = docso($scope.tong_tien_thanh_toan);
-            });
-        });
-    };
+    //            for (var i = 0; i < $scope.Detail.ListAdd.length; i++) {
+    //                tong_tien_hang = parseFloat($scope.Detail.ListAdd[i].THANH_TIEN_HANG + tong_tien_hang);
+    //                tong_tien_thue_GTGT = parseFloat($scope.Detail.ListAdd[i].TIEN_THUE_GTGT + tong_tien_thue_GTGT);
+    //                tong_tien_thanh_toan = parseFloat($scope.Detail.ListAdd[i].TIEN_THANH_TOAN + tong_tien_thanh_toan)
+    //            }
+    //            $scope.tong_tien_hang = tong_tien_hang;
+    //            $scope.tong_tien_thue_GTGT = tong_tien_thue_GTGT
+    //            $scope.tong_tien_thanh_toan = tong_tien_thanh_toan;
+    //            $scope.so_tien_viet_bang_chu = docso($scope.tong_tien_thanh_toan);
+    //        });
+    //    });
+    //};
 
     $scope.kiemtra = function (item) {
         $scope.item = item;
@@ -215,35 +215,35 @@
         return;       
     };
 
-    $scope.deleteBH = function () {
-        var url = document.location.href;
-        //this removes the anchor at the end, if there is one
-        url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
-        //this removes the query after the file name, if there is one
-        url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
-        //this removes everything before the last slash in the path
-        url = url.substring(url.lastIndexOf("/") + 1, url.length);
-        //
-        BanHangService.delete_banhang(url).then(function (response) {
-            SuccessSystem('Xóa thành công');
-            window.setTimeout(function () {
+    //$scope.deleteBH = function () {
+    //    var url = document.location.href;
+    //    //this removes the anchor at the end, if there is one
+    //    url = url.substring(0, (url.indexOf("#") == -1) ? url.length : url.indexOf("#"));
+    //    //this removes the query after the file name, if there is one
+    //    url = url.substring(0, (url.indexOf("?") == -1) ? url.length : url.indexOf("?"));
+    //    //this removes everything before the last slash in the path
+    //    url = url.substring(url.lastIndexOf("/") + 1, url.length);
+    //    //
+    //    BanHangService.delete_banhang(url).then(function (response) {
+    //        SuccessSystem('Xóa thành công');
+    //        window.setTimeout(function () {
 
-                // Move to a new location or you can do something else
-                window.location.href = "/BanHang/Index";
+    //            // Move to a new location or you can do something else
+    //            window.location.href = "/BanHang/Index";
 
-            }, 2000);
-        }, function errorCallback(response) {
-            ErrorSystem('Gặp sự cố khi xóa');
-        });;
-    };
-    $scope.load_thongtinchung_banhang();
-    $http.get(window.location.origin + '/api/Api_KH/GET_KHACH_CUA_SALE/' + salehienthoi)
+    //        }, 2000);
+    //    }, function errorCallback(response) {
+    //        ErrorSystem('Gặp sự cố khi xóa');
+    //    });;
+    //};
+    //$scope.load_thongtinchung_banhang();
+    //$http.get(window.location.origin + '/api/Api_KH/GET_KHACH_CUA_SALE/' + salehienthoi)
 
-        .then(function (response) {
-            $scope.list_khachhang = response.data;
-        }, function (error) {
-            console.log(error);
-        });
+    //    .then(function (response) {
+    //        $scope.list_khachhang = response.data;
+    //    }, function (error) {
+    //        console.log(error);
+    //    });
 
     //get data nguoi giu
     $http.get(window.location.origin + '/api/Api_KH/GetAllSale')
@@ -327,39 +327,110 @@
         } while (so > 0);
         return chuoi;
     }
-    window.setInterval(function(){
-        // List don ban hang
-        $http.post('/api/Api_BanHang/ListDonBanHang/' + isadmin + '/' + username).then(function (response) {
+
+    var tukhoa = '';
+
+    var thamso = {
+        username: username,
+        macongty: macongty,
+        isadmin: isadmin,
+        tukhoa: tukhoa
+    }
+
+    // Phan trang list don hang PO
+    $http.post('/api/Api_BanHang/DemTongSoDonBanHang', thamso).then(function (response) {
+        $scope.tongsodonBanHang = response.data;
+        pagination2.make(parseInt($scope.tongsodonBanHang), 15);
+    });
+
+
+    function pageClick2(pageNumber) {
+        $("#page-number-phan_trang_tong_kh").text(pageNumber);
+        var datas = {
+            macongty: macongty,
+            username: username,
+            isadmin: isadmin,
+            tukhoa: tukhoa
+        }
+        $http({
+            method: 'POST',
+            data: datas,
+            url: window.location.origin + '/api/Api_BanHang/ListDonBanHang/' + pageNumber
+        }).then(function successCallback(response) {
             $scope.list_donbanhang_kinhdoanh = response.data;
         });
-    //List don ban hang chua xuat kho
-    $http.post('/api/Api_BanHang/ListDonBanHangChuaXuatKho/' + isadmin + '/' + username).then(function (response) {
-        $scope.list_donbanhangchuaxuatkho_kinhdoanh = response.data;
-    });
-    // List don ban hang da xuat kho
-    $http.post('/api/Api_BanHang/ListDonBanHangDaXuatKho/' + isadmin + '/' + username).then(function (response) {
-        $scope.list_donbanhangdaxuatkho_kinhdoanh = response.data;
-    });
-}, 5000);
-
-
-
-    // List don ban hang
-    $http.post('/api/Api_BanHang/ListDonBanHang/' + isadmin + '/' + username).then(function (response) {
-        $scope.list_donbanhang_kinhdoanh = response.data;
-    });
-    //List don ban hang chua xuat kho
-    $http.post('/api/Api_BanHang/ListDonBanHangChuaXuatKho/' + isadmin + '/' + username).then(function (response) {
-        $scope.list_donbanhangchuaxuatkho_kinhdoanh = response.data;
-    });
-    // List don ban hang da xuat kho
-    $http.post('/api/Api_BanHang/ListDonBanHangDaXuatKho/' + isadmin + '/' + username).then(function (response) {
-        $scope.list_donbanhangdaxuatkho_kinhdoanh = response.data;
-    });
-
-    $scope.chitietbanhang = function (masobh) {
-        window.location.href = "/KinhDoanh/DonBanHang/PhieuBanHang/" + masobh;
+        $scope.interval(pageNumber)
     }
+
+    var pagination2 = new Pagination({
+
+        container: $("#phan_trang_tong_list_ban_hang"),
+        pageClickCallback: pageClick2,
+        maxVisibleElements: 15,
+        //showInput: true,
+        //inputTitle: "Go to page"
+    });
+
+    //End phan trang list don hang PO
+
+    $scope.interval = function (pageNumber) {
+        var datas = {
+            macongty: macongty,
+            username: username,
+            isadmin: isadmin,
+            tukhoa: tukhoa
+        }
+        window.setInterval(function () {
+            // List bao gia kinh doanh
+            $http.post('/api/Api_BanHang/ListDonBanHang/' + pageNumber, datas).then(function (response) {
+                $scope.list_donbanhang_kinhdoanh = response.data;
+            });
+        }, 5000);
+    };
+
+
+//    window.setInterval(function(){
+//        // List don ban hang
+//        $http.post('/api/Api_BanHang/ListDonBanHang/' + isadmin + '/' + username).then(function (response) {
+//            $scope.list_donbanhang_kinhdoanh = response.data;
+//        });
+//    //List don ban hang chua xuat kho
+//    $http.post('/api/Api_BanHang/ListDonBanHangChuaXuatKho/' + isadmin + '/' + username).then(function (response) {
+//        $scope.list_donbanhangchuaxuatkho_kinhdoanh = response.data;
+//    });
+//    // List don ban hang da xuat kho
+//    $http.post('/api/Api_BanHang/ListDonBanHangDaXuatKho/' + isadmin + '/' + username).then(function (response) {
+//        $scope.list_donbanhangdaxuatkho_kinhdoanh = response.data;
+//    });
+//}, 5000);
+
+    $scope.ready = function (index) {
+        var pageNumber = parseInt(index);
+        var datas = {
+            macongty: macongty,
+            username: username,
+            isadmin: isadmin,
+            tukhoa: tukhoa
+        }
+
+        // List don ban hang
+        $http.post('/api/Api_BanHang/ListDonBanHang/' + pageNumber,datas).then(function (response) {
+            $scope.list_donbanhang_kinhdoanh = response.data;
+        });
+        //List don ban hang chua xuat kho
+        $http.post('/api/Api_BanHang/ListDonBanHangChuaXuatKho/' + isadmin + '/' + username).then(function (response) {
+            $scope.list_donbanhangchuaxuatkho_kinhdoanh = response.data;
+        });
+        // List don ban hang da xuat kho
+        $http.post('/api/Api_BanHang/ListDonBanHangDaXuatKho/' + isadmin + '/' + username).then(function (response) {
+            $scope.list_donbanhangdaxuatkho_kinhdoanh = response.data;
+        });
+
+        $scope.chitietbanhang = function (masobh) {
+            window.location.href = "/KinhDoanh/DonBanHang/PhieuBanHang/" + masobh;
+        }
+    }
+    $scope.ready(1);
 });
 app.directive('date', function (dateFilter) {
     return {
