@@ -62,5 +62,36 @@ namespace ERP.Web.Areas.HopLong.Api.Kho
 
             return Ok(newcomment);
         }
+
+
+        //Cập nhật ghi chú hàng hóa
+        [HttpPost]
+        [Route("api/Api_TonKhoHL/CapNhatGhiChu/{mahang}/{ghichu}")]
+        public IHttpActionResult CapNhatGhiChu(string mahang, string ghichu)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            string thongbaocomment;
+
+            var query = db.HHs.Where(x => x.MA_HANG == mahang).FirstOrDefault();
+            if(query != null)
+            {
+                query.GHI_CHU = ghichu;
+                thongbaocomment = "Bạn đã cập nhật thành công ghi chú cho mã hàng " + query.MA_CHUAN;
+            }
+            else
+            {
+                thongbaocomment = "Không tìm thấy thông tin về mã hàng mà bạn muốn cập nhật ghi chú";
+            }
+            
+            db.SaveChanges();
+
+            return Ok(thongbaocomment);
+        }
+
+
+
     }
 }

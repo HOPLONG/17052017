@@ -44,8 +44,6 @@ public partial class CCTC_CONG_TY
 
         this.KHO_DNXH = new HashSet<KHO_DNXH>();
 
-        this.KHO_GIU_HANG = new HashSet<KHO_GIU_HANG>();
-
         this.KHO_NHAP_KHO = new HashSet<KHO_NHAP_KHO>();
 
         this.KHO_NHAT_KY_TACH_GOP_MA = new HashSet<KHO_NHAT_KY_TACH_GOP_MA>();
@@ -77,6 +75,8 @@ public partial class CCTC_CONG_TY
         this.QUY_PHIEU_THU = new HashSet<QUY_PHIEU_THU>();
 
         this.CN_NGHIEP_VU = new HashSet<CN_NGHIEP_VU>();
+
+        this.KHO_GIU_HANG = new HashSet<KHO_GIU_HANG>();
 
     }
 
@@ -155,10 +155,6 @@ public partial class CCTC_CONG_TY
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
-    public virtual ICollection<KHO_GIU_HANG> KHO_GIU_HANG { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
     public virtual ICollection<KHO_NHAP_KHO> KHO_NHAP_KHO { get; set; }
 
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -224,6 +220,10 @@ public partial class CCTC_CONG_TY
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<CN_NGHIEP_VU> CN_NGHIEP_VU { get; set; }
+
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+
+    public virtual ICollection<KHO_GIU_HANG> KHO_GIU_HANG { get; set; }
 
 }
 
