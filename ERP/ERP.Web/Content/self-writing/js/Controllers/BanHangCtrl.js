@@ -356,6 +356,10 @@
     $http.post('/api/Api_BanHang/ListDonBanHangDaXuatKho/' + isadmin + '/' + username).then(function (response) {
         $scope.list_donbanhangdaxuatkho_kinhdoanh = response.data;
     });
+
+    $scope.chitietbanhang = function (masobh) {
+        window.location.href = "/KinhDoanh/DonBanHang/PhieuBanHang/" + masobh;
+    }
 });
 app.directive('date', function (dateFilter) {
     return {

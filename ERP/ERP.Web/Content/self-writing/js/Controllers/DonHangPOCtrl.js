@@ -270,31 +270,44 @@
         });
     };
 
-    $scope.CreateBH = function (item) {
+    $scope.CreateBH = function (item,index,checkPO) {
         $scope.item = item;
-        $scope.Detail.ListBH.push({
-            ID : $scope.item.ID,
-            MA_SO_PO: $scope.item.MA_SO_PO,
-            MA_HANG: $scope.item.MA_HANG,
-            MA_DIEU_CHINH: $scope.item.MA_DIEU_CHINH,
-            TK_NO: '131',
-            TK_CO: '51111',
-            DVT: $scope.item.DVT,
-            SO_LUONG: $scope.item.SO_LUONG,
-            DON_GIA: $scope.item.DON_GIA,
-            THANH_TIEN_HANG: $scope.item.THANH_TIEN_HANG,
-            DIEN_GIAI_THUE: 'Thuế GTGT đầu ra',
-            THUE_GTGT: $scope.item.THUE_GTGT,
-            TIEN_THUE_GTGT : $scope.item.TIEN_THUE_GTGT,
-            TK_THUE: '33311',
-            TIEN_THANH_TOAN: $scope.item.TIEN_THANH_TOAN,
-            DA_BAN : false,
-        })
+        if (checkPO == true)
+        {
+                $scope.Detail.ListBH.push({
+                    ID: $scope.item.ID,
+                    MA_SO_PO: $scope.item.MA_SO_PO,
+                    MA_HANG: $scope.item.MA_HANG,
+                    MA_DIEU_CHINH: $scope.item.MA_DIEU_CHINH,
+                    TK_NO: '131',
+                    TK_CO: '51111',
+                    DVT: $scope.item.DVT,
+                    SO_LUONG: $scope.item.SO_LUONG,
+                    DON_GIA: $scope.item.DON_GIA,
+                    THANH_TIEN_HANG: $scope.item.THANH_TIEN_HANG,
+                    DIEN_GIAI_THUE: 'Thuế GTGT đầu ra',
+                    THUE_GTGT: $scope.item.THUE_GTGT,
+                    TIEN_THUE_GTGT: $scope.item.TIEN_THUE_GTGT,
+                    TK_THUE: '33311',
+                    TIEN_THANH_TOAN: $scope.item.TIEN_THANH_TOAN,
+                    DA_BAN: false,
+                })
+        } else {
+            for(i=0;i<$scope.Detail.ListBH.length;i++)
+            {
+                if($scope.Detail.ListBH[i].ID == $scope.item.ID)
+                {
+                    $scope.Detail.ListBH.splice(i, 1);
+                }
+            }
+        }
+        console.log($scope.Detail.ListBH);
     };
 
     $scope.AddNew_PhieuBanHang = function () {
         
         var username = $('#username').val();
+        var ngaygiaohang = $('#ngay_giao_hang').val();
         $scope.arrayChiTietPO = [];
 
         for (var i = 0; i < $scope.Detail.ListBH.length; i++) {
@@ -320,15 +333,27 @@
             $scope.arrayChiTietPO.push(ChiTietPO);
         }
 
+        var tong_tien_hang = 0;
+        var tong_tien_thue_GTGT = 0;
+        var tong_tien_thanh_toan = 0;
+
+
+        for (var i = 0; i < $scope.Detail.ListBH.length; i++) {
+            tong_tien_hang = parseFloat($scope.Detail.ListBH[i].THANH_TIEN_HANG + tong_tien_hang);
+            tong_tien_thue_GTGT = parseFloat($scope.Detail.ListBH[i].TIEN_THUE_GTGT + tong_tien_thue_GTGT);
+            tong_tien_thanh_toan = parseFloat($scope.Detail.ListBH[i].TIEN_THANH_TOAN + tong_tien_thanh_toan)
+        }
+
+
         $scope.ThongTinBanHang = {
             MA_KHACH_HANG: $scope.thongtinchung[0].MA_KHACH_HANG,
             TEN_LIEN_HE: $scope.thongtinchung[0].TEN_LIEN_HE,
             HINH_THUC_THANH_TOAN: $scope.thongtinchung[0].HINH_THUC_THANH_TOAN,
-            TONG_TIEN_HANG: $scope.tong_tien_hang,
-            TONG_TIEN_THUE_GTGT: $scope.tong_tien_thue_GTGT,
-            TONG_TIEN_THANH_TOAN: $scope.tong_tien_thanh_toan,
-            SO_TIEN_VIET_BANG_CHU: $scope.so_tien_viet_bang_chu,
-            NGAY_GIAO_HANG: $scope.thongtinchung[0].NGAY_GIAO_HANG,
+            TONG_TIEN_HANG: tong_tien_hang,
+            TONG_TIEN_THUE_GTGT: tong_tien_thue_GTGT,
+            TONG_TIEN_THANH_TOAN: tong_tien_thanh_toan,
+            SO_TIEN_VIET_BANG_CHU: docso(tong_tien_thanh_toan),
+            NGAY_GIAO_HANG: ngaygiaohang,
             DIA_DIEM_GIAO_HANG: $scope.thongtinchung[0].DIA_DIEM_GIAO_HANG,
             DA_XUAT_KHO: false,
             DA_LAP_HOA_DON: false,
@@ -563,7 +588,7 @@
     };
 
     $scope.RedirectDuyetPO = function (masoPO) {
-        window.location.href = "/KinhDoanh/DonHangPO/Details/" + masoPO;
+        window.location.href = "/Marketing/KyDuyetPO/DetailDuyetPO/" + masoPO;
 
         var data_change = {
             DANG_DUYET: true,

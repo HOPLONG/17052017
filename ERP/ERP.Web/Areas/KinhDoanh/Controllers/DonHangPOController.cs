@@ -39,6 +39,13 @@ namespace ERP.Web.Areas.KinhDoanh.Controllers
             return View();
         }
 
+
+            public ActionResult POLenBanHang()
+        {
+
+            return View();
+        }
+
         // GET: DonHangPO/Details/5
         public ActionResult Details(string id)
         {
