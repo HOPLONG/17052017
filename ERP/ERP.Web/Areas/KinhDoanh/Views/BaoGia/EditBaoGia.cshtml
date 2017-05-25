@@ -78,7 +78,7 @@
                                 <table border='1' style="width:100%; height: 100%; border:none;">
                                     <tr>
                                         <td>
-                                            <input type="text" class="form-control" ng-model="item.MA_CHUAN" ng-change="onHHEditFind(item.MA_CHUAN)" placeholder="Nhập mã hàng" ng-focus="item.showtable_hanghoa_edit = true" style="display:inline-block;width:80%;height:20px; font-size:13px; padding-left: 14px;">
+                                            <input type="text" class="form-control" ng-model="item.MA_CHUAN" ng-change="onHHEditFind(item.MA_CHUAN)" placeholder="Nhập mã hàng" ng-focus="item.showtable_hanghoa_edit = true" ng-blur="item.showtable_hanghoa_edit = false" style="display:inline-block;width:80%;height:20px; font-size:13px; padding-left: 14px;">
                                             <input type="text" class="form-control" ng-model="item.MA_HANG" style="display:none">
                                             <div class="input-group-btn">
                                                 <div class="dropdown-menu dropdown-menu-center borderRadius0 padding0 menuhh" style="display:block" ng-show="item.showtable_hanghoa_edit">
@@ -97,7 +97,7 @@
                                                                 </tr>
                                                             </thead>
                                                             <tbody ng-repeat="kh in arrayHHEditFinded">
-                                                                <tr style="cursor:pointer" ng-click="inputstaff_edit(kh,index,item)">
+                                                                <tr style="cursor:pointer" ng-mousedown="inputstaff_edit(kh,index,item)">
                                                                     <td>{{kh.MA_CHUAN}}</td>
                                                                     <td>{{kh.TEN_HANG}}</td>
                                                                     <td>{{kh.MA_NHOM_HANG}}</td>
