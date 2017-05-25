@@ -17,6 +17,13 @@ using ERP.Web.Models.NewModels.BaoGiaAll;
 
 namespace ERP.Web.Api.BanHang
 {
+    public class TongHopDonBanHang
+    {
+        public string username { get; set; }
+        public string macongty { get; set; }
+        public Boolean isadmin { get; set; }
+        public string tukhoa { get; set; }
+    }
     public class Api_BanHangController : ApiController
     {
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
@@ -25,12 +32,22 @@ namespace ERP.Web.Api.BanHang
         // GET: api/Api_BanHang
 
         // List don ban hang
-        [Route("api/Api_BanHang/ListDonBanHang/{isadmin}/{username}")]
-        public List<Prod_BH_List_DonBanHang_Result> ListDonBanHang(bool isadmin, string username)
+        [Route("api/Api_BanHang/ListDonBanHang/{page}")]
+        public List<Prod_BH_List_DonBanHang_Result> ListDonBanHang(int page,TongHopDonBanHang TongHopDonBanHang)
         {
-            var query = db.Database.SqlQuery<Prod_BH_List_DonBanHang_Result>("Prod_BH_List_DonBanHang @macongty,@username,@isadmin", new SqlParameter("macongty", "HOPLONG"), new SqlParameter("username", username), new SqlParameter("isadmin", isadmin));
+            var query = db.Database.SqlQuery<Prod_BH_List_DonBanHang_Result>("Prod_BH_List_DonBanHang @macongty,@username,@isadmin,@sotrang,@tukhoa", new SqlParameter("macongty", TongHopDonBanHang.macongty), new SqlParameter("username", TongHopDonBanHang.username), new SqlParameter("isadmin", TongHopDonBanHang.isadmin), new SqlParameter("sotrang", page), new SqlParameter("tukhoa", TongHopDonBanHang.tukhoa));
             var result = query.ToList();
             return result;
+        }
+
+        // Dem tong so don ban hang
+        [Route("api/Api_BanHang/DemTongSoDonBanHang")]
+        public string DemTongSoDonBanHang(TongHopDonBanHang TongHopDonBanHang)
+        {
+            var query = db.Database.SqlQuery<int>("Prod_BH_DemTongSoDonBanHang @username,@macongty,@isadmin", new SqlParameter("username", TongHopDonBanHang.username), new SqlParameter("macongty", TongHopDonBanHang.macongty), new SqlParameter("isadmin", TongHopDonBanHang.isadmin));
+            var result = query.FirstOrDefault();
+            string kq = result.ToString();
+            return kq;
         }
 
         // List don ban hang chua xuat kho
