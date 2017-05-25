@@ -37,17 +37,25 @@ public partial class Prod_KHO_GetAllTon_Result
 
     public Nullable<decimal> GIA_LIST { get; set; }
 
-    public string MA_KHO_CON { get; set; }
+    public string SERIES { get; set; }
 
-    public Nullable<int> SO_LUONG { get; set; }
+    public string QUY_CACH_DONG_GOI { get; set; }
 
-    public string TEN_KHO { get; set; }
+    public string NOI_DUNG_COMMENT { get; set; }
 
-    public string TK_KHO { get; set; }
+    public Nullable<int> tonHL { get; set; }
 
-    public string TK_CHI_PHI { get; set; }
+    public Nullable<int> DANG_GIU_HL { get; set; }
 
-    public string TK_DOANH_THU { get; set; }
+    public Nullable<int> TON_TAI_HANG { get; set; }
+
+    public Nullable<decimal> GIA_LIST_NCC1 { get; set; }
+
+    public Nullable<decimal> GIA_LIST_NCC2 { get; set; }
+
+    public Nullable<decimal> GIA_LIST_NCC3 { get; set; }
+
+    public Nullable<decimal> GIA_LIST_NCC4 { get; set; }
 
 }
 
