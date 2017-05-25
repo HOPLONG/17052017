@@ -21,6 +21,7 @@
 <div ng-app="myApp" ng-controller="DonHangPOCtrl">
     <input type="hidden" value="@Session["USERNAME"]" id="username" />
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
+    <input type="hidden" id="macongty" name="macongty" value="@Session["MA_CONG_TY"]" />
     <fieldset>
         <legend>Sửa đơn PO</legend>
 
@@ -83,7 +84,7 @@
                                 <div class="form-group">
                                     <label class="col-md-6">Cần xuất ngay: </label>
                                     <div class="col-md-2">
-                                        <input ng-model="item.CAN_XUAT_NGAY" type="checkbox" />
+                                        <input ng-model="item.CAN_XUAT_NGAY" type="checkbox" ng-disabled="true"/>
                                     </div>
                                 </div>
                             </div>
@@ -91,7 +92,7 @@
                                 <div class="form-group">
                                     <label class="col-md-6">Cần lấy hóa đơn:</label>
                                     <div class="col-md-2">
-                                        <input ng-model="item.CAN_LAY_HOA_DON" type="checkbox" />
+                                        <input ng-model="item.CAN_LAY_HOA_DON" type="checkbox" ng-disabled="true"/>
                                     </div>
                                 </div>
                             </div>
