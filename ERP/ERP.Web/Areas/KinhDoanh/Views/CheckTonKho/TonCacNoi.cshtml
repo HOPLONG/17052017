@@ -64,7 +64,16 @@
                                 <table style="height: 100%; width:100%">
                                     <tr height="23"><td style="padding:3.5px;text-align:left ">{{item.MA_CHUAN}}</td></tr>
                                     <tr height="23"><td style="font-size:12px; padding:3.5px;text-align:left !important; font-style:italic">{{item.TEN_HANG}}</td></tr>
-                                    <tr height="23"><td class="text-left"><span style="font-size:11px;padding:3.5px; font-style:italic; color:red" ng-show="item.DISCONTINUE"> ( Ngưng sản xuất ) </span><br /></td></tr>
+                                    <tr height="23">
+                                        <td class="text-left">
+                                            <span style="font-size:11px;padding:3.5px; font-style:italic; color:red" ng-show="item.DISCONTINUE"> ( Ngưng sản xuất ) </span> 
+                                            <span style="float:right">
+                                                <a data-toggle="modal" data-target="#comment" ng-click="edit(item)" style="cursor:pointer; text-align:left"><span class="fa fa-commenting"></span></a>
+                                                <abbr title="{{item.NOI_DUNG_COMMENT}}" ng-if="item.NOI_DUNG_COMMENT != null "><i style="text-align:left; padding-left:3.5px; color:red" class="fa fa-comments-o"></i></abbr>
+                                            </span>
+
+                                        </td>
+                                    </tr>
                                     <tr height="23"><td class="text-left"><span style="font-size:14px; color:blue; text-decoration:underline; " ng-click="datatonkho(item.MA_CHUYEN_DOI)" ng-show="item.DISCONTINUE">=> {{item.MA_CHUYEN_DOI}}</span> </td></tr>
                                 </table>
                             </td>
@@ -74,9 +83,9 @@
                                 <table style="height: 100%; width:100%">
                                     <tr height="23"><td class="text-left" style="padding:3.5px">{{item.MA_NHOM_HANG}}</td></tr>
                                     <tr height="23"><td class="text-center" style="color:blue"><i>{{item.XUAT_XU}}</i></td></tr>
-                                    <tr height="23"><td style="text-align:left; padding-left:3.5px"><a data-toggle="modal" data-target="#comment" ng-click="edit(item)" style="cursor:pointer; text-align:left"><span class="fa fa-commenting"></span></a></td></tr>
+                                    <tr height="23"><td style="text-align:left; padding-left:3.5px"></td></tr>
                                    
-                                    <tr height="23"><td><abbr  title="{{item.NOI_DUNG_COMMENT}}"><i class="fa fa-comments-o"></i></abbr></td></tr>
+                                    <tr height="23"><td ></td></tr>
 
                                 </table>
                             </td>
@@ -144,8 +153,8 @@
                                                     <span style="color:blue"><abbr title="Số tồn thực kho HL hiện tại">{{item.tonHL}}</abbr> </span>
 
                                                 </td>
-                                                <td width="30px">
-                                                    <span style="font-weight:bold; color:red"><abbr title="Tổng số trong kho chờ (đã có P.O - chờ xuất)">{{item.DANG_GIU_HL}}</abbr> </span>
+                                                <td width="30px" ng-click="GetDataGiuHang(item.MA_HANG);" data-toggle="modal" data-target="#giuhangmodal">
+                                                    <span  style="font-weight:bold; color:red"><abbr title="Tổng số trong kho chờ (đã có P.O - chờ xuất)">{{item.DANG_GIU_HL}}</abbr> </span>
 
                                                 </td>
                                             </tr>
@@ -360,7 +369,50 @@
         </div>
     </div>
 
+    <!-- Modal giữ hàng-->
+    <div class="modal fade" id="giuhangmodal" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="panel-heading">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">List sale đang giữ hàng</h4>
+                </div>
+                <div class="modal-body">
+                    <table border="1" cellpadding="0" cellspacing="0" style="width:100%;">
+
+                        <tbody>
+                            <tr height="20">
+                                <th align="center" height="20" style="height:20px;width:20%;">Người giữ</th>
+                                <th align="center" style="width:10%;">Mã khách</th>
+                                <th align="center" style="width:10%;">SL giữ</th>
+                                <th align="center" style="width:10%;">Ngày giữ</th>
+                                <th align="center" style="width:10%;">Ngày xuất</th>
+                                <th align="center" style="width:10%;">Giữ-đã có PO</th>
+                                <th align="center" style="width:10%;">Giữ-đang báo giá</th>
+                            </tr>
+                            <tr height="20" ng-repeat ="item in ListDataGiuKho">
+                                <td text-align="left">{{item.TEN_SALES_GIU}}</td>
+                                <td text-align="left">{{item.MA_KHACH_HANG}}</td>
+                                <td>{{item.SL_GIU}}</td>
+                                <td>{{item.NGAY_GIU|date : 'dd/MM/yyyy'}}</td>
+                                <td>{{item.NGAY_XUAT|date : 'dd/MM/yyyy'}}</td>
+                                <td><i class="fa fa-check" aria-hidden="true" ng-if="item.GIU_PO==true"></i></td>
+                                <td><i class="fa fa-check" aria-hidden="true" ng-if="item.GIU_PO==false"></i></td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="panel-footer">
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-------------------------------->
 
 
     <!--Xem nhật ký hỏi hàng-->
@@ -422,7 +474,7 @@
                     <div class="col-md-12">
                         <label class="col-md-2">Nội dung</label>
                         <div class="col-sm-10">
-                            <textarea id="newcomment" name="newcomment" class="form-control input-md"></textarea>
+                            <textarea id="newcomment" name="newcomment" ng-model="item.NOI_DUNG_COMMENT" class="form-control input-md"></textarea>
                         </div>
                     </div>
                 </div>
@@ -430,18 +482,18 @@
                     <div class="form-group">
                         <label class="col-md-4 control-label" for="anmelden"></label>
                         <div class="col-md-8 addnew" style="text-align: left;margin-top: 30px;">
-                            <button id="addnew" name="addnew" class="btn" ng-click="AddNewComment(item.MA_HANG)" data-dismiss="modal">Add New</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button id="addnew" name="addnew" class="btn" ng-click="AddNewComment(item.MA_HANG,item.NOI_DUNG_COMMENT)" data-dismiss="modal">Cập nhật</button>
                             <button id="exit" name="exit" class="btn" data-dismiss="modal">Exit</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <script>
+        @*<script>
             CKEDITOR.replace('newcomment', {
                 height: 150
             });
-        </script>
+        </script>*@
 
     </div>
 </div>
