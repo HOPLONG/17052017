@@ -7,10 +7,25 @@
     ViewBag.Title = "Index";
 }
 <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+<link href="~/Content/assets/css/components.css" rel="stylesheet" />
+<link href="~/Content/assets/css/core.css" rel="stylesheet" />
+<link href="~/Content/assets/css/colors.css" rel="stylesheet" />
+<link href="~/Content/download/pnotify.custom.min.css" rel="stylesheet" />
+<link href="~/Content/assets/css/icons/icomoon/styles.css" rel="stylesheet" />
 
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+
+<script src="~/Content/assets/js/plugins/loaders/pace.min.js"></script>
+<script src="~/Content/assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
+<script src="~/Content/assets/js/plugins/ui/moment/moment.min.js"></script>
+<script src="~/Content/assets/js/plugins/pickers/datepicker.js"></script>
+<script src="~/Content/assets/js/plugins/pickers/daterangepicker.js"></script>
+<script src="~/Content/Scripts/daterangepicker.js"></script>
+<script src="~/Content/Scripts/moment.min.js"></script>
+<script src="~/Content/download/date_directive.js"></script>
+<script src="~/Content/download/bootstrap-datetimepicker.js"></script>
 
 <!-- Angular Material Library -->
 <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
@@ -66,45 +81,110 @@
                     </div>
                     <div class="modal-body">
                         <table border="1" cellpadding="0" cellspacing="0">
+
                             <tbody>
-                                <tr>
-                                    <td align="left" style="height:36px;width:10%; background:#76933C; color:white; font-weight:bold">Sale giữ</td>
-                                    <td align="left" style="width:20%;"><input type="text" style="border:none; height:36px; width: 100%" /> </td>
-                                    <td colspan="4" style="width:30%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                <tr height="36">
+                                    <td align="left" style="height:36px;width:15%; background:#76933C; color:white; font-weight:bold">Sale giữ</td>
+                                    <td align="left" style="width:20%;"><input type="text" style="border:none; height:36px;" id="username" value="@Session["USERNAME"]" /> </td>
+                                    <td style="width:30%;"><input type="text" style="border:none; height:36px" id="hovaten" value="@Session["HO_VA_TEN"]" /></td>
+                                    <td><input type="hidden" value="@Session["MA_CONG_TY"]" id="macongty" /></td>
+                                    <td align="left" style="width:15%; background:#76933C; color:white; font-weight:bold">Ngày giữ</td>
+                                    <td style="width:20%;"><input type="text" datepicker style="border:none;" ng-model="GeneralInfo.ngay_giu" /></td>
                                 </tr>
                                 <tr>
-                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Khách hàng</td>
-                                    <td align="left"><input type="text" style="border:none; height:36px; width: 100%" /></td>
-                                    <td colspan="4"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                    <td align="left" style="height:36px;width:15% ;background:#76933C; color:white; font-weight:bold">Khách hàng</td>
+                                    <td align="left" style="width:35%">
+                                        <div>
+                                            <div class="has-feedback showtableselect" ng-click="ShowKhachHang()">
+                                                <input type="text" ng-model="GeneralInfo.KhachHang" class="form-control showtableselect" ng-change="SearchKH(GeneralInfo.KhachHang)">
+                                                <div class="form-control-feedback">
+                                                    <i class="icon-arrow-down5"></i>
+                                                </div>
+                                            </div>
+                                            <div class="tableselect" id="KhachHang" style="display:none;width: 50% !important">
+                                                <table class="table-hover ">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:20%">Mã khách hàng</th>
+                                                            <th style="width:20%">Tên khách hàng</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in KhachHang.KhachHang" ng-click="SelectKhachHang(item)">
+                                                            <td>{{item.MA_KHACH_HANG}}</td>
+                                                            <td>{{item.TEN_CONG_TY}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <label id="basic-error" class="validation-error-label" ng-if="ValidateGeneral.KhachHang == false" for="basic">Trường này không được để trống</label>
+                                        </div>
+                                    </td>
+                                    <td style="width: 50%"><input type="text" readonly class="form-control" ng-model="GeneralInfo.TenDoiTuong"></td>
                                 </tr>
-                                <tr>
-                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Hàng hóa</td>
-                                    <td colspan="5"><input type="text" style="border:none; height:36px; width: 100%" /></td>
-                                </tr>
-                                <tr>
-                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Ngày giữ</td>
-                                    <td colspan="2" style="width:10%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
-                                    <td align="left" style="width:10%;background:#76933C; color:white; font-weight:bold">SL giữ</td>
-                                    <td colspan="2" style="width:60%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
-                                </tr>
-                                <tr>
+                                <tr height="36">
+                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Mã hàng</td>
+                                    <td align="left" style="background:#76933C; color:white; font-weight:bold">SL giữ</td>
                                     <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Ngày xuất</td>
-                                    <td colspan="2" style="width:10%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
-                                    <td align="left" style="width:10%; background:#76933C; color:white; font-weight:bold">Giữ PO?</td>
-                                    <td colspan="2" style="width:60%;"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                    <td align="left" style="background:#76933C; color:white; font-weight:bold">Giữ PO?</td>
+                                    <td align="left" colspan="2" style="height:36px;background:#76933C; color:white; font-weight:bold">Ghi chú</td>
+                                </tr>
+                                <tr height="36" ng-repeat="(index,item) in Detail.ListAdd">
+                                    <td>
+                                        <div class="has-feedback showtableselect" ng-click="ShowHangHoa(index)">
+                                            <input type="text" ng-model="item.MA_CHUAN" class="input showtableselect" ng-change="SearchHH(item.MA_CHUAN)">
+
+                                            <div class="form-control-feedback">
+                                                <i class="icon-arrow-down5"></i>
+                                            </div>
+                                        </div>
+                                        <div class="tableselect" id="DataHangHoa{{index}}" style="display: none; max-width: 750px; padding-left: 0px; margin-left: -9px;">
+                                            <table class="table-hover ">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Mã hàng</th>
+                                                        <th>Tên hàng</th>
+                                                        <th>Mã nhóm hàng</th>
+                                                        <th>Xuất xứ</th>
+                                                        <th>DVT</th>
+                                                        <th>Kho giữ</th>
+                                                        <th>Số lượng tồn</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="(hindex,itemHangHoa) in Detail.ListHangHoa" ng-click="SelectHangHoa(index,item,itemHangHoa)">
+                                                        <td>{{itemHangHoa.MA_CHUAN}}</td>
+                                                        <td>{{itemHangHoa.TEN_HANG}}</td>
+                                                        <td>{{itemHangHoa.MA_NHOM_HANG}}</td>
+                                                        <td>{{itemHangHoa.XUAT_XU}}</td>
+                                                        <td>{{itemHangHoa.DVT}}</td>
+                                                        <td>{{itemHangHoa.TEN_KHO}}</td>
+                                                        <td class="text-center">{{itemHangHoa.SO_LUONG}}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                    <td><input type="number" style="border:none; height:36px; width: 100%" ng-model="item.SL_GIU"  /></td>
+                                    <td><input type="text" datepicker style="border:none; height:36px; width: 100%" ng-model="item.NGAY_XUAT" /></td>
+                                    <td><input type="checkbox" style="border:none;" ng-model="item.GIU_PO" /></td>
+                                    <td colspan="2"><input type="text" style="border:none; height:36px; width: 100%" ng-model="item.GHI_CHU" /></td>
                                 </tr>
                                 <tr>
-                                    <td align="left" height="36" style="height:36px;background:#76933C; color:white; font-weight:bold">Ghi chú</td>
-                                    <td colspan="5"><input type="text" style="border:none; height:36px; width: 100%" /></td>
+                                    <td colspan="11" style="text-align:center; cursor:pointer;font-weight:inherit; font-size:16px" ng-click="AddNew()">Bấm vào đây để thêm mới</td>
+
                                 </tr>
                             </tbody>
                         </table>
+
                     </div>
                     <div class="modal-footer">
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="anmelden"></label>
                             <div class="col-md-8 addnew">
+                                <button  ng-click="SaveGiuHang();">Lưu</button>
                                 <button id="exit" name="exit" class="btn addnewmodal" data-dismiss="modal">Exit</button>
+                                
                             </div>
                         </div>
                     </div>
