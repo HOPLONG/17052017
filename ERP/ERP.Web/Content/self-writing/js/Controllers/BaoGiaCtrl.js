@@ -13,6 +13,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
 
     var isadmin = $('#isadmin').val();
     var username = $('#username').val();
+    var macongty = $('#macongty').val();
 
     $scope.get_nhomhang = function () {
         $http.get("/api/Api_NhomVTHHHL").then(function (response) {
@@ -2697,46 +2698,119 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
     };
 
 
+    $scope.interval = function (sotrang) {
+        var datas = {
+            macongty: macongty,
+            username: username,
+            isadmin: isadmin,
+            tukhoa: tukhoa
+        }
+        window.setInterval(function () {
+            // List bao gia kinh doanh
+            $http.post('/api/Api_BaoGia/ListBaoGia/' + sotrang,datas).then(function (response) {
+                $scope.ds_baogia_kinhdoanh = response.data;
+            });
+        }, 5000);
+    };
+    
 
 
+    //window.setInterval(function (sotrang) {
+    //    // List bao gia kinh doanh
+    //    $http.post('/api/Api_BaoGia/ListBaoGia/' + isadmin + '/' + username).then(function (response) {
+    //        $scope.ds_baogia_kinhdoanh = response.data;
+    //    });
 
+    //    // List bao gia kinh doanh da huy
+    //    $http.post('/api/Api_BaoGia/ListBaoGiaDaHuy/' + isadmin + '/' + username).then(function (response) {
+    //        $scope.ds_baogia_kinhdoanh_dahuy = response.data;
+    //    });
 
-    window.setInterval(function () {
-        // List bao gia kinh doanh
-        $http.post('/api/Api_BaoGia/ListBaoGia/' + isadmin + '/' + username).then(function (response) {
-            $scope.ds_baogia_kinhdoanh = response.data;
-        });
+    //    // List bao gia kinh doanh that bai
+    //    $http.post('/api/Api_BaoGia/ListBaoGiaThatBai/' + isadmin + '/' + username).then(function (response) {
+    //        $scope.ds_baogia_kinhdoanh_thatbai = response.data;
+    //    });
 
-        // List bao gia kinh doanh da huy
-        $http.post('/api/Api_BaoGia/ListBaoGiaDaHuy/' + isadmin + '/' + username).then(function (response) {
-            $scope.ds_baogia_kinhdoanh_dahuy = response.data;
-        });
+    //    // List bao gia kinh doanh dang cho phan hoi
+    //    $http.post('/api/Api_BaoGia/ListBaoGiaDangChoPhanHoi/' + isadmin + '/' + username).then(function (response) {
+    //        $scope.ds_baogia_kinhdoanh_dangchophanhoi = response.data;
+    //    });
 
-        // List bao gia kinh doanh that bai
-        $http.post('/api/Api_BaoGia/ListBaoGiaThatBai/' + isadmin + '/' + username).then(function (response) {
-            $scope.ds_baogia_kinhdoanh_thatbai = response.data;
-        });
+    //    // List bao gia kinh doanh da len PO
+    //    $http.post('/api/Api_BaoGia/ListBaoGiaDaLenPO/' + isadmin + '/' + username).then(function (response) {
+    //        $scope.ds_baogia_kinhdoanh_dalenPO = response.data;
+    //    });
 
-        // List bao gia kinh doanh dang cho phan hoi
-        $http.post('/api/Api_BaoGia/ListBaoGiaDangChoPhanHoi/' + isadmin + '/' + username).then(function (response) {
-            $scope.ds_baogia_kinhdoanh_dangchophanhoi = response.data;
-        });
+    //    // List bao gia kinh doanh thanh cong
+    //    $http.post('/api/Api_BaoGia/ListBaoGiaThanhCong/' + isadmin + '/' + username).then(function (response) {
+    //        $scope.ds_baogia_kinhdoanh_thanhcong = response.data;
+    //    });
+    //}, 5000);
+    var tukhoa = '';
 
-        // List bao gia kinh doanh da len PO
-        $http.post('/api/Api_BaoGia/ListBaoGiaDaLenPO/' + isadmin + '/' + username).then(function (response) {
-            $scope.ds_baogia_kinhdoanh_dalenPO = response.data;
-        });
-
-        // List bao gia kinh doanh thanh cong
-        $http.post('/api/Api_BaoGia/ListBaoGiaThanhCong/' + isadmin + '/' + username).then(function (response) {
-            $scope.ds_baogia_kinhdoanh_thanhcong = response.data;
-        });
-    }, 5000);
+    var thamso = {
+        username: username,
+        macongty: macongty,
+        isadmin: isadmin,
+        tukhoa: tukhoa
+    }
 
     // List bao gia kinh doanh
-    $http.post('/api/Api_BaoGia/ListBaoGia/' + isadmin + '/' + username).then(function (response) {
-        $scope.ds_baogia_kinhdoanh = response.data;
+    $scope.load_listbaogia = function (index) {
+        var pageNumber = parseInt(index);
+        var datas = {
+            macongty: macongty,
+            username: username,
+            isadmin: isadmin,
+            tukhoa: tukhoa
+        }
+        $http.post('/api/Api_BaoGia/ListBaoGia/' + pageNumber, datas).then(function (response) {
+            $scope.ds_baogia_kinhdoanh = response.data;
+        });
+    };
+    $scope.load_listbaogia(1)
+
+    // Phan trang list bao gia
+    $http.post('/api/Api_BaoGia/DemTongSoBaoGia', thamso).then(function (response) {
+        $scope.tongsobaogia = response.data;
+        pagination2.make(parseInt($scope.tongsobaogia), 15);
     });
+
+
+    function pageClick2(pageNumber) {
+        $("#page-number-phan_trang_tong_kh").text(pageNumber);
+        var datas = {
+            macongty: macongty,
+            username: username,
+            isadmin: isadmin,
+            tukhoa: tukhoa
+        }
+        $http({
+            method: 'POST',
+            data: datas,
+            url: window.location.origin + '/api/Api_BaoGia/ListBaoGia/' + pageNumber
+        }).then(function successCallback(response) {
+            $scope.ds_baogia_kinhdoanh = response.data;
+        });
+        $scope.interval(pageNumber)
+    }
+
+    var pagination2 = new Pagination({
+
+        container: $("#phan_trang_tong_list_bao_gia"),
+        pageClickCallback: pageClick2,
+        maxVisibleElements: 15,
+        //showInput: true,
+        //inputTitle: "Go to page"
+    });
+
+    //End phan trang list bao gia
+
+
+
+
+
+
 
     // List bao gia kinh doanh da huy
     $http.post('/api/Api_BaoGia/ListBaoGiaDaHuy/' + isadmin + '/' + username).then(function (response) {
@@ -2840,6 +2914,9 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
             ErrorSystem('Không thêm được hàng hóa');
         });
     };
+
+
+
 
 });
 

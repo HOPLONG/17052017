@@ -40,6 +40,9 @@
     };
 
 
+
+
+
     $scope.printToCart = function (printSectionId) {
         var innerContents = document.getElementById(printSectionId).innerHTML;
         var popupWinindow = window.open('', '_blank', 'width=600,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');

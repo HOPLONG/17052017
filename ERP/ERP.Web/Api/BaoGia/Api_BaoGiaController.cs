@@ -17,6 +17,13 @@ using ERP.Web.Models.NewModels.BaoGiaAll;
 
 namespace ERP.Web.Api.BaoGia
 {
+    public class TongHopBaoGia
+    {
+        public string username { get; set; }
+        public string macongty { get; set; }
+        public Boolean isadmin { get; set; }
+        public string tukhoa { get; set; }
+    }
     public class Api_BaoGiaController : ApiController
     {
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
@@ -26,12 +33,21 @@ namespace ERP.Web.Api.BaoGia
 
         // GET: api/Api_BaoGia
         //List bao gia kinh doanh
-        [Route("api/Api_BaoGia/ListBaoGia/{isadmin}/{username}")]
-        public List<Prod_BH_ListBaoGia_Result> ListBaoGia(bool isadmin,string username)
+        [Route("api/Api_BaoGia/ListBaoGia/{page}")]
+        public List<Prod_BH_ListBaoGia_Result> ListBaoGia(int page,TongHopBaoGia TongHopBaoGia)
         {
-            var query = db.Database.SqlQuery<Prod_BH_ListBaoGia_Result>("Prod_BH_ListBaoGia @username,@macongty,@isadmin", new SqlParameter("username", username), new SqlParameter("macongty", "HOPLONG"),new SqlParameter("isadmin", isadmin));
+            var query = db.Database.SqlQuery<Prod_BH_ListBaoGia_Result>("Prod_BH_ListBaoGia @username,@macongty,@isadmin,@sotrang,@tukhoa", new SqlParameter("username", TongHopBaoGia.username), new SqlParameter("macongty", TongHopBaoGia.macongty),new SqlParameter("isadmin", TongHopBaoGia.isadmin), new SqlParameter("sotrang", page), new SqlParameter("tukhoa", TongHopBaoGia.tukhoa));
             var result = query.ToList();
             return result;
+        }
+
+        [Route("api/Api_BaoGia/DemTongSoBaoGia")]
+        public string DemTongSoBaoGia(TongHopBaoGia TongHopBaoGia)
+        {
+            var query = db.Database.SqlQuery<int>("Prod_BH_DemTongSoBaoGia @username,@macongty,@isadmin", new SqlParameter("username", TongHopBaoGia.username), new SqlParameter("macongty", TongHopBaoGia.macongty), new SqlParameter("isadmin", TongHopBaoGia.isadmin));
+            var result = query.FirstOrDefault();
+            string kq = result.ToString();
+            return kq;
         }
 
         [Route("api/Api_BaoGia/ListBaoGiaDaHuy/{isadmin}/{username}")]
