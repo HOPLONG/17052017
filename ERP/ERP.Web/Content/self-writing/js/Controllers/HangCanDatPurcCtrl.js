@@ -128,47 +128,57 @@
         if(kiemtra == true)
         {
             $scope.Detail.ListAdd.push({
-                ID : $scope.item.ID,
+                ID_CT_PO: $scope.item.ID_CT_PO,
+                ID: $scope.item.ID,
+                MA_HANG : $scope.item.MA_HANG
             })
+            var valueArr = $scope.Detail.ListAdd.map(function (item) { return item.ID });
+            var isDuplicate = valueArr.some(function (item, idx) {
+                return valueArr.indexOf(item) != idx
+            });
+            if (isDuplicate == true) {
+                $scope.Detail.ListAdd.pop();
+            }
             if ($scope.Detail.ListNew.length == 0) {
                 $scope.Detail.ListNew.push({
-                    id_ban_hang: $scope.item.ID,
+                    id_ban_hang: $scope.item.ID_CT_PO,
                     ten_hang : $scope.item.TEN_HANG,
                     ma_hang: $scope.item.MA_HANG,
-                    so_luong: $scope.item.SO_LUONG,
+                    so_luong: $scope.item.SL_DAT,
                     don_gia_chua_vat: 0,
                     thoi_gian_giao_hang: '',
                     ghi_chu: '',
-                    ma_dieu_chinh: $scope.item.MA_DIEU_CHINH,
+                    ma_dieu_chinh: $scope.item.MA_CHUAN,
                     hang: $scope.item.MA_NHOM_HANG_CHI_TIET,
                     don_gia_ban: $scope.item.DON_GIA,
                     thanh_tien: 0,
                 });
             } else {
+                
                 var count = 0;
                 angular.forEach($scope.Detail.ListNew, function (value, key) {
                     if (value.ma_hang == item.MA_HANG)
                     {
 
                         count++
-                        value.so_luong = value.so_luong + item.SO_LUONG
+                        value.so_luong = value.so_luong + item.SL_DAT
                     }
                 });
                 console.log(count);
                 if (count == 0) {
                     $scope.Detail.ListNew.push({
-                        id_ban_hang: $scope.item.ID,
+                        id_ban_hang: $scope.item.ID_CT_PO,
                         ten_hang: $scope.item.TEN_HANG,
                         ma_hang: $scope.item.MA_HANG,
-                        so_luong: $scope.item.SO_LUONG,
+                        so_luong: $scope.item.SL_DAT,
                         don_gia_chua_vat: 0,
                         thoi_gian_giao_hang: '',
                         ghi_chu: '',
-                        ma_dieu_chinh: $scope.item.MA_DIEU_CHINH,
+                        ma_dieu_chinh: $scope.item.MA_CHUAN,
                         hang: $scope.item.MA_NHOM_HANG_CHI_TIET,
                         don_gia_ban: $scope.item.DON_GIA,
                         thanh_tien: 0,
-                    });
+                    });                   
                 } else if (count > 0) {
                     
                 }
@@ -251,7 +261,8 @@
                             for (i = 0; i < response.data.length; i++)
                             {
                                 $scope.Detail.ListMua.push({
-                                    ID_MUA_HANG : response.data[i].ID
+                                    ID_MUA_HANG: response.data[i].ID,
+                                    MA_HANG : response.data[i].MA_HANG
                                 })
                             }
                             
@@ -259,9 +270,10 @@
                             {
                                 for(k=0;k< $scope.Detail.ListAdd.length;k++)
                                 {
+                                    if ($scope.Detail.ListMua[j].MA_HANG == $scope.Detail.ListAdd[k].MA_HANG)
                                     $scope.Detail.ListGop.push({
                                         ID_PO_MUA_HANG: $scope.Detail.ListMua[j].ID_MUA_HANG,
-                                        ID_PO_BAN_HANG : $scope.Detail.ListAdd[k].ID,
+                                        ID_PO_BAN_HANG : $scope.Detail.ListAdd[k].ID_CT_PO,
                                     })
                                 }
                             }
@@ -505,18 +517,24 @@
                     $scope.Detail.ListJoin.push({
                         ID_DE_NGHI: response.data[i].ID,
                         SL_VE: response.data[i].SL,
+                        MA_HANG : response.data[i].MA_HANG
                     })
                 }
 
                 for (j = 0; j < $scope.Detail.ListJoin.length; j++)
                 {
-                    
-                    $scope.Detail.ListMH_JOIN_DN.push({
-                        ID_DE_NGHI: $scope.Detail.ListJoin[j].ID_DE_NGHI,
-                        ID_PO_DAT_HANG: $scope.Detail.ListDeNghiNhapKho[j].ID,
-                        SL_VE: $scope.Detail.ListJoin[j].SL_VE,
-                    })
-                    
+                    for (k = 0; k < $scope.Detail.ListDeNghiNhapKho.length; k++)
+                    {
+                        if($scope.Detail.ListDeNghiNhapKho[k].MA_HANG == $scope.Detail.ListJoin[j].MA_HANG)
+                        {
+                            $scope.Detail.ListMH_JOIN_DN.push({
+                                ID_DE_NGHI: $scope.Detail.ListJoin[j].ID_DE_NGHI,
+                                ID_PO_DAT_HANG: $scope.Detail.ListDeNghiNhapKho[j].ID,
+                                SL_VE: $scope.Detail.ListJoin[j].SL_VE,
+                            })
+                        }
+                    }
+                   
                 }
                 $http.post('/api/Api_MH_JOIN_DENGHI/PostMH_DE_NGHI_JOIN_PO_MH', $scope.Detail.ListMH_JOIN_DN).then(function (response) {
                     $(function () {

@@ -196,6 +196,21 @@
         });
     };
 
+    $scope.AddToKhoDat = function(item)
+    {
+        $scope.item = item;
+        var data = {
+            ID_CT_PO: $scope.item.ID_DON_CHI_TIET,
+            MA_HANG: $scope.item.MA_HANG,
+            SL_DAT: $scope.item.SO_LUONG,
+            NGAY_XUAT: $scope.item.NGAY_GIAO_HANG,
+            NGUOI_GIU: $scope.item.NHAN_VIEN_QUAN_LY,
+        }
+        $http.post('/api/Api_HangCanDat/ThemHangCanDat', data).then(function (response) {
+            $scope.GetDataHangCanXuat();
+        });
+    }
+
     // truyền về list xuất hàng
     $scope.GeneralInfo = {
         NgayChungTu: null,

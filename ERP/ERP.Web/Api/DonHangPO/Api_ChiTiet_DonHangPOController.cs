@@ -91,10 +91,10 @@ namespace ERP.Web.Api.DonHangPO
             //}
             foreach (var item in bH_CT_DON_HANG_PO)
             {
-                var donhangPO = db.BH_CT_DON_HANG_PO.Where(x => x.ID == item.ID).FirstOrDefault();
+                var donhangPO = db.MH_HANG_CAN_DAT.Where(x => x.ID == item.ID).FirstOrDefault();
                 if (donhangPO != null)
                 {
-                    donhangPO.CAN_DAT_HANG = false;
+                    donhangPO.DA_LEN_PO_MUA_HANG = true;
                 }
             }
             try

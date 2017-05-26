@@ -21,7 +21,7 @@ namespace ERP.Web.Api.MuaHang
         [Route("api/Api_HangCanDatPurchase/GetHangCanDatPurchase/{isadmin}/{username}")]
         public List<Prod_HangCanDat_PURC_Result> GetHangCanDatPurchase(bool isadmin, string username)
         {
-            var query = db.Database.SqlQuery<Prod_HangCanDat_PURC_Result>("Prod_HangCanDat_PURC @macongty,@username,@isadmin", new SqlParameter("macongty", "HOPLONG"), new SqlParameter("username", username), new SqlParameter("isadmin", isadmin));
+            var query = db.Database.SqlQuery<Prod_HangCanDat_PURC_Result>("Prod_HangCanDat_PURC @username,@isadmin", new SqlParameter("username", username), new SqlParameter("isadmin", isadmin));
             var result = query.ToList();
             return result;
         }
