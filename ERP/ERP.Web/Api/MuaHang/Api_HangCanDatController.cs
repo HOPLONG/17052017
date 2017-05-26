@@ -69,33 +69,29 @@ namespace ERP.Web.Api.MuaHang
         }
 
         // POST: api/Api_HangCanDat
-        [ResponseType(typeof(BH_DON_HANG_PO))]
-        public IHttpActionResult PostBH_DON_HANG_PO(BH_DON_HANG_PO bH_DON_HANG_PO)
+        [Route("api/Api_HangCanDat/ThemHangCanDat")]
+        public IHttpActionResult ThemHangCanDat(MH_HANG_CAN_DAT hangcandat)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            MH_HANG_CAN_DAT newhangcandat = new MH_HANG_CAN_DAT();
+            newhangcandat.ID_CT_PO = hangcandat.ID_CT_PO;
+            newhangcandat.MA_HANG = hangcandat.MA_HANG;
+            newhangcandat.SL_DAT = hangcandat.SL_DAT;
+            newhangcandat.NGAY_XUAT = hangcandat.NGAY_XUAT;
+            newhangcandat.NGUOI_GIU = hangcandat.NGUOI_GIU;
+            db.MH_HANG_CAN_DAT.Add(newhangcandat);
+            db.SaveChanges();
 
-            db.BH_DON_HANG_PO.Add(bH_DON_HANG_PO);
-
-            try
+            var query = db.BH_CT_DON_HANG_PO.Where(x => x.ID == hangcandat.ID_CT_PO).FirstOrDefault();
+            if(query != null)
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
-                if (BH_DON_HANG_POExists(bH_DON_HANG_PO.MA_SO_PO))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                query.DA_DAT_HANG = true;
             }
 
-            return CreatedAtRoute("DefaultApi", new { id = bH_DON_HANG_PO.MA_SO_PO }, bH_DON_HANG_PO);
+            return Ok(newhangcandat);
         }
 
         // DELETE: api/Api_HangCanDat/5
