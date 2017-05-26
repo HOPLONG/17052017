@@ -196,6 +196,21 @@
         });
     };
 
+    $scope.AddToKhoDat = function(item)
+    {
+        $scope.item = item;
+        var data = {
+            ID_CT_PO: $scope.item.ID_DON_CHI_TIET,
+            MA_HANG: $scope.item.MA_HANG,
+            SL_DAT: $scope.item.SO_LUONG,
+            NGAY_XUAT: $scope.item.NGAY_GIAO_HANG,
+            NGUOI_GIU: $scope.item.NHAN_VIEN_QUAN_LY,
+        }
+        $http.post('/api/Api_HangCanDat/ThemHangCanDat', data).then(function (response) {
+            $scope.GetDataHangCanXuat();
+        });
+    }
+
     // truyền về list xuất hàng
     $scope.GeneralInfo = {
         NgayChungTu: null,
@@ -372,6 +387,76 @@
                 });
     };
     GetDSXuatHang();
+
+
+    //Giữ hàng
+    $scope.MANG_KHO = [];
+    $scope.chuyenmakho01 = function (tontang1) {
+        if (tontang1 == true) {
+            $scope.MANG_KHO.push({
+                MA_KHO: 'IVHOPLONG01'
+            })
+        }
+
+    };
+    $scope.chuyenmakho02 = function (tontang2) {
+        if (tontang2 == true) {
+            $scope.MANG_KHO.push({
+                MA_KHO: 'IVHOPLONG02'
+            })
+        }
+
+    };
+    $scope.chuyenmakho03 = function (tontang3) {
+        if (tontang3 == true) {
+            $scope.MANG_KHO.push({
+                MA_KHO: 'IVHOPLONG03'
+            })
+        }
+
+    };
+    
+
+
+    var a = $('#username').val();
+    var b = $('#macongty').val();
+    $scope.GiuHang = function (item) {
+
+        $scope.item = item;
+        var data = {
+
+            SALES_GIU: $scope.item.NHAN_VIEN_QUAN_LY,
+            MA_KHACH_HANG: $scope.item.MA_KHACH_HANG,
+            TRUC_THUOC: b,
+            MA_HANG: $scope.item.MA_HANG,
+            SL_GIU: $scope.item.SO_LUONG,
+            GIU_PO: true,
+            ID_CT_PO: $scope.item.ID_DON_CHI_TIET,
+            MA_SO_PO: $scope.item.MA_SO_PO,
+            TonKho: $scope.MANG_KHO
+           
+
+        }
+
+        $http.post("/api/Api_KHO_GIU_HANG/PostKHO_GIU_HANG1", data).then(function (response) {
+            //console.log(response);
+            $scope.datareturn = response.data;
+            //response.data = jQuery.parseJSON(response.data);
+            if (response.data == null) {
+                InputFail();
+            }
+            else {
+                new PNotify({
+                    title: 'Thành công',
+                    addclass: 'bg-primary'
+                });
+                GetDSXuatHang();
+            }
+        }, function (error) {
+            ConnectFail();
+        });
+    }
+
 
 
 });
