@@ -113,6 +113,84 @@ namespace ERP.Web.Api.Kho
             return Ok();
         }
 
+
+        // POST: api/Api_KHO_GIU_HANG
+        [Route("api/Api_KHO_GIU_HANG/PostKHO_GIU_HANG1")]
+        [ResponseType(typeof(KHO_GIU_HANG))]
+        public IHttpActionResult PostKHO_GIU_HANG1(KhoGiu khogiuhang)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            
+                KHO_GIU_HANG kg = new KHO_GIU_HANG();
+                kg.SALES_GIU = khogiuhang.SALES_GIU;
+                kg.MA_KHACH_HANG = khogiuhang.MA_KHACH_HANG;
+                kg.NGAY_GIU = DateTime.Today.Date;
+                kg.MA_HANG = khogiuhang.MA_HANG;
+                kg.SL_GIU = khogiuhang.SL_GIU;
+                kg.GIU_PO = Convert.ToBoolean(khogiuhang.GIU_PO);
+                kg.TRUC_THUOC = khogiuhang.TRUC_THUOC;
+                kg.ID_CT_PO = khogiuhang.ID_CT_PO;
+                db.KHO_GIU_HANG.Add(kg);
+            foreach (TonKho item in khogiuhang.TonKho)
+            {
+                //Cập nhật hàng tồn
+                TONKHO_HOPLONG newHangTon = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == item.MA_KHO).FirstOrDefault();
+                if(newHangTon != null)
+                {
+                    newHangTon.SL_HOPLONG -= Convert.ToInt32(khogiuhang.SL_GIU);
+                }
+                TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
+                if (newhanggiu == null)
+                {
+                    newhanggiu = new TONKHO_HOPLONG();
+                    newhanggiu.MA_HANG = khogiuhang.MA_HANG;
+                    newhanggiu.MA_KHO_CON = "IVHOPLONG05";
+                    newhanggiu.SL_HOPLONG = Convert.ToInt32(khogiuhang.SL_GIU);
+                    db.TONKHO_HOPLONG.Add(newhanggiu);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    newhanggiu.SL_HOPLONG += Convert.ToInt32(khogiuhang.SL_GIU);
+                }
+                //if (newHangTon == null || newHangTon.SL_HOPLONG < khogiuhang.SL_GIU)
+                //{
+                //    return Ok("Hàng không có trong kho hoặc SL tồn không đủ");
+                //}
+
+               BH_CT_DON_HANG_PO trangthai = db.BH_CT_DON_HANG_PO.Where(x => x.ID == khogiuhang.ID_CT_PO).FirstOrDefault();
+                if(trangthai != null)
+                {
+                    trangthai.CAN_GIU_HANG = true;
+                }
+                db.SaveChanges();
+                var dagiu = db.BH_CT_DON_HANG_PO.Where(x => x.MA_SO_PO == khogiuhang.MA_SO_PO && x.CAN_GIU_HANG == false).ToList().Count();
+                if (dagiu == 0)
+                {
+                    var dagiuhang = db.BH_DON_HANG_PO.Where(x => x.MA_SO_PO == khogiuhang.MA_SO_PO).FirstOrDefault();
+                    if(dagiuhang != null)
+                    {
+                        dagiuhang.DA_GIU = true;
+                    }
+                }
+            }
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateException)
+            {
+
+                throw;
+
+            }
+
+            return Ok();
+        }
+
         // DELETE: api/Api_KHO_GIU_HANG/5
         [ResponseType(typeof(KHO_GIU_HANG))]
         public IHttpActionResult DeleteKHO_GIU_HANG(int id)
