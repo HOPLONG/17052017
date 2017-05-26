@@ -161,23 +161,30 @@ app.controller('GiuHangHopLongCtrl', function ($scope, $http) {
         
         
 
-        for (i = 0; i < $scope.Detail.ListAdd.length; i++)
-        {
-            $scope.Detail.ListGiuHang.push({
-                SALES_GIU: $scope.GeneralInfo.Username,
-                MA_KHACH_HANG :  $scope.GeneralInfo.KhachHang,
-                NGAY_GIU: $scope.GeneralInfo.ngay_giu.format('DD/MM/YYYY'),
-                TRUC_THUOC: b,
-                MA_HANG  : $scope.Detail.ListAdd[i].MA_HANG,
-                SL_GIU : $scope.Detail.ListAdd[i].SL_GIU,
-                NGAY_XUAT : $scope.Detail.ListAdd[i].NGAY_XUAT.format('DD/MM/YYYY'),
-                GIU_PO : $scope.Detail.ListAdd[i].GIU_PO,
-                GHI_CHU : $scope.Detail.ListAdd[i].GHI_CHU
-            })
-        }
+        //for (i = 0; i < $scope.Detail.ListAdd.length; i++)
+        //{
+        //    $scope.Detail.ListGiuHang.push({
+        //        SALES_GIU: $scope.GeneralInfo.Username,
+        //        MA_KHACH_HANG :  $scope.GeneralInfo.KhachHang,
+        //        NGAY_GIU: $scope.GeneralInfo.ngay_giu.format('DD/MM/YYYY'),
+        //        TRUC_THUOC: b,
+        //        MA_HANG  : $scope.Detail.ListAdd[i].MA_HANG,
+        //        SL_GIU : $scope.Detail.ListAdd[i].SL_GIU,
+        //        NGAY_XUAT : $scope.Detail.ListAdd[i].NGAY_XUAT.format('DD/MM/YYYY'),
+        //        GIU_PO : $scope.Detail.ListAdd[i].GIU_PO,
+        //        GHI_CHU : $scope.Detail.ListAdd[i].GHI_CHU
+        //    })
+        //}
         var data = {
-            
-            ChiTiet: $scope.Detail.ListGiuHang,
+            SALES_GIU: $scope.GeneralInfo.Username,
+            MA_KHACH_HANG :  $scope.GeneralInfo.KhachHang,
+            NGAY_GIU: $scope.GeneralInfo.ngay_giu.format('DD/MM/YYYY'),
+            TRUC_THUOC: b,
+            MA_HANG  : $scope.Detail.ListAdd[i].MA_HANG,
+            SL_GIU : $scope.Detail.ListAdd[i].SL_GIU,
+            NGAY_XUAT : $scope.Detail.ListAdd[i].NGAY_XUAT.format('DD/MM/YYYY'),
+            GIU_PO : $scope.Detail.ListAdd[i].GIU_PO,
+            GHI_CHU : $scope.Detail.ListAdd[i].GHI_CHU
             
         }
 

@@ -25,6 +25,8 @@
                             <th class="text-left">Tồn T2</th>
                             <th class="text-left">Tồn T3</th>
                             <th class="text-left">Tồn T4</th>
+                            <th class="text-left">Số lượng đã giữ</th>
+                            <th class="text-left">Hàng cần xuất ngay</th>
                             <th class="text-center" colspan="2">Tác vụ</th>
 
                         </tr>
@@ -40,10 +42,13 @@
                             <td class="text-right">{{item.DON_GIA | number:0}}</td>
                             <td class="text-left">{{item.TEN_CONG_TY}}</td>
                             <td class="text-left">{{item.HO_VA_TEN}}</td>
-                            <td class="text-center"><input type="checkbox"  ng-click="chuyenmakho('IVHOPLONG01')" />{{item.TON_TANG_2}}</td>
-                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho('IVHOPLONG02')"/> {{item.TON_TANG_3}}</td>
-                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho('IVHOPLONG03')"/> {{item.TON_TANG_4}}</td>
-                            <td><input type="button" value="Giữ hàng" class="btn-primary" ng-click="GiuHang(item.ID_DON_CHI_TIET,item.MA_HANG,item.DVT,item.SO_LUONG)" ng-if="item.SO_LUONG < (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) || (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) > 0 " /></td>
+
+                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho01(TON_TANG2);" ng-model="TON_TANG2" />{{item.TON_TANG_2}}</td>
+                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho02(TON_TANG3);" ng-model="TON_TANG3"/> {{item.TON_TANG_3}}</td>
+                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho03(TON_TANG4);" ng-model="TON_TANG4"/> {{item.TON_TANG_4}}</td>
+                            <td class="text-left">{{item.SL_DA_GIU}}</td>
+                            <td class="text-left"><input type="checkbox" ng-checked="{{item.CAN_XUAT_NGAY}}" /></td>
+                            <td><input type="button" value="Giữ hàng" class="btn-primary" ng-click="GiuHang(item);" ng-if="item.SO_LUONG < (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) || (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) > 0 " /></td>
                             <td><input type="button" value="Đặt Hàng" class="btn-primary" ng-click="candathang(item.ID_DON_CHI_TIET);AddToKhoDat(item)" ng-if="item.SO_LUONG > (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) || (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) < 0" /></td>
 
                         </tr>
