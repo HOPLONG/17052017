@@ -20,12 +20,12 @@
                 <td>
                     <input type="checkbox"  ng-change="AddNewHang(item,kiemtra)" ng-model="kiemtra"/>
                 </td>
-                <td>{{item.MA_DIEU_CHINH}}</td>
-                <td style="display:none">{{item.ID}}</td>
+                <td>{{item.MA_CHUAN}}</td>
+                <td style="display:none">{{item.ID_CT_PO}}</td>
                 <td style="display:none">{{item.TEN_HANG}}</td>
                 <td>{{item.MA_NHOM_HANG_CHI_TIET}}</td>
-                <td>{{item.SO_LUONG}}</td>
-                <td>{{item.NGAY_GIAO_HANG | date: 'dd/MM/yyyy'}}</td>
+                <td>{{item.SL_DAT}}</td>
+                <td>{{item.NGAY_XUAT | date: 'dd/MM/yyyy'}}</td>
             </tr>
         </table>
     </div>
@@ -173,7 +173,7 @@
                         Danh sách đặt hàng
                     </td>
                     <td colspan="4" rowspan="2" style="width:353px;">
-                       <input ng-model="thue_vat" ng-init="thue_vat=10.00" ng-change="test(detail)" placeholder="Thuế VAT"/>
+                       Thuế VAT : <input ng-model="thue_vat" ng-init="thue_vat=10.00" ng-change="test(detail)" placeholder="Thuế VAT"/>
                     </td>
                 </tr>
                 <tr height="17"></tr>
