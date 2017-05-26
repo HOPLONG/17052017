@@ -274,7 +274,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         var tong_chi_phi_hoa_don_edit = 0;
         var tong_khach_nhan_edit = 0;
 
-        if (parseFloat($scope.item.GIA_LIST) != null) {
+        if ($scope.item.GIA_LIST != null && $scope.item.GIA_LIST != 0) {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.GIA_LIST) - parseFloat((parseFloat($scope.item.GIA_LIST) * ($scope.item.CHIET_KHAU / 100)));
         } else {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.DON_GIA_NHAP) + parseFloat((parseFloat($scope.item.DON_GIA_NHAP) * ($scope.item.HE_SO_LOI_NHUAN / 100)));
@@ -320,7 +320,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         var tong_chi_phi_hoa_don_new = 0;
         var tong_khach_nhan_new = 0;
 
-        if ($scope.detail.gia_list != null) {
+        if ($scope.detail.gia_list != null && $scope.detail.gia_list!=0) {
             $scope.detail.gia_bao_di_net = parseFloat($scope.detail.gia_list) - parseFloat((parseFloat($scope.detail.gia_list) * ($scope.detail.chiet_khau / 100)));
         } else  {
             $scope.detail.gia_bao_di_net = parseFloat($scope.detail.gia_nhap) + parseFloat((parseFloat($scope.detail.gia_nhap) * ($scope.detail.he_so_loi_nhuan / 100)));
@@ -2271,7 +2271,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
         var tong_chi_phi_hoa_don_edit = 0;
         var tong_khach_nhan_edit = 0;
 
-        if ($scope.item.GIA_LIST != null) {
+        if ($scope.item.GIA_LIST != null && $scope.item.GIA_LIST != 0) {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.GIA_LIST) - parseFloat((parseFloat($scope.item.GIA_LIST) * ($scope.item.CHIET_KHAU / 100)));
         } else {
             $scope.item.DON_GIA_BAO_DI_NET = parseFloat($scope.item.DON_GIA_NHAP) + parseFloat((parseFloat($scope.item.DON_GIA_NHAP) * ($scope.item.HE_SO_LOI_NHUAN / 100)));
