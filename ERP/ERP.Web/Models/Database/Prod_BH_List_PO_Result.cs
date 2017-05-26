@@ -67,6 +67,8 @@ public partial class Prod_BH_List_PO_Result
 
     public string TEN_NGUOI_DUYET { get; set; }
 
+    public int DANG_BAN_DO { get; set; }
+
 }
 
 }
