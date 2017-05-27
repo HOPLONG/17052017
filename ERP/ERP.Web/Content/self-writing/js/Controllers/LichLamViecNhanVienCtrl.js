@@ -5,7 +5,7 @@ app.controller('LichLamViecNhanVienCtrl', function ($scope, $http) {
 
     //get data lich lam viec
     $scope.get_datalichlamviec = function (nhanvienthuchien) {
-        $http.get("http://27.72.144.148:8003/api/LichLamViec/GetLichLamViec/" + nhanvienthuchien)
+        $http.get("/api/LichLamViec/GetLichLamViec/" + nhanvienthuchien)
          .then(function (response) {
              if (response.data) {
                  $scope.DataLichLamViec = response.data;
@@ -21,7 +21,7 @@ app.controller('LichLamViecNhanVienCtrl', function ($scope, $http) {
 
     //Get data_phòng ban
     $scope.get_dataphongban = function (macongty) {
-        $http.get("http://27.72.144.148:8003/api/PhongBan/GetPhongBan/" + macongty)
+        $http.get("/api/PhongBan/GetPhongBan/" + macongty)
          .then(function (response) {
              if (response.data) {
                  $scope.DataPhongBan = response.data;
@@ -84,7 +84,7 @@ app.controller('LichLamViecNhanVienCtrl', function ($scope, $http) {
 
     //Get data_nhân viên phòng ban
     $scope.get_datanhanvienphongban = function (maphongban) {
-        $http.get("http://27.72.144.148:8003/api/NhanVien/GetNhanVienPhongBan/" + maphongban)
+        $http.get("/api/NhanVien/GetNhanVienPhongBan/" + maphongban)
          .then(function (response) {
              if (response.data) {
                  $scope.DataNhanVienPhongBan = response.data;
@@ -149,4 +149,61 @@ app.controller('LichLamViecNhanVienCtrl', function ($scope, $http) {
     //End table expand row
 
     $scope.trangthailamviec = ['Đang thực hiện', 'Chưa hoàn thành', 'Đã xong việc'];
+
+    // Chon khach hang bao gia moi
+
+    $scope.arrayNVFinded = [];
+    $scope.arrayNV = [];
+    $scope.showtable_NV = false;
+
+    $http.get(window.location.origin + '/api/Api_NguoidungHL')
+     .then(function (response) {
+         if (response.data) {
+             $scope.arrayNV = response.data;
+             $scope.arrayNVFinded = $scope.arrayNV.map(function (item) {
+                 return item;
+             });
+         }
+     }, function (error) {
+         console.log(error);
+     });
+    //hàm tìm kiếm
+    $scope.onNVFind = function () {
+        if (!$scope.HO_VA_TEN) {
+            $scope.arrayNVFinded = $scope.arrayNV.map(function (item) {
+                return item;
+            });
+        }
+        $scope.arrayNVFinded = $scope.arrayNV.filter(function (item) {
+            if (item.HO_VA_TEN.toLowerCase().indexOf($scope.ho_va_ten.toLowerCase()) >= 0) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+    }
+
+    // hiển thị danh sách đổi tượng(LẤY THEO MÃ)
+    $scope.showInfoNV = function (p_dt) {
+        $scope.ho_va_ten = p_dt.HO_VA_TEN;
+        $scope.username = p_dt.USERNAME;
+        $scope.showtable_NV = false;
+    }
+    
+
+    $scope.newgiaoviec = function () {
+        var data = {
+            TIEU_DE_CONG_VIEC: $scope.tieu_de_cong_viec_giao_viec,
+            NOI_DUNG_CONG_VIEC: $scope.noi_dung_cong_viec_giao_viec,
+            THOI_GIAN_HOAN_THANH: $scope.thoi_gian_hoan_thanh_giao_viec,
+            NHAN_VIEN_THUC_HIEN: $scope.username,
+            GHI_CHU: $scope.ghi_chu_giao_viec,
+            TRANG_THAI: $scope.trang_thai_giao_viec,
+            NGUOI_GIAO_VIEC: salehienthoi,
+        }
+
+        $http.post('/api/Api_GiaoViec/PostNV_GIAO_VIEC', data).then(function (response) {
+            SuccessSystem('Thành công');
+        });
+    };
 });
