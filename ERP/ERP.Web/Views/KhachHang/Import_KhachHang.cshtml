@@ -78,7 +78,7 @@
 
                 <table>
                     <tr>
-                        <th><h1>Import Khách Hàng Mới</h1></th>
+                        <th><h1>Update Khách Hàng Mới</h1></th>
                     <tr>
                     <tr>
                         <th><a href="~/Content/Files/KHACH_HANG.xlsx" class="fa fa-file-excel-o"><b>Tải xuống file mẫu</b></a></th>
@@ -164,7 +164,42 @@
 
 
             <div class="col-md-6">
-               
+                @using (Html.BeginForm("Addnew_SalePhuTrach", "KhachHang", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            {
+
+                            <!-- Form Name -->
+
+                    <table>
+                        <tr>
+                            <th><h1>Import Sale phụ trách </h1></th>
+                        <tr>
+                        <tr>
+                            <th><a href="~/Content/Files/KHACH_HANG.xlsx" class="fa fa-file-excel-o"> Tải file update mẫu</a></th>
+                        <tr>
+                            <td colspan="2">
+                                <hr />
+                                <input type="file" name="UploadedFile" class="file" value="Choose File From Your Computer">
+                                <br />
+                                <input type="submit" class="btn btn-success" value="Add" />
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">Dữ liệu trên tệp mà chưa có trong hệ thống thì sẽ được thêm vào, các dữ liệu khác sẽ giữ nguyên</td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <p style="color:blue">@ViewBag.Message2</p>
+                                <p style="color:blue">@ViewBag.Information2</p>
+                                <p style="color:red">@ViewBag.Error2</p>
+                            </td>
+                        </tr>
+                    </table>
+
+
+
+
+                }
             </div>
         </div>
         <!--End thống kê mua hàng khách hàng-->

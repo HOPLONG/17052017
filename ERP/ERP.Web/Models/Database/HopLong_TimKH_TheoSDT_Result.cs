@@ -79,6 +79,10 @@ public partial class HopLong_TimKH_TheoSDT_Result
 
     public Nullable<int> ID { get; set; }
 
+    public string SALE_ME { get; set; }
+
+    public string TEN_CUA_SALES_ME { get; set; }
+
 }
 
 }
