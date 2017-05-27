@@ -155,6 +155,7 @@ namespace ERP.Web.Api.Kho
             {
                 //Cập nhật hàng tồn
                 TONKHO_HOPLONG newHangTon = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == item.MA_KHO).FirstOrDefault();
+                
                 if(newHangTon != null)
                 {
                     newHangTon.SL_HOPLONG = newHangTon.SL_HOPLONG - Convert.ToInt32(item.TON_TANG_2) - Convert.ToInt32(item.TON_TANG_3) - Convert.ToInt32(item.TON_TANG_4);
