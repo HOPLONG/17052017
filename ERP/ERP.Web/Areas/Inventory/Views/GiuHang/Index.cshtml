@@ -41,6 +41,7 @@
 
 <div ng-app="myApp" ng-controller="GiuHangHopLongCtrl">
     <div class="content">
+        <input type="hidden" value="@Session["MA_CONG_TY"]" id="macongty" />
         <input type="hidden" name="macongty" id="macongty" value="@Session["MA_CONG_TY"]">
         <div class="content">
             <button class="primary" style="margin-bottom:5px" data-toggle="modal" data-target="#themgiuhangmodal">Thêm giữ hàng</button>
@@ -83,18 +84,46 @@
                         <table border="1" cellpadding="0" cellspacing="0">
 
                             <tbody>
-                                <tr height="36">
-                                    <td align="left" style="height:36px;width:15%; background:#76933C; color:white; font-weight:bold">Sale giữ</td>
-                                    <td align="left" style="width:20%;"><input type="text" style="border:none; height:36px;" id="username" value="@Session["USERNAME"]" /> </td>
-                                    <td style="width:30%;"><input type="text" style="border:none; height:36px" id="hovaten" value="@Session["HO_VA_TEN"]" /></td>
-                                    <td><input type="hidden" value="@Session["MA_CONG_TY"]" id="macongty" /></td>
-                                    <td align="left" style="width:15%; background:#76933C; color:white; font-weight:bold">Ngày giữ</td>
-                                    <td style="width:20%;"><input type="text" datepicker style="border:none;" ng-model="GeneralInfo.ngay_giu" /></td>
+                                <tr>
+                                    <td align="center" style="width:20%;background:#00BFFF; color:white; font-weight:bold">Sale giữ</td>
+                                    <td style="width:20%;">
+                                        <div>
+                                            <div class="has-feedback showtableselect" ng-click="ShowDataNhanVien()">
+                                                <input type="text" ng-model="GeneralInfo.Username" class="form-control showtableselect">
+                                                <div class="form-control-feedback">
+                                                    <i class="icon-arrow-down5"></i>
+                                                </div>
+                                            </div>
+                                            <div class="tableselect" id="DataNhanVien" style="display:none;min-width: 250px;">
+                                                <table class="table-hover ">
+                                                    <thead>
+                                                        <tr>
+                                                            <th style="width:30%">Mã nhân viên</th>
+                                                            <th style="width:30%">Tên nhân viên</th>
+                                                            <th style="width:20%">Phòng ban</th>
+                                                            <th style="width:20%">Điện thoại</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in NhanVien| filter:GeneralInfo.Username" ng-click="SelectDataNhanVien(item)">
+                                                            <td>{{item.USERNAME}}</td>
+                                                            <td>{{item.HO_VA_TEN}}</td>
+                                                            <td>{{item.PHONG_BAN}}</td>
+                                                            <td>{{item.SDT}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td><input type="text" readonly class="form-control" ng-model="GeneralInfo.NhanVienBanHang"></td>
+                                   
+                                    <td align="center" style="background:#00BFFF; color:white; font-weight:bold">Ngày giữ</td>
+                                    <td><input type="text" datepicker style="border:none;" ng-model="GeneralInfo.ngay_giu" /></td>
                                 </tr>
                                 <tr>
-                                    <td align="left" style="height:36px;width:15% ;background:#76933C; color:white; font-weight:bold">Khách hàng</td>
-                                    <td align="left" style="width:35%">
-                                        <div>
+                                    <td align="center" style="width:10%; background:#00BFFF; color:white; font-weight:bold">Khách hàng</td>
+                                    <td align="left" style="width:20%;">
                                             <div class="has-feedback showtableselect" ng-click="ShowKhachHang()">
                                                 <input type="text" ng-model="GeneralInfo.KhachHang" class="form-control showtableselect" ng-change="SearchKH(GeneralInfo.KhachHang)">
                                                 <div class="form-control-feedback">
@@ -116,18 +145,16 @@
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                            </div>
-                                            <label id="basic-error" class="validation-error-label" ng-if="ValidateGeneral.KhachHang == false" for="basic">Trường này không được để trống</label>
                                         </div>
                                     </td>
-                                    <td style="width: 50%"><input type="text" readonly class="form-control" ng-model="GeneralInfo.TenDoiTuong"></td>
+                                    <td colspan="4"><input type="text" readonly class="form-control" ng-model="GeneralInfo.TenDoiTuong"></td>
                                 </tr>
                                 <tr height="36">
-                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Mã hàng</td>
-                                    <td align="left" style="background:#76933C; color:white; font-weight:bold">SL giữ</td>
-                                    <td align="left" style="height:36px;background:#76933C; color:white; font-weight:bold">Ngày xuất</td>
-                                    <td align="left" style="background:#76933C; color:white; font-weight:bold">Giữ PO?</td>
-                                    <td align="left" colspan="2" style="height:36px;background:#76933C; color:white; font-weight:bold">Ghi chú</td>
+                                    <td align="center" style="background:#00BFFF; color:white; font-weight:bold">Mã hàng</td>
+                                    <td align="center" style="width:5%;background:#00BFFF; color:white; font-weight:bold">SL giữ</td>
+                                    <td align="center" style="height:36px;background:#00BFFF; color:white; font-weight:bold">Ngày xuất</td>
+                                    <td align="left" style="background:#00BFFF; color:white; font-weight:bold">Giữ PO?</td>
+                                    <td align="center" colspan="3" style="height:36px;background:#00BFFF; color:white; font-weight:bold">Ghi chú</td>
                                 </tr>
                                 <tr height="36" ng-repeat="(index,item) in Detail.ListAdd">
                                     <td>
@@ -167,11 +194,11 @@
                                     </td>
                                     <td><input type="number" style="border:none; height:36px; width: 100%" ng-model="item.SL_GIU"  /></td>
                                     <td><input type="text" datepicker style="border:none; height:36px; width: 100%" ng-model="item.NGAY_XUAT" /></td>
-                                    <td><input type="checkbox" style="border:none;" ng-model="item.GIU_PO" /></td>
-                                    <td colspan="2"><input type="text" style="border:none; height:36px; width: 100%" ng-model="item.GHI_CHU" /></td>
+                                    <td align="center"><input type="checkbox" style="border:none; text-align:center;" ng-model="item.GIU_PO" /></td>
+                                    <td colspan="3"><input type="text" style="border:none; height:36px; width: 100%" ng-model="item.GHI_CHU" /></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="11" style="text-align:center; cursor:pointer;font-weight:inherit; font-size:16px" ng-click="AddNew()">Bấm vào đây để thêm mới</td>
+                                    <td colspan="7" style="text-align:center; cursor:pointer;font-weight:inherit; font-size:16px" ng-click="AddNew()">Bấm vào đây để thêm mới</td>
 
                                 </tr>
                             </tbody>
@@ -182,7 +209,7 @@
                         <div class="form-group">
                             <label class="col-md-4 control-label" for="anmelden"></label>
                             <div class="col-md-8 addnew">
-                                <button  ng-click="SaveGiuHang();">Lưu</button>
+                                <button class="btn addnewmodal" ng-click="SaveGiuHang();">Lưu</button>
                                 <button id="exit" name="exit" class="btn addnewmodal" data-dismiss="modal">Exit</button>
                                 
                             </div>

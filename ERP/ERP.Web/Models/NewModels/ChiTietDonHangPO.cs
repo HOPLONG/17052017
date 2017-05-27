@@ -22,5 +22,6 @@ namespace ERP.Web.Models.NewModels
         public string TK_CO { set; get; }
         public string TK_THUE { set; get; }
         public string DIEN_GIAI_THUE { set; get; }
+        public bool DA_LEN_PO_MUA_HANG { set; get; }
     }
 }

@@ -8,7 +8,10 @@ app.controller('GiuHangHopLongCtrl', function ($scope, $http) {
     $scope.GeneralInfo = {
         KhachHang: null,
         TenDoiTuong: null,
-        ngay_giu: null
+        ngay_giu: null,
+        NhanVienBanHang: null,
+        Username: null
+
     };
     $scope.Detail = {
         ListAdd: [],
@@ -25,12 +28,13 @@ app.controller('GiuHangHopLongCtrl', function ($scope, $http) {
             
         });
     }
-    function ResetValue() {
+    function ResetAfterSave() {
         
         $scope.GeneralInfo.KhachHang = null,
         $scope.GeneralInfo.ngay_giu = null,
-       $cope.GeneralInfo.TenDoiTuong = null,
-        $scope.Detail.ListGiuHang = []
+       $scope.GeneralInfo.TenDoiTuong = null,
+        $scope.Detail.ListGiuHang = [],
+        $scope.Detail.ListAdd = []
 
     }
 
@@ -80,6 +84,20 @@ app.controller('GiuHangHopLongCtrl', function ($scope, $http) {
                  console.log(error);
              });
         }
+
+        //Lấy dữ liệu nhân viên hợp long
+        $http.get("http://27.72.144.148:8003/api/NhanVien/GetAllNhanVien/HOPLONG")
+            .then(function (response) {
+                if (typeof (response.data) == "object") {
+                    $scope.NhanVien = response.data;
+                }
+                else {
+                    ErrorSystem();
+                }
+            }, function (error) {
+                ConnectFail();
+            });
+        //-------------------------------
     }
     Init();
     
@@ -120,29 +138,53 @@ app.controller('GiuHangHopLongCtrl', function ($scope, $http) {
         //$scope.Detail.ListAdd[index].KhoList = $scope.Detail.ListHangHoa[childIndex].KHO;
         $(".tableselect").css({ "display": "none" });
     };
+
+    //nhân viên
+    $scope.ShowDataNhanVien = function () {
+        if ($("#DataNhanVien").css("display") == "none") {
+            $(".tableselect").css({ "display": "none" });
+            $("#DataNhanVien").css({ "display": "block" });
+        }
+        else {
+            $(".tableselect").css({ "display": "none" });
+        }
+    }
+
+    $scope.SelectDataNhanVien = function (item) {
+        $scope.GeneralInfo.NhanVienBanHang = item.HO_VA_TEN;
+        $scope.GeneralInfo.Username = item.USERNAME;
+        $(".tableselect").css({ "display": "none" });
+    }
     var a = $('#username').val();
     var b = $('#macongty').val();
     $scope.SaveGiuHang = function () {
         
         
 
-        for (i = 0; i < $scope.Detail.ListAdd.length; i++)
-        {
-            $scope.Detail.ListGiuHang.push({
-                SALES_GIU : a,
-                MA_KHACH_HANG :  $scope.GeneralInfo.KhachHang,
-                NGAY_GIU: $scope.GeneralInfo.ngay_giu.format('DD/MM/YYYY'),
-                TRUC_THUOC: b,
-                MA_HANG  : $scope.Detail.ListAdd[i].MA_HANG,
-                SL_GIU : $scope.Detail.ListAdd[i].SL_GIU,
-                NGAY_XUAT : $scope.Detail.ListAdd[i].NGAY_XUAT.format('DD/MM/YYYY'),
-                GIU_PO : $scope.Detail.ListAdd[i].GIU_PO,
-                GHI_CHU : $scope.Detail.ListAdd[i].GHI_CHU
-            })
-        }
+        //for (i = 0; i < $scope.Detail.ListAdd.length; i++)
+        //{
+        //    $scope.Detail.ListGiuHang.push({
+        //        SALES_GIU: $scope.GeneralInfo.Username,
+        //        MA_KHACH_HANG :  $scope.GeneralInfo.KhachHang,
+        //        NGAY_GIU: $scope.GeneralInfo.ngay_giu.format('DD/MM/YYYY'),
+        //        TRUC_THUOC: b,
+        //        MA_HANG  : $scope.Detail.ListAdd[i].MA_HANG,
+        //        SL_GIU : $scope.Detail.ListAdd[i].SL_GIU,
+        //        NGAY_XUAT : $scope.Detail.ListAdd[i].NGAY_XUAT.format('DD/MM/YYYY'),
+        //        GIU_PO : $scope.Detail.ListAdd[i].GIU_PO,
+        //        GHI_CHU : $scope.Detail.ListAdd[i].GHI_CHU
+        //    })
+        //}
         var data = {
-            
-            ChiTiet: $scope.Detail.ListGiuHang,
+            SALES_GIU: $scope.GeneralInfo.Username,
+            MA_KHACH_HANG :  $scope.GeneralInfo.KhachHang,
+            NGAY_GIU: $scope.GeneralInfo.ngay_giu.format('DD/MM/YYYY'),
+            TRUC_THUOC: b,
+            MA_HANG  : $scope.Detail.ListAdd[i].MA_HANG,
+            SL_GIU : $scope.Detail.ListAdd[i].SL_GIU,
+            NGAY_XUAT : $scope.Detail.ListAdd[i].NGAY_XUAT.format('DD/MM/YYYY'),
+            GIU_PO : $scope.Detail.ListAdd[i].GIU_PO,
+            GHI_CHU : $scope.Detail.ListAdd[i].GHI_CHU
             
         }
 
@@ -159,6 +201,7 @@ app.controller('GiuHangHopLongCtrl', function ($scope, $http) {
                     title: 'Thành công',
                     addclass: 'bg-primary'
                 });
+                $scope.GetDataGiuHang();
             }
         }, function (error) {
             ConnectFail();
