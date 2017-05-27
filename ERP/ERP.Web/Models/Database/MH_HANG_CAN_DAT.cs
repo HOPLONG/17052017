@@ -13,27 +13,32 @@ namespace ERP.Web.Models.Database
 {
 
 using System;
+    using System.Collections.Generic;
     
-public partial class Prod_HangCanDat_PURC_Result
+public partial class MH_HANG_CAN_DAT
 {
 
     public int ID { get; set; }
 
-    public string MA_HANG { get; set; }
-
-    public string TEN_HANG { get; set; }
-
-    public string MA_NHOM_HANG_CHI_TIET { get; set; }
-
     public int ID_CT_PO { get; set; }
 
-    public Nullable<System.DateTime> NGAY_XUAT { get; set; }
+    public string MA_HANG { get; set; }
 
     public int SL_DAT { get; set; }
 
-    public string MA_CHUAN { get; set; }
+    public Nullable<System.DateTime> NGAY_XUAT { get; set; }
 
-    public string HO_VA_TEN { get; set; }
+    public string NGUOI_GIU { get; set; }
+
+    public bool DA_LEN_PO_MUA_HANG { get; set; }
+
+
+
+    public virtual BH_CT_DON_HANG_PO BH_CT_DON_HANG_PO { get; set; }
+
+    public virtual HH HH { get; set; }
+
+    public virtual HT_NGUOI_DUNG HT_NGUOI_DUNG { get; set; }
 
 }
 
