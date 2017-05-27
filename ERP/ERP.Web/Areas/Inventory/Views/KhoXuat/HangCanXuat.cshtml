@@ -33,19 +33,19 @@
 
                     </thead>
                     <tbody>
-                        <tr ng-repeat="item in ListHangCanXuat" itemsPerPage: 30 class="hover" ng-class-odd="'odd'" ng-class-even="'even'" pagination-id="phanhoi" @*ng-click="DanLink(item.MA_SO_PO);*@">
+                        <tr ng-repeat="item in ListHangCanXuat" itemsPerPage: 30 class="hover" ng-class-odd="'odd'" ng-class-even="'even'" pagination-id="phanhoi" @*ng-click="DanLink(item.MA_SO_PO);*@>
                             <td class="text-left">{{item.MA_CHUAN}}</td>
                             <td class="text-center">{{item.NGAY_GIAO_HANG | date:'dd/MM/yyyy'}}</td>
                             <td class="text-center">{{item.NGAY_LEN_PO | date:'dd/MM/yyyy'}}</td>
                             <td class="text-center">{{item.MA_SO_PO}}</td>
-                            <td class="text-center">{{item.SO_LUONG}}</td>
+                            <td class="text-center">{{item.SO_LUONG - item.SL_DA_GIU}}</td>
                             <td class="text-right">{{item.DON_GIA | number:0}}</td>
                             <td class="text-left">{{item.TEN_CONG_TY}}</td>
                             <td class="text-left">{{item.HO_VA_TEN}}</td>
 
-                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho01(TON_TANG2);" ng-model="TON_TANG2" />{{item.TON_TANG_2}}</td>
-                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho02(TON_TANG3);" ng-model="TON_TANG3"/> {{item.TON_TANG_3}}</td>
-                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho03(TON_TANG4);" ng-model="TON_TANG4"/> {{item.TON_TANG_4}}</td>
+                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho01(TON_TANG2,item);" ng-model="TON_TANG2" />{{item.TON_TANG_2}}</td>
+                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho02(TON_TANG3,item);" ng-model="TON_TANG3"/> {{item.TON_TANG_3}}</td>
+                            <td class="text-center"><input type="checkbox" ng-click="chuyenmakho03(TON_TANG4,item);" ng-model="TON_TANG4"/> {{item.TON_TANG_4}}</td>
                             <td class="text-left">{{item.SL_DA_GIU}}</td>
                             <td class="text-left"><input type="checkbox" ng-checked="{{item.CAN_XUAT_NGAY}}" /></td>
                             <td><input type="button" value="Giữ hàng" class="btn-primary" ng-click="GiuHang(item);" ng-if="item.SO_LUONG < (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) || (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) > 0 " /></td>

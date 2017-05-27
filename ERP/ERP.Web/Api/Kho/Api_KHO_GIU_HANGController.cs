@@ -134,27 +134,30 @@ namespace ERP.Web.Api.Kho
                 kg.TRUC_THUOC = khogiuhang.TRUC_THUOC;
                 kg.ID_CT_PO = khogiuhang.ID_CT_PO;
                 db.KHO_GIU_HANG.Add(kg);
+
+
+            TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
+            if (newhanggiu == null)
+            {
+                TONKHO_HOPLONG soluonggiumoi = new TONKHO_HOPLONG();
+                soluonggiumoi.MA_HANG = khogiuhang.MA_HANG;
+                soluonggiumoi.MA_KHO_CON = "IVHOPLONG05";
+                soluonggiumoi.SL_HOPLONG = Convert.ToInt32(khogiuhang.SL_GIU);
+                db.TONKHO_HOPLONG.Add(soluonggiumoi);
+                db.SaveChanges();
+            }
+            else
+            {
+                newhanggiu.SL_HOPLONG += Convert.ToInt32(khogiuhang.SL_GIU);
+            }
+
             foreach (TonKho item in khogiuhang.TonKho)
             {
                 //Cập nhật hàng tồn
                 TONKHO_HOPLONG newHangTon = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == item.MA_KHO).FirstOrDefault();
                 if(newHangTon != null)
                 {
-                    newHangTon.SL_HOPLONG -= Convert.ToInt32(khogiuhang.SL_GIU);
-                }
-                TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
-                if (newhanggiu == null)
-                {
-                    newhanggiu = new TONKHO_HOPLONG();
-                    newhanggiu.MA_HANG = khogiuhang.MA_HANG;
-                    newhanggiu.MA_KHO_CON = "IVHOPLONG05";
-                    newhanggiu.SL_HOPLONG = Convert.ToInt32(khogiuhang.SL_GIU);
-                    db.TONKHO_HOPLONG.Add(newhanggiu);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    newhanggiu.SL_HOPLONG += Convert.ToInt32(khogiuhang.SL_GIU);
+                    newHangTon.SL_HOPLONG = newHangTon.SL_HOPLONG - Convert.ToInt32(item.TON_TANG_2) - Convert.ToInt32(item.TON_TANG_3) - Convert.ToInt32(item.TON_TANG_4);
                 }
                 //if (newHangTon == null || newHangTon.SL_HOPLONG < khogiuhang.SL_GIU)
                 //{

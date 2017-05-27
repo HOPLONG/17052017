@@ -46,6 +46,24 @@ namespace ERP.Web.Areas.KinhDoanh.Controllers
             return View();
         }
 
+        public ActionResult ListPO_DangGiuDo()
+        {
+
+            return View();
+        }
+
+        public ActionResult ListPO_DaGiuDayDu()
+        {
+
+            return View();
+        }
+
+        public ActionResult ChiTietPOChuaGiuDu()
+        {
+            return View();
+        }
+
+
         // GET: DonHangPO/Details/5
         public ActionResult Details(string id)
         {
