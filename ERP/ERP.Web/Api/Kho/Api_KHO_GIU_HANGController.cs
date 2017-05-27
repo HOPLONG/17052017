@@ -72,46 +72,46 @@ namespace ERP.Web.Api.Kho
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Api_KHO_GIU_HANG
-        [Route("api/Api_KHO_GIU_HANG/PostKHO_GIU_HANG")]
-        [ResponseType(typeof(KHO_GIU_HANG))]
-        public IHttpActionResult PostKHO_GIU_HANG(KhoGiu khogiuhang)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Api_KHO_GIU_HANG
+        //[Route("api/Api_KHO_GIU_HANG/PostKHO_GIU_HANG")]
+        //[ResponseType(typeof(KHO_GIU_HANG))]
+        //public IHttpActionResult PostKHO_GIU_HANG(KhoGiu khogiuhang)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
             
-            foreach (ChiTietKhoGiu item in khogiuhang.ChiTiet)
-            {
-                KHO_GIU_HANG kg = new KHO_GIU_HANG();
-                kg.SALES_GIU = item.SALES_GIU;
-                kg.MA_KHACH_HANG = item.MA_KHACH_HANG;
-                kg.NGAY_GIU = GeneralFunction.ConvertToTime(item.NGAY_GIU);
-                kg.MA_HANG = item.MA_HANG;
-                kg.SL_GIU = item.SL_GIU;
-                kg.NGAY_XUAT = GeneralFunction.ConvertToTime(item.NGAY_XUAT);
-                kg.GIU_PO = Convert.ToBoolean(item.GIU_PO);
-                kg.GHI_CHU = item.GHI_CHU;
-                kg.TRUC_THUOC = item.TRUC_THUOC;
-                db.KHO_GIU_HANG.Add(kg);
-            } 
+        //    foreach (ChiTietKhoGiu item in khogiuhang.ChiTiet)
+        //    {
+        //        KHO_GIU_HANG kg = new KHO_GIU_HANG();
+        //        kg.SALES_GIU = item.SALES_GIU;
+        //        kg.MA_KHACH_HANG = item.MA_KHACH_HANG;
+        //        kg.NGAY_GIU = GeneralFunction.ConvertToTime(item.NGAY_GIU);
+        //        kg.MA_HANG = item.MA_HANG;
+        //        kg.SL_GIU = item.SL_GIU;
+        //        kg.NGAY_XUAT = GeneralFunction.ConvertToTime(item.NGAY_XUAT);
+        //        kg.GIU_PO = Convert.ToBoolean(item.GIU_PO);
+        //        kg.GHI_CHU = item.GHI_CHU;
+        //        kg.TRUC_THUOC = item.TRUC_THUOC;
+        //        db.KHO_GIU_HANG.Add(kg);
+        //    } 
 
                 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
 
-                    throw;
+        //            throw;
 
-            }
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
 
         // POST: api/Api_KHO_GIU_HANG
