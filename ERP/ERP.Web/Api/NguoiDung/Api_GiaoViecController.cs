@@ -70,18 +70,26 @@ namespace ERP.Web.Api.NguoiDung
         }
 
         // POST: api/Api_GiaoViec
-        [ResponseType(typeof(NV_GIAO_VIEC))]
-        public IHttpActionResult PostNV_GIAO_VIEC(NV_GIAO_VIEC nV_GIAO_VIEC)
+        [Route("api/Api_GiaoViec/PostNV_GIAO_VIEC")]
+        public IHttpActionResult PostNV_GIAO_VIEC(NV_GIAO_VIEC giaoviec)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            db.NV_GIAO_VIEC.Add(nV_GIAO_VIEC);
+            NV_GIAO_VIEC newviec = new NV_GIAO_VIEC();
+            newviec.TIEU_DE_CONG_VIEC = giaoviec.TIEU_DE_CONG_VIEC;
+            newviec.NGAY_GIAO_VIEC = DateTime.Today.Date;
+            newviec.NOI_DUNG_CONG_VIEC = giaoviec.NOI_DUNG_CONG_VIEC;
+            newviec.THOI_GIAN_HOAN_THANH = giaoviec.THOI_GIAN_HOAN_THANH;
+            newviec.NGUOI_GIAO_VIEC = giaoviec.NGUOI_GIAO_VIEC;
+            newviec.NHAN_VIEN_THUC_HIEN = giaoviec.NHAN_VIEN_THUC_HIEN;
+            newviec.TRANG_THAI = giaoviec.TRANG_THAI;
+            newviec.GHI_CHU = giaoviec.GHI_CHU;
+            db.NV_GIAO_VIEC.Add(newviec);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = nV_GIAO_VIEC.ID }, nV_GIAO_VIEC);
+            return Ok(newviec);
         }
 
         // DELETE: api/Api_GiaoViec/5
