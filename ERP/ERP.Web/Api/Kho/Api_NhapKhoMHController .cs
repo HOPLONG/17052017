@@ -22,6 +22,7 @@ namespace ERP.Web.Api.Kho
         int IDDeNghi;
         private ERP_DATABASEEntities db = new ERP_DATABASEEntities();
 
+        int soluongcon;
 
        
         // GET: api/Api_NhapKho/5
@@ -213,22 +214,106 @@ namespace ERP.Web.Api.Kho
                     tongtien += newItem.THANH_TIEN;
                     newItem.TK_KHO = item.TK_KHO;
                     db.KHO_CT_NHAP_KHO.Add(newItem);
-                    
+
 
                     //Cập nhật hàng tồn
-                    TONKHO_HOPLONG newHangTon = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG && x.MA_KHO_CON == item.MA_KHO_CON).FirstOrDefault();
-                    if (newHangTon == null)
+                    var newkhogiu = db.KHO_HANG_CAN_GIU.Where(x => x.MA_HANG == item.MA_HANG).ToList();
+                    soluongcon = newItem.SO_LUONG;
+                    foreach (var abc in newkhogiu)
                     {
-                        newHangTon = new TONKHO_HOPLONG();
-                        newHangTon.MA_HANG = item.MA_HANG;
-                        newHangTon.MA_KHO_CON = item.MA_KHO_CON;
-                        newHangTon.SL_HOPLONG = Convert.ToInt32(item.SL);
-                        db.TONKHO_HOPLONG.Add(newHangTon);
+                        if(newItem.SO_LUONG > abc.SL_CAN_GIU)
+                        {
+                            TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
+                            if (newhanggiu != null)
+                            {
+                                newhanggiu.SL_HOPLONG += abc.SL_CAN_GIU;
+                            }
+                            var quezzzry = db.KHO_GIU_HANG.Where(x => x.ID_CT_PO == abc.ID_PO_BAN).FirstOrDefault();
+                            if (quezzzry != null)
+                            {
+                                quezzzry.SL_GIU = abc.SL_CAN_GIU + quezzzry.SL_GIU;
+                            }
+                            abc.SL_CAN_GIU = 0;
+                            newItem.SO_LUONG = newItem.SO_LUONG - abc.SL_CAN_GIU;
+
+                            TONKHO_HOPLONG newHangTon = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG && x.MA_KHO_CON == item.MA_KHO_CON).FirstOrDefault();
+                            if (newHangTon == null)
+                            {
+                                newHangTon = new TONKHO_HOPLONG();
+                                newHangTon.MA_HANG = item.MA_HANG;
+                                newHangTon.MA_KHO_CON = item.MA_KHO_CON;
+                                newHangTon.SL_HOPLONG = newItem.SO_LUONG;
+                                db.TONKHO_HOPLONG.Add(newHangTon);
+                            }
+                            else
+                            {
+                                newHangTon.SL_HOPLONG += newItem.SO_LUONG;
+                            }
+                            
+
+                        }
+                        if (newItem.SO_LUONG < abc.SL_CAN_GIU)
+                        {
+                            TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
+                            if (newhanggiu != null)
+                            {
+                                newhanggiu.SL_HOPLONG += abc.SL_CAN_GIU;
+                            }
+                            var quezzzry = db.KHO_GIU_HANG.Where(x => x.ID_CT_PO == abc.ID_PO_BAN).FirstOrDefault();
+                            if (quezzzry != null)
+                            {
+                                quezzzry.SL_GIU = abc.SL_CAN_GIU + quezzzry.SL_GIU;
+                            }
+                            abc.SL_CAN_GIU = abc.SL_CAN_GIU - newItem.SO_LUONG;
+                            newItem.SO_LUONG = 0;
+                            TONKHO_HOPLONG newHangTon = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG && x.MA_KHO_CON == item.MA_KHO_CON).FirstOrDefault();
+                            if (newHangTon == null)
+                            {
+                                newHangTon = new TONKHO_HOPLONG();
+                                newHangTon.MA_HANG = item.MA_HANG;
+                                newHangTon.MA_KHO_CON = item.MA_KHO_CON;
+                                newHangTon.SL_HOPLONG = newItem.SO_LUONG;
+                                db.TONKHO_HOPLONG.Add(newHangTon);
+                            }
+                            else
+                            {
+                                newHangTon.SL_HOPLONG += newItem.SO_LUONG;
+                            }
+                        }
+                        if (newItem.SO_LUONG == abc.SL_CAN_GIU)
+                        {
+                            TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
+                            if (newhanggiu != null)
+                            {
+                                newhanggiu.SL_HOPLONG += abc.SL_CAN_GIU;
+                            }
+                            var quezzzry = db.KHO_GIU_HANG.Where(x => x.ID_CT_PO == abc.ID_PO_BAN).FirstOrDefault();
+                            if (quezzzry != null)
+                            {
+                                quezzzry.SL_GIU = abc.SL_CAN_GIU + quezzzry.SL_GIU;
+                            }
+                            abc.SL_CAN_GIU = 0;
+                            newItem.SO_LUONG = 0;
+                            TONKHO_HOPLONG newHangTon = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG && x.MA_KHO_CON == item.MA_KHO_CON).FirstOrDefault();
+                            if (newHangTon == null)
+                            {
+                                newHangTon = new TONKHO_HOPLONG();
+                                newHangTon.MA_HANG = item.MA_HANG;
+                                newHangTon.MA_KHO_CON = item.MA_KHO_CON;
+                                newHangTon.SL_HOPLONG = newItem.SO_LUONG;
+                                db.TONKHO_HOPLONG.Add(newHangTon);
+                            }
+                            else
+                            {
+                                newHangTon.SL_HOPLONG += newItem.SO_LUONG;
+                            }
+                        }
+                       
+
+                        
                     }
-                    else
-                    {
-                        newHangTon.SL_HOPLONG += Convert.ToInt32(item.SL);
-                    }
+
+                    
                     
                     var query = db.MH_CT_DE_NGHI_NHAP_KHO.Where(x => x.MA_HANG == newItem.MA_HANG && x.MA_SO_DN == kho_NhapKhoMH.MA_SO_DN).FirstOrDefault();
                     if(query != null)
@@ -251,6 +336,7 @@ namespace ERP.Web.Api.Kho
                         query1.DA_NHAP_KHO = true;
                         query1.PHIEU_NHAP_KHO = newItem.SO_CHUNG_TU;
                     }
+  
 
                     // Lưu Nhật ký
                     KT_SO_NHAT_KY_CHUNG sonhatky = new KT_SO_NHAT_KY_CHUNG();
