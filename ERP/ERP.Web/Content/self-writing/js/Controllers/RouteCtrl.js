@@ -38,26 +38,32 @@ app.controller('HomeDonPOCtrl', function ($scope, $location, $log) {
                 break;
             case 1:
                 $location.url("/ThemMoiPO");
-                break;
+                break
             case 2:
-                $location.url("/ListPO_DaHuy");
+                $location.url("/ListPO_DaGiuDayDu");
                 break;
             case 3:
-                $location.url("/ListPO_DangChoDuyet");
+                $location.url("/ListPO_DangGiuDo");
                 break;
             case 4:
-                $location.url("/ListPO_DangDuyet");
+                $location.url("/ListPO_DaHuy");
                 break;
             case 5:
-                $location.url("/ListPO_DaLenDonBanHang");
+                $location.url("/ListPO_DangChoDuyet");
                 break;
             case 6:
-                $location.url("/ListPO_CanBanNgay");
+                $location.url("/ListPO_DangDuyet");
                 break;
             case 7:
-                $location.url("/ListPO_DangXuatDo");
+                $location.url("/ListPO_DaLenDonBanHang");
                 break;
             case 8:
+                $location.url("/ListPO_CanBanNgay");
+                break;
+            case 9:
+                $location.url("/ListPO_DangXuatDo");
+                break;
+            case 10:
                 $location.url("/ListPO_DaDuyet");
                 break;
         }
@@ -216,6 +222,7 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "ListBaoGiaDaLenPO",
         controller: "baogiaCtrl"
     })
+
     // Don hang PO
         .state('ListPO', {
             url: "/ListPO",
@@ -257,11 +264,22 @@ app.config(function ($stateProvider, $urlRouterProvider) {
         templateUrl: "ListPO_DangXuatDo",
         controller: "DonHangPOCtrl"
     })
-        .state('ThemMoiPO', {
-            url: "/ThemMoiPO",
-            templateUrl: "ThemMoiPO",
-            controller: "DonHangPOCtrl"
-        })
+    .state('ThemMoiPO', {
+        url: "/ThemMoiPO",
+        templateUrl: "ThemMoiPO",
+        controller: "DonHangPOCtrl"
+    })
+    .state('ListPO_DaGiuDayDu', {
+        url: "/ListPO_DaGiuDayDu",
+        templateUrl: "ListPO_DaGiuDayDu",
+        controller: "DonHangPOCtrl"
+    })
+    .state('ListPO_DangGiuDo', {
+        url: "/ListPO_DangGiuDo",
+        templateUrl: "ListPO_DangGiuDo",
+        controller: "DonHangPOCtrl"
+    })
+
     // Don ban hang
     .state('ListDonBanHang', {
         url: "/ListDonBanHang",

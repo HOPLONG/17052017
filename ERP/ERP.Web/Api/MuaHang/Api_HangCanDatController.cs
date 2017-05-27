@@ -89,6 +89,7 @@ namespace ERP.Web.Api.MuaHang
             if(query != null)
             {
                 query.DA_DAT_HANG = true;
+                db.SaveChanges();
             }
 
             return Ok(newhangcandat);
