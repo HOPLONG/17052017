@@ -624,6 +624,7 @@ input:-ms-input-placeholder {
                             </div>
                         </div>
                         <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEditLienHe" ng-click="EditLienHe(lienhe)" class="btn fa fa-edit">Sửa</button>
+
                     </div>
                 </div>
             </div>
@@ -974,7 +975,10 @@ input:-ms-input-placeholder {
                                                     
                                                 </tr>
                                             </table><br />
-                                            <center><button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEdit" ng-click="edit(item)" class="btn fa fa-pencil-square-o">Sửa</button></center>
+                                            <center>
+                                                <button type="button" data-dismiss="modal" data-toggle="modal" data-target="#myEdit" ng-click="edit(item)" class="btn fa fa-pencil-square-o">Sửa</button>
+                                                <button id="exit" name="exit" ng-click="showrow = false" class="btn fa fa-sign-out" data-dismiss="modal">Exit</button>
+                                            </center>
                                         </div>
                                         
                                     </div>
@@ -1055,7 +1059,7 @@ input:-ms-input-placeholder {
                                                     </tr>
 
                                                     <tr>
-                                                        <th colspan="10" style="border: 2px solid lightsteelblue !important"><span ng-click="hienthidong()" style="cursor: pointer; text-decoration:underline; color:blue; font-weight: bold">Click vào đây để thêm dòng mới</span></th>
+                                                        <th colspan="10" style="border: 1px solid #FAEBD7; background-color: #FAEBD7 !important"><span ng-click="hienthidong()" style="cursor: pointer; color: black; font-weight: bold">Click vào đây để thêm dòng mới</span></th>
                                                     </tr>
                                                     
                                                 </tfoot>
@@ -1360,7 +1364,6 @@ input:-ms-input-placeholder {
                     </div>
                     <div class="modal-footer">
                         
-                        <button id="exit" name="exit" ng-click="showrow = false" class="btn fa fa-sign-out" data-dismiss="modal">Exit</button>
                     </div>
                 </div>
 

@@ -1,6 +1,6 @@
 ﻿
 <script src="~/Content/self-writing/js/Controllers/BaoGiaCtrl/PrintBaoGiaCtrl.js"></script>
-
+<link href="~/Content/self-writing/css/Kinhdoanh/qoutation.css" rel="stylesheet" />
 <div ng-controller="PrintBaoGiaCtrl">
     <div id="printSectionId" >
         <center>
@@ -82,23 +82,23 @@
 
                                     </tr>
                                     <tr height="18">
-                                        <td colspan="6">Người liên hệ: {{thongtinchung.NGUOI_LIEN_HE}}({{thongtinchung.SDT1}})</td>
+                                        <td width="90px" colspan="6">Người liên hệ: {{thongtinchung.NGUOI_LIEN_HE}}({{thongtinchung.SDT1}})</td>
                                         <td align="left" colspan="4">{{thongtinchung.TEN_SALE_QUAN_LY}}</td>
 
                                     </tr>
                                     <tr height="18">
-                                        <td colspan="6">Địa chỉ: {{thongtinchung.DIA_CHI_XUAT_HOA_DON}}</td>
-                                        <td align="left" colspan="4">Số điện thoại:{{thongtinchung.SDT_SALE_QUAN_LY}}</td>
+                                        <td width="90px" colspan="6">Địa chỉ: {{thongtinchung.DIA_CHI_XUAT_HOA_DON}}</td>
+                                        <td width="90px" align="left" colspan="4">Số điện thoại:{{thongtinchung.SDT_SALE_QUAN_LY}}</td>
 
                                     </tr>
                                     <tr height="18">
-                                        <td colspan="6">MST: {{thongtinchung.MST}} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Tel: {{thongtinchung.HOTLINE}} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Fax: {{thongtinchung.FAX}}</td>
+                                        <td width="90px" colspan="6">MST: {{thongtinchung.MST}} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;Tel: {{thongtinchung.HOTLINE}} &nbsp; &nbsp;&nbsp;&nbsp;&nbsp; Fax: {{thongtinchung.FAX}}</td>
                                         <td align="left" width="135px"></td>
                                         <td colspan="3"></td>
 
                                     </tr>
                                     <tr height="18">
-                                        <td align="left" colspan="6" height="18">Email:{{thongtinchung.EMAIL_CONG_TY}}</td>
+                                        <td width="90px" align="left" colspan="6" height="18">Email:{{thongtinchung.EMAIL_CONG_TY}}</td>
                                         <td colspan="4"></td>
 
                                     </tr>
@@ -608,7 +608,9 @@
             </table>
         </center>
     </div>
-    <button ng-click="printToCart('printSectionId')" class="btn btn-default">In</button>
-    <input type="button" onclick="location.href='/KinhDoanh/BaoGia/BaoGiaHome';" class="btn btn-default" value="Về danh sách" />
-    <button ng-click="moveFromDetailstoEdit()" class="btn btn-default">Sửa</button>
+    <div class="button_foot">
+        <button ng-click="printToCart('printSectionId')" class="btn fa fa-print">In</button>
+        <button type="button" onclick="location.href='/KinhDoanh/BaoGia/BaoGiaHome';" class="btn fa fa-sign-out">Về danh sách</button>
+        <button ng-click="moveFromDetailstoEdit()" class="btn fa fa-edit">Sửa</button>
+    </div>
 </div>

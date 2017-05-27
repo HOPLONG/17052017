@@ -51,6 +51,9 @@
                             <td><input type="button" value="Giữ hàng" class="btn-primary" ng-click="GiuHang(item);" ng-if="item.SO_LUONG < (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) || (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) > 0 " /></td>
                             <td><input type="button" value="Đặt Hàng" class="btn-primary" ng-click="candathang(item.ID_DON_CHI_TIET);AddToKhoDat(item)" ng-if="item.SO_LUONG > (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) || (item.TON_TANG_2 + item.TON_TANG_3 + item.TON_TANG_4) < 0" /></td>
 
+                            
+
+
                         </tr>
                         <!--Detail row-->
                         <tr dir-paginate-end=""></tr>

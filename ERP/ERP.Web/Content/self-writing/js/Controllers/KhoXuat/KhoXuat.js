@@ -450,7 +450,7 @@
                     title: 'Thành công',
                     addclass: 'bg-primary'
                 });
-                GetDSXuatHang();
+                $scope.GetDataHangCanXuat();
             }
         }, function (error) {
             ConnectFail();

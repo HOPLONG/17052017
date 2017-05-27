@@ -57,6 +57,10 @@ public partial class Prod_HangCanXuat_Result
 
     public Nullable<int> TON_TANG_4 { get; set; }
 
+    public Nullable<int> SL_DA_GIU { get; set; }
+
+    public bool CAN_XUAT_NGAY { get; set; }
+
 }
 
 }
