@@ -10,6 +10,7 @@
 
             <input type="hidden" value="@Session["USERNAME"]" id="username" />
             <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
+            <input type="hidden" id="macongty" name="macongty" value="@Session["MA_CONG_TY"]" />
             <div class="col-md-6 boder_themmoi">
                 <div class="col-md-12 form-group">
                     <label class="col-md-2 control-label" for="name">Khách hàng :</label>
@@ -150,11 +151,13 @@
                                                                         <th>Mã hàng</th>
                                                                         <th>Tên hàng</th>
                                                                         <th>Mã nhóm hàng</th>
+                                                                        <th>Xuất xứ</th>
                                                                         <th>Đơn vị tính</th>
                                                                         <th>Giá list</th>
-                                                                        <th>Mã kho còn</th>
-                                                                        <th>Số lượng</th>
-                                                                        <th>Tên kho</th>
+                                                                        <th>Tồn kho</th>
+                                                                        <th>Ngưng SX</th>
+                                                                        <th>Chuyển sang mã</th>
+                                                                        <th>Ghi chú</th>
                                                                     </tr>
                                                                 </thead>
                                                                 <tbody>
@@ -162,11 +165,13 @@
                                                                         <td>{{kh.MA_CHUAN}}</td>
                                                                         <td>{{kh.TEN_HANG}}</td>
                                                                         <td>{{kh.MA_NHOM_HANG}}</td>
+                                                                        <td>{{kh.XUAT_XU}}</td>
                                                                         <td>{{kh.DVT}}</td>
                                                                         <td>{{kh.GIA_LIST | currency : '' : 0}}</td>
-                                                                        <td>{{kh.MA_KHO_CON}}</td>
-                                                                        <td>{{kh.SO_LUONG}}</td>
-                                                                        <td>{{kh.TEN_KHO}}</td>
+                                                                        <td>{{kh.tonHL}}</td>
+                                                                        <td><i class="fa fa-check" ng-if="kh.DISCONTINUE==true"></i></td>
+                                                                        <td>{{kh.MA_CHUYEN_DOI}}</td>
+                                                                        <td style="color:red; font-weight:bold">{{kh.NOI_DUNG_COMMENT}}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>

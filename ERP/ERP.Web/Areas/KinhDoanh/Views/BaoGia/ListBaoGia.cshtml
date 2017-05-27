@@ -5,7 +5,7 @@
 
     <div ng-app="myApp" ng-controller="baogiaCtrl" class="content">
     <input type="hidden" value="@Session["USERNAME"]" id="username"/>
-
+    <input type="hidden" id="macongty" name="macongty" value="@Session["MA_CONG_TY"]" />
     <input type="hidden" value="@Session["IS_AMIN"]" id="isadmin" />
     <div class="col-md-8">
         <table class="table">
@@ -37,6 +37,18 @@
                     </td>
                 </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="8">
+                        <div class="col-md-12" id="list_bao_gia" style="text-align:center">
+                            <div>
+                                <div id="phan_trang_tong_list_bao_gia" style="width: 100%;display:inline-block; text-align:center"></div>
+                                <br />
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tfoot>
         </table>
     </div>
     <div class="col-md-4">

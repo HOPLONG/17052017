@@ -70,6 +70,17 @@ app.constant('config', {
     FAIL: "-1",
     INPUT_ERROR: "-2",
 });
+
+function LamTron(number) {
+    var so = number;
+    var phantram = Math.ceil(so / 100);
+    var ketqua = phantram * 100;
+
+    return ketqua;
+}
+
+
+
 function ErrorSystem() {
     new PNotify({
         title: 'Thất bại',
