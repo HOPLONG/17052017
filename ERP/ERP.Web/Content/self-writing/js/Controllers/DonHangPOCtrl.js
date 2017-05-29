@@ -649,6 +649,16 @@
         $http.post('/api/Api_DonHangPO/ListPO_ChuaLenDonBan/' + isadmin + '/' + username).then(function (response) {
             $scope.list_PO_ChuaLenDonBan = response.data;
         });
+
+        // List PO da giu day du
+        $http.post('/api/Api_DonHangPO/ListPO_DaGiuDayDu/' + isadmin + '/' + username).then(function (response) {
+            $scope.list_PO_DaGiuDayDu = response.data;
+        });
+
+        // List PO dang giu do
+        $http.post('/api/Api_DonHangPO/ListPO_DangGiuDo/' + isadmin + '/' + username).then(function (response) {
+            $scope.list_PO_DangGiuDo = response.data;
+        });
     };
     $scope.readyfunction(1);
 
@@ -670,6 +680,9 @@
         });
     }
 
+    $scope.POChuaGiuDu = function (masoPO) {
+        window.location.href = "/KinhDoanh/DonHangPO/ChiTietPOChuaGiuDU/" + masoPO;
+    };
 
     $scope.xemchitietPO = function (masoPO) {
         window.location.href = "/KinhDoanh/DonHangPO/GetPrintPO/" + masoPO;

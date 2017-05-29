@@ -72,46 +72,46 @@ namespace ERP.Web.Api.Kho
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/Api_KHO_GIU_HANG
-        [Route("api/Api_KHO_GIU_HANG/PostKHO_GIU_HANG")]
-        [ResponseType(typeof(KHO_GIU_HANG))]
-        public IHttpActionResult PostKHO_GIU_HANG(KhoGiu khogiuhang)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// POST: api/Api_KHO_GIU_HANG
+        //[Route("api/Api_KHO_GIU_HANG/PostKHO_GIU_HANG")]
+        //[ResponseType(typeof(KHO_GIU_HANG))]
+        //public IHttpActionResult PostKHO_GIU_HANG(KhoGiu khogiuhang)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
             
-            foreach (ChiTietKhoGiu item in khogiuhang.ChiTiet)
-            {
-                KHO_GIU_HANG kg = new KHO_GIU_HANG();
-                kg.SALES_GIU = item.SALES_GIU;
-                kg.MA_KHACH_HANG = item.MA_KHACH_HANG;
-                kg.NGAY_GIU = GeneralFunction.ConvertToTime(item.NGAY_GIU);
-                kg.MA_HANG = item.MA_HANG;
-                kg.SL_GIU = item.SL_GIU;
-                kg.NGAY_XUAT = GeneralFunction.ConvertToTime(item.NGAY_XUAT);
-                kg.GIU_PO = Convert.ToBoolean(item.GIU_PO);
-                kg.GHI_CHU = item.GHI_CHU;
-                kg.TRUC_THUOC = item.TRUC_THUOC;
-                db.KHO_GIU_HANG.Add(kg);
-            } 
+        //    foreach (ChiTietKhoGiu item in khogiuhang.ChiTiet)
+        //    {
+        //        KHO_GIU_HANG kg = new KHO_GIU_HANG();
+        //        kg.SALES_GIU = item.SALES_GIU;
+        //        kg.MA_KHACH_HANG = item.MA_KHACH_HANG;
+        //        kg.NGAY_GIU = GeneralFunction.ConvertToTime(item.NGAY_GIU);
+        //        kg.MA_HANG = item.MA_HANG;
+        //        kg.SL_GIU = item.SL_GIU;
+        //        kg.NGAY_XUAT = GeneralFunction.ConvertToTime(item.NGAY_XUAT);
+        //        kg.GIU_PO = Convert.ToBoolean(item.GIU_PO);
+        //        kg.GHI_CHU = item.GHI_CHU;
+        //        kg.TRUC_THUOC = item.TRUC_THUOC;
+        //        db.KHO_GIU_HANG.Add(kg);
+        //    } 
 
                 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateException)
-            {
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateException)
+        //    {
 
-                    throw;
+        //            throw;
 
-            }
+        //    }
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
 
 
         // POST: api/Api_KHO_GIU_HANG
@@ -134,6 +134,23 @@ namespace ERP.Web.Api.Kho
                 kg.TRUC_THUOC = khogiuhang.TRUC_THUOC;
                 kg.ID_CT_PO = khogiuhang.ID_CT_PO;
                 db.KHO_GIU_HANG.Add(kg);
+
+
+            TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
+            if (newhanggiu == null)
+            {
+                TONKHO_HOPLONG soluonggiumoi = new TONKHO_HOPLONG();
+                soluonggiumoi.MA_HANG = khogiuhang.MA_HANG;
+                soluonggiumoi.MA_KHO_CON = "IVHOPLONG05";
+                soluonggiumoi.SL_HOPLONG = Convert.ToInt32(khogiuhang.SL_GIU);
+                db.TONKHO_HOPLONG.Add(soluonggiumoi);
+                db.SaveChanges();
+            }
+            else
+            {
+                newhanggiu.SL_HOPLONG += Convert.ToInt32(khogiuhang.SL_GIU);
+            }
+
             foreach (TonKho item in khogiuhang.TonKho)
             {
                 //Cập nhật hàng tồn
@@ -141,21 +158,7 @@ namespace ERP.Web.Api.Kho
                 
                 if(newHangTon != null)
                 {
-                    newHangTon.SL_HOPLONG -= Convert.ToInt32(khogiuhang.SL_GIU);
-                }
-                TONKHO_HOPLONG newhanggiu = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == khogiuhang.MA_HANG && x.MA_KHO_CON == "IVHOPLONG05").FirstOrDefault();
-                if (newhanggiu == null)
-                {
-                    newhanggiu = new TONKHO_HOPLONG();
-                    newhanggiu.MA_HANG = khogiuhang.MA_HANG;
-                    newhanggiu.MA_KHO_CON = "IVHOPLONG05";
-                    newhanggiu.SL_HOPLONG = Convert.ToInt32(khogiuhang.SL_GIU);
-                    db.TONKHO_HOPLONG.Add(newhanggiu);
-                    db.SaveChanges();
-                }
-                else
-                {
-                    newhanggiu.SL_HOPLONG += Convert.ToInt32(khogiuhang.SL_GIU);
+                    newHangTon.SL_HOPLONG = newHangTon.SL_HOPLONG - Convert.ToInt32(item.TON_TANG_2) - Convert.ToInt32(item.TON_TANG_3) - Convert.ToInt32(item.TON_TANG_4);
                 }
                 //if (newHangTon == null || newHangTon.SL_HOPLONG < khogiuhang.SL_GIU)
                 //{

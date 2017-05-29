@@ -55,6 +55,12 @@ public partial class GetAll_ChiTiet_DonBanHang_Result
 
     public string TK_HACH_TOAN_KHO { get; set; }
 
+    public string XUAT_XU { get; set; }
+
+    public string MA_KHO_CON { get; set; }
+
+    public string TEN_KHO { get; set; }
+
 }
 
 }

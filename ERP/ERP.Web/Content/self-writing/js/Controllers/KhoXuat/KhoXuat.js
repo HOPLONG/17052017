@@ -199,10 +199,11 @@
     $scope.AddToKhoDat = function(item)
     {
         $scope.item = item;
+
         var data = {
             ID_CT_PO: $scope.item.ID_DON_CHI_TIET,
             MA_HANG: $scope.item.MA_HANG,
-            SL_DAT: $scope.item.SO_LUONG,
+            SL_DAT: $scope.item.SO_LUONG - $scope.item.SL_DA_GIU,
             NGAY_XUAT: $scope.item.NGAY_GIAO_HANG,
             NGUOI_GIU: $scope.item.NHAN_VIEN_QUAN_LY,
         }
@@ -391,26 +392,35 @@
 
     //Giữ hàng
     $scope.MANG_KHO = [];
-    $scope.chuyenmakho01 = function (tontang1) {
+    $scope.chuyenmakho01 = function (tontang1, item) {
         if (tontang1 == true) {
             $scope.MANG_KHO.push({
-                MA_KHO: 'IVHOPLONG01'
+                MA_KHO: 'IVHOPLONG01',
+                TON_TANG_2: item.TON_TANG_2,
+                TON_TANG_3: 0,
+                TON_TANG_4: 0,
             })
         }
 
     };
-    $scope.chuyenmakho02 = function (tontang2) {
+    $scope.chuyenmakho02 = function (tontang2,item) {
         if (tontang2 == true) {
             $scope.MANG_KHO.push({
-                MA_KHO: 'IVHOPLONG02'
+                MA_KHO: 'IVHOPLONG02',
+                TON_TANG_2: 0,
+                TON_TANG_3: item.TON_TANG_3,
+                TON_TANG_4:0,
             })
         }
 
     };
-    $scope.chuyenmakho03 = function (tontang3) {
+    $scope.chuyenmakho03 = function (tontang3,item) {
         if (tontang3 == true) {
             $scope.MANG_KHO.push({
-                MA_KHO: 'IVHOPLONG03'
+                MA_KHO: 'IVHOPLONG03',
+                TON_TANG_2: 0,
+                TON_TANG_3: 0,
+                TON_TANG_4: item.TON_TANG_4,
             })
         }
 
@@ -421,21 +431,29 @@
     var a = $('#username').val();
     var b = $('#macongty').val();
     $scope.GiuHang = function (item) {
-
+        var soluongtong = 0;
         $scope.item = item;
+        for (i = 0; i < $scope.MANG_KHO.length; i++)
+        {
+            soluongtong = $scope.MANG_KHO[i].TON_TANG_2 + $scope.MANG_KHO[i].TON_TANG_3 + $scope.MANG_KHO[i].TON_TANG_4 + soluongtong;
+        }
+        $scope.soluongtong = soluongtong;
+        if (($scope.item.SO_LUONG-$scope.item.SL_DA_GIU) < $scope.soluongtong) {
+            var soluong = $scope.item.SO_LUONG - $scope.item.SL_DA_GIU;
+        } else {
+            var soluong = $scope.soluongtong;
+        }
         var data = {
-
             SALES_GIU: $scope.item.NHAN_VIEN_QUAN_LY,
             MA_KHACH_HANG: $scope.item.MA_KHACH_HANG,
             TRUC_THUOC: b,
             MA_HANG: $scope.item.MA_HANG,
-            SL_GIU: $scope.item.SO_LUONG,
+            SL_GIU: soluong,
+            SL_GIU_GOC : $scope.item.SO_LUONG,
             GIU_PO: true,
             ID_CT_PO: $scope.item.ID_DON_CHI_TIET,
             MA_SO_PO: $scope.item.MA_SO_PO,
-            TonKho: $scope.MANG_KHO
-           
-
+            TonKho: $scope.MANG_KHO          
         }
 
         $http.post("/api/Api_KHO_GIU_HANG/PostKHO_GIU_HANG1", data).then(function (response) {
@@ -450,7 +468,7 @@
                     title: 'Thành công',
                     addclass: 'bg-primary'
                 });
-                GetDSXuatHang();
+                $scope.GetDataHangCanXuat();
             }
         }, function (error) {
             ConnectFail();

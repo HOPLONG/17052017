@@ -67,7 +67,8 @@
                         <a href="/KinhDoanh/DonHangPO/Edit/{{item.MA_SO_PO}}">Sửa</a>
                     </td>*@
                     <td>
-                        <a href="/KinhDoanh/DonHangPO/POLenBanHang/{{item.MA_SO_PO}}" ng-hide="item.DA_BAN_HANG">Tạo phiếu bán hàng</a>
+                        <a href="/KinhDoanh/DonHangPO/POLenBanHang/{{item.MA_SO_PO}}" ng-if="item.DA_BAN_HANG == false && item.DA_GIU == true">Tạo phiếu bán hàng</a>
+                        <a href="/KinhDoanh/DonHangPO/ChiTietPOChuaGiuDu/{{item.MA_SO_PO}}" ng-if="item.DA_BAN_HANG == false && item.DA_GIU == false">Tạo phiếu bán hàng</a>
                     </td>
                 </tr>
             </tbody>

@@ -17,29 +17,23 @@ using System;
 public partial class Prod_HangCanDat_PURC_Result
 {
 
-    public string MA_SO_PO { get; set; }
-
     public int ID { get; set; }
 
     public string MA_HANG { get; set; }
 
-    public string MA_DIEU_CHINH { get; set; }
-
     public string TEN_HANG { get; set; }
-
-    public int SO_LUONG { get; set; }
-
-    public decimal DON_GIA { get; set; }
-
-    public decimal THANH_TIEN_HANG { get; set; }
-
-    public string DVT { get; set; }
 
     public string MA_NHOM_HANG_CHI_TIET { get; set; }
 
-    public System.DateTime NGAY_LEN_PO { get; set; }
+    public int ID_CT_PO { get; set; }
 
-    public System.DateTime NGAY_GIAO_HANG { get; set; }
+    public Nullable<System.DateTime> NGAY_XUAT { get; set; }
+
+    public int SL_DAT { get; set; }
+
+    public string MA_CHUAN { get; set; }
+
+    public string HO_VA_TEN { get; set; }
 
 }
 

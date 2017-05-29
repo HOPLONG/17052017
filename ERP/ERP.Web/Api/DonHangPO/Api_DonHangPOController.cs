@@ -129,6 +129,24 @@ namespace ERP.Web.Api.DonHangPO
             return result;
         }
 
+        // List PO da giu day du
+        [Route("api/Api_DonHangPO/ListPO_DaGiuDayDu/{isadmin}/{username}")]
+        public List<Prod_BH_List_PO_DaGiuDayDu_Result> ListPO_DaGiuDayDu(bool isadmin, string username)
+        {
+            var query = db.Database.SqlQuery<Prod_BH_List_PO_DaGiuDayDu_Result>("Prod_BH_List_PO_DaGiuDayDu @macongty,@username,@isadmin", new SqlParameter("macongty", "HOPLONG"), new SqlParameter("username", username), new SqlParameter("isadmin", isadmin));
+            var result = query.ToList();
+            return result;
+        }
+
+        // List PO dang giu do
+        [Route("api/Api_DonHangPO/ListPO_DangGiuDo/{isadmin}/{username}")]
+        public List<Prod_BH_List_PO_DangGiuDo_Result> ListPO_DangGiuDo(bool isadmin, string username)
+        {
+            var query = db.Database.SqlQuery<Prod_BH_List_PO_DangGiuDo_Result>("Prod_BH_List_PO_DangGiuDo @macongty,@username,@isadmin", new SqlParameter("macongty", "HOPLONG"), new SqlParameter("username", username), new SqlParameter("isadmin", isadmin));
+            var result = query.ToList();
+            return result;
+        }
+
         [Route("api/Api_DonHangPO/GetBH_DON_HANG_PO/{isadmin}/{sale}")]
         public List<GetAll_DonHangPO_Result> GetBH_DON_HANG_PO(bool isadmin,string sale)
         {
@@ -382,17 +400,17 @@ namespace ERP.Web.Api.DonHangPO
             foreach (var item in thongtinPO.ChiTietPO)
             {
                 var query = db.TONKHO_HOPLONG.Where(x => x.MA_HANG == item.MA_HANG).ToList();
-                tongton = 0;
-                if (query != null)
-                {
-                    foreach (var tonkho in query)
-                    {
-                        tongton = tongton + tonkho.SL_HOPLONG;
-                    }
-                } else
-                {
-                    tongton = 0;
-                }
+                //tongton = 0;
+                //if (query != null)
+                //{
+                //    foreach (var tonkho in query)
+                //    {
+                //        tongton = tongton + tonkho.SL_HOPLONG;
+                //    }
+                //} else
+                //{
+                //    tongton = 0;
+                //}
                 
                 BH_CT_DON_HANG_PO lienhe = new BH_CT_DON_HANG_PO();
                 lienhe.MA_SO_PO = baogia.MA_SO_PO;
@@ -405,15 +423,15 @@ namespace ERP.Web.Api.DonHangPO
                 lienhe.THUE_GTGT = thongtinPO.THUE_SUAT_GTGT;
                 lienhe.TIEN_THUE_GTGT =( (Convert.ToDouble(item.THANH_TIEN_HANG) * (thongtinPO.THUE_SUAT_GTGT / 100) ));
                 lienhe.TIEN_THANH_TOAN = Convert.ToDouble(lienhe.THANH_TIEN_HANG) + lienhe.TIEN_THUE_GTGT;
-                if(item.SO_LUONG <= tongton)
-                {
-                    lienhe.CAN_GIU_HANG = true;
-                    lienhe.CAN_DAT_HANG = false;
-                } else if(item.SO_LUONG > tongton)
-                {
-                    lienhe.CAN_GIU_HANG = false;
-                    lienhe.CAN_DAT_HANG = true;
-                }
+                //if(item.SO_LUONG <= tongton)
+                //{
+                //    lienhe.CAN_GIU_HANG = true;
+                //    lienhe.CAN_DAT_HANG = false;
+                //} else if(item.SO_LUONG > tongton)
+                //{
+                //    lienhe.CAN_GIU_HANG = false;
+                //    lienhe.CAN_DAT_HANG = true;
+                //}
                 db.BH_CT_DON_HANG_PO.Add(lienhe);
             }
 

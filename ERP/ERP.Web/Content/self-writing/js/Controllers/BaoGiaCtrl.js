@@ -1490,7 +1490,7 @@ app.controller('baogiaCtrl', function ($scope, $http, baogiaService, $timeout) {
     // hiển thị danh sách đổi tượng(LẤY THEO MÃ)
     $scope.inputstaff = function (kh, index, detail) {
         $scope.showtable_hanghoa = true;
-        if (kh.SO_LUONG > 0) {
+        if (kh.tonHL > 0) {
             detail.ma_hang = kh.MA_HANG;
             detail.ma_chuan = kh.MA_CHUAN;
             detail.ten_hang = kh.TEN_HANG;
